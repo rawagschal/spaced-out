@@ -1,11 +1,12 @@
-// Global Variable
+// Global Variables
 var currentDate = moment();
+
+// Mercury Retrograde Button
 var mercuryRetroBtn = document.getElementById("button-1")
-
 $("#button-1").text("Is Mercury in Retrograde?");
-
 mercuryRetroBtn.onclick = getMercury;
 
+// Is Mercury in Retrograde response
 function getMercury() {
     var date = moment(currentDate).format("(YYYY-MM-DD)")
     fetch(
