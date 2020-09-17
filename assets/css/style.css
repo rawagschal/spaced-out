@@ -11,6 +11,7 @@ body {
     align-content: center;
     background-color: black;
     background-image: url(https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000679/GSFC_20171208_Archive_e000679~orig.jpg);
+    font-size: 14px;
 }
 
 /* this will keep size nice and tiddy in one container  */
@@ -33,14 +34,23 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 100%;
-    /* justify-content: center;
-    align-items: center; */
+    justify-content: center;
+    align-items: center;
 }
 
 .side-child {
     flex-direction: column;
-    width: 
+    width: 50%;
 }
 
+.side-child img {
+    width: 70%;
+}
 
+.sidebar-header {
+    font-size: 1.45em;
+}
 
+.sidebar-subheader {
+    font-size: 1em;
+}
