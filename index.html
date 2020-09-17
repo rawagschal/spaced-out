@@ -15,33 +15,30 @@
 
 <body>
     <div class="main-wrapper">
-        <div class="container main-container">
+        <div class="main-container">
             <div class="row">
                 <!-- main content  -->
-                <div class="col l9">
+                <div class="col s12 m8 l9">
                     <!-- main content page, astronaut blurbs, and image gallery and everything else -->
 
                     Here is some mock up main content that should be regenerated in the DOM.
                 </div>
 
                 <!-- side bar  -->
-                <div class="col l3">
+                <div class="col s12 m4 l3">
                     <!-- here is where the images of the day should be -->
                     <div class="row image-sidebar">
                         <!-- nasa image of the day  -->
-                        <div class="col l4 side-child">
-                            <h3>NASA's Image of the Day</h3>
-                            <!-- <img src="assets/images/exampleimagefornasa.jpg" /> -->
-                        </div>
-                        <div class="col l4 side-child">
-                            <!-- Nasa's example description of the day. -->
-                            <!-- <h4>History of Chandra X-Ray Observatory</h4> -->
+                        <div class="col s12 side-child">
+                            <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                            <img id="day-nasa-img" src="assets/images/exampleimagefornasa.jpg" />
+                            <h5 class="sidebar-subheader">History of Chandra X-Ray Observatory</h5>
                             <!-- <p>This most distant x-ray cluster of galaxies yet has been found by astronomers using Chandra X-ray Observatory (CXO).</p> -->
                         </div>
-                        <div class="col l4 side-child">
-                            <!-- <h3>AstroBins Image of the Day</h3> -->
-                            <!-- <img src="assets/images/exampleimageforastrobin.jpg" /> -->
-                            <!-- <h4>LDN 1251</h4> -->
+                        <div class="col s12 side-child">
+                            <h4 class="sidebar-header">AstroBins Image of the Day</h4>
+                            <img id="day-astrobin-img" src="assets/images/exampleimageforastrobin.jpg" />
+                            <h5 class="sidebar-subheader">LDN 1251</h5>
                         </div>
                     </div>
                 </div>
