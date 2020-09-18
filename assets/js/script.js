@@ -1,6 +1,19 @@
 // Global Variables
 var currentDate = moment();
 
+
+
+// this variable will destroy everything previously created so it can generate the next page 
+var destroyElement = function () {
+    placeHolder.innerHTML = null;
+}
+
+var displayStartPage = function () {
+    //this will be the first page that the DOM will generate
+    var headerOne = 
+}
+
+
 // Mercury Retrograde Button
 var mercuryRetroBtn = document.getElementById("button-1")
 $("#button-1").text("Is Mercury in Retrograde?");
@@ -28,3 +41,5 @@ function getMercury() {
     }
 };
 
+
+displayStartPage ();
