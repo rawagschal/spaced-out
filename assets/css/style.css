@@ -65,7 +65,9 @@ footer {
 }
 
 footer h4 {
+    justify-self: center;
     font-size: 1.25em;
+    letter-spacing: 5px;
 }
 
 footer ul {
