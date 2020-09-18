@@ -28,3 +28,16 @@ function getMercury() {
     }
 };
 
+// Astrobin Image of the Day
+function getAstrobin() {
+    fetch(
+        `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
+    )
+    .then(function(response) {
+        return response.json();
+      })
+    .then(function(astrobinResponse) {
+        console.log(astrobinResponse.image);
+    })
+};
+
