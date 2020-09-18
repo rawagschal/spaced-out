@@ -10,7 +10,7 @@ mercuryRetroBtn.onclick = getMercury;
 function getMercury() {
     var date = moment(currentDate).format("(YYYY-MM-DD)")
     fetch(
-        `https://mercuryretrogradeapi.com/?date=&${date}`
+        (`https:mercuryretrogradeapi.com/?date=&${date}`)
     )
     .then(function(mercuryResponse) {
         return mercuryResponse.json();
@@ -28,6 +28,30 @@ function getMercury() {
     }
 };
 
+console.log("hi");
+var test = function(){
+    fetch("http://api.open-notify.org/astros.json")
+    .then(function (response) {
+        return response.json()
+    })
+    .then(function (astroResponse) {
+        console.log(astroResponse);
+        // Array.forEach(element => {
+            
+        //  })
+        });  
+    fetch("https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" + astroResponse.people[0].name.split(" ")[1])
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (bioResponse){
+        console.log(bioResponse);     
+    })
+};
+
+test();
+    
+
 // Astrobin Image of the Day
 function getAstrobin() {
     fetch(
@@ -41,3 +65,4 @@ function getAstrobin() {
     })
 };
 
+    
