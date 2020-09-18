@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: black;
+    background-image: url(https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000679/GSFC_20171208_Archive_e000679~orig.jpg);
+    font-size: 14px;
+}
+
+/* this will keep size nice and tiddy in one container  */
+.main-wrapper {
+    background-color: #ffffff;
+    margin: 5%;
+    width: 80vw;  /* these two allow container responsiveness on all viewports with ease */
+    /* height: 80vh; */
+}
+
+.content-container,
+.side-container { /*was a col */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+/* everything below is the sidebar  */
+.image-sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-child {
+    flex-direction: column;
+    width: 50%;
+}
+
+.side-child img {
+    width: 70%;
+}
+
+.sidebar-header {
+    font-size: 1.45em;
+}
+
+.sidebar-subheader {
+    font-size: 1em;
+}
+
+.sidebar-subheader p {
+    font-size: 0.75em;
+}
+
+footer {
+    height: 10vh;
+}
+
+footer h4 {
+    font-size: 1.25em;
+}
+
+footer ul {
+    margin: 0 15px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer ul li {
+
+}
+
+footer ul li a {
+    text-decoration: none; 
+    
+}
