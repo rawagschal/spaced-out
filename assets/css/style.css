@@ -17,15 +17,16 @@ body {
 /* this will keep size nice and tiddy in one container  */
 .main-wrapper {
     background-color: #ffffff;
-    margin-top: 5%;
+    margin: 5%;
     width: 80vw;  /* these two allow container responsiveness on all viewports with ease */
-    height: 80vh;
+    /* height: 80vh; */
 }
 
-.col {
+.content-container,
+.side-container { /*was a col */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
 }
 
 /* everything below is the sidebar  */
@@ -53,4 +54,33 @@ body {
 
 .sidebar-subheader {
     font-size: 1em;
+}
+
+.sidebar-subheader p {
+    font-size: 0.75em;
+}
+
+footer {
+    height: 10vh;
+}
+
+footer h4 {
+    font-size: 1.25em;
+}
+
+footer ul {
+    margin: 0 15px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer ul li {
+
+}
+
+footer ul li a {
+    text-decoration: none; 
+    
 }
