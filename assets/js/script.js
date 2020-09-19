@@ -154,7 +154,7 @@ function getAstrobin() {
 };
 
 // Space News - By Spaceflight
-function getSpaceFlightNews() {
+var getSpaceFlightNews = function() {
     fetch(
         `https://spaceflightnewsapi.net/api/v1/articles`
     )
@@ -209,6 +209,6 @@ getAstrobin();
 getMercury();
 
 // Space News  - Not respecting on click
-// $(spaceNewsBtn).on("click", getSpaceFlightNews());
-getSpaceFlightNews();
+$("spaceNewsBtn").click(getSpaceFlightNews(event));
+// getSpaceFlightNews();
 
