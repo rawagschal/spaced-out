@@ -1,7 +1,7 @@
-// Global Variables
+//Global Variables
 var currentDate = moment();
-const astrosInSpace = []
-const astrosSection = document.getElementById('astroList')
+const astrosInSpace = [];
+const astrosSection = document.getElementById("astroList");
 //Mercury Retrograde Button
 var mercuryRetroBtn = document.getElementById("button-1")
 $("#button-1").text("Is Mercury in Retrograde?");
@@ -30,7 +30,6 @@ function getMercury() {
 };
 
 console.log("hi");
-
 var test = function () {
   fetch("http://api.open-notify.org/astros.json")
     .then(function (response) {
@@ -38,7 +37,7 @@ var test = function () {
     })
     .then(function (astroResponse) {
       console.log(astroResponse);
-    astroResponse.people.forEach(element => {
+      astroResponse.people.forEach(element => {
         fetch(
             "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
               element.name.split(" ")[1]
@@ -48,16 +47,15 @@ var test = function () {
             })
             .then(function (bioResponse) {
               console.log(bioResponse);
-              astrosInSpace.push(bioResponse.results[0])
-    showAstros(bioResponse.results[0]);
+              // bioResponse.push(bioResponse.results[0])
+              showAstros(bioResponse.results[0]);
             });
       })
-
     });
 };
 function showAstros(astroObj){
     console.log('finished loading' + astroObj.name);
-    astrosSection.innerHTML += `
+    astroList.innerHTML += `
     <div class="row">
                 <div class="col s12 m12">
                   <div class="card">
@@ -79,6 +77,8 @@ function showAstros(astroObj){
     `
 }
 test();
+
+
 // Astrobin Image of the Day
 function getAstrobin() {
   fetch(
@@ -90,4 +90,4 @@ function getAstrobin() {
     .then(function (astrobinResponse) {
       console.log(astrobinResponse.image);
     });
-}
+  }
