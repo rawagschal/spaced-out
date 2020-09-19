@@ -21,8 +21,8 @@ var displayIntroPage = function () {
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("button");
     astronautBtn.on("click", getAstronauts);
     //button to photo gallery
-    // var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
-    // galleryBtn.on("click", getSpaceFlightN);
+    var galleryBtn = $("galleryBtn")//("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    galleryBtn.on("click", getPhotoGallery);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
     mercuryBtn.on("click", displayMercury);
@@ -65,6 +65,21 @@ var displayMercury = function (mercuryResponse) {
     console.log("False")
   }
 };
+
+//Photo gallery
+var galleryBtn = $("galleryBtn")
+galleryBtn.on("click", getPhotoGallery);
+
+var getPhotoGallery = function () {
+  fetch("https://images-api.nasa.gov")
+  
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  });
+}
 
 
 //this is the name of the astronaut stuff
