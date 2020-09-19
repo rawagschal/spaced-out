@@ -9,7 +9,9 @@
     
     <!-- here are our css reference sheets  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- here is the icon sheet  -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- here is our style sheet  -->
     <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
@@ -19,27 +21,30 @@
         <div class="main-container">
             <div class="row">
                 <!-- main content  -->
-                <div class="col s12 m8 l9 content-container">
-                    <!-- main content page, astronaut blurbs, and image gallery and everything else -->
-
-                    Here is some mock up main content that should be regenerated in the DOM.
+                <div class="col s12 m8 l9">
+                    <div class="content-container" id="content-container">
+                        <!-- main content page, astronaut blurbs, and image gallery and everything else -->
+                        <button id="button-1"></button>
+                    </div>
                 </div>
 
                 <!-- side bar  -->
-                <div class="col s12 m4 l3 side-container">
-                    <!-- here is where the images of the day should be -->
-                    <div class="row image-sidebar">
-                        <!-- nasa image of the day  -->
-                        <div class="col s12 side-child">
-                            <h4 class="sidebar-header">NASA's Image of the Day</h4>
-                            <img id="day-nasa-img" src="assets/images/exampleimagefornasa.jpg" />
-                            <h5 class="sidebar-subheader">History of Chandra X-Ray Observatory</h5>
-                            <p>This most distant x-ray cluster of galaxies yet has been found by astronomers using Chandra X-ray Observatory (CXO).</p>
-                        </div>
-                        <div class="col s12 side-child">
-                            <h4 class="sidebar-header">AstroBins Image of the Day</h4>
-                            <img id="day-astrobin-img" src="assets/images/exampleimageforastrobin.jpg" />
-                            <h5 class="sidebar-subheader">LDN 1251</h5>
+                <div class="col s12 m4 l3">
+                    <div class="side-container">
+                        <!-- here is where the images of the day should be -->
+                        <div class="row image-sidebar">
+                            <!-- nasa image of the day  -->
+                            <div class="col s12 side-child">
+                                <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                                <img id="day-nasa-img" src="assets/images/exampleimagefornasa.jpg" />
+                                <h5 class="sidebar-subheader">History of Chandra X-Ray Observatory</h5>
+                                <p>This most distant x-ray cluster of galaxies yet has been found by astronomers using Chandra X-ray Observatory (CXO).</p>
+                            </div>
+                            <div class="col s12 side-child">
+                                <h4 class="sidebar-header">AstroBins Image of the Day</h4>
+                                <img id="day-astrobin-img" src="assets/images/exampleimageforastrobin.jpg" />
+                                <h5 class="sidebar-subheader">LDN 1251</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,19 +52,21 @@
             <div class="row">
                 <!-- this is our footer  -->
                 <footer class="col s12">
+                    <div class="footer-container">
                     <!-- some external content and minor links can go here  -->
-                        <h4>S p a c e d O u t</h4>
+                        <h4>Spaced Out</h4>
                         <ul>
                             <li>
-                                <a href="#">I'm a link </a>
+                                <a href="#">About The Creators</a>
                             </li>
                             <li>
-                                <a href="#">I'm a link </a>
+                                <a href="https://github.com/rawagschal/spaced-out" target="_blank">GitHub Repo</a>
                             </li>
                             <li>
-                                <a href="#">I'm possibly another link</a>
+                                <a href="mailto:spaceatspace@space.com" target="_blank">Contact Us</a>
                             </li>
                         </ul>
+                    </div>
                 </footer>
             </div>
         </div>
