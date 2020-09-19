@@ -85,6 +85,8 @@ var getPhotoGallery = function () {
 //this is the name of the astronaut stuff
 var getAstronauts = function () {
     destroyElement();
+    var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
+    introContainerEl.append(rowContainerEl);
     fetch("http://api.open-notify.org/astros.json")
       .then(function (response) {
         return response.json();
@@ -109,27 +111,28 @@ var getAstronauts = function () {
 };
 
 var displayAstro = function (astronautArray) {
-  introContainerEl.html(
-    `
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card">
-          <div class="card-image">
-            <img src="${astronautArray["profile_image"]}" />
-            <span class="card-title">${astronautArray.name}</span>
-          </div>
-          <div class="card-content">
-            <p>
-              ${astronautArray.bio}
-            </p>
-          </div>
-          <div class="card-action">
-            <a href="${astronautArray.wiki}">Wikipedia</a>
-          </div>
-        </div>
-      </div>
-    </div>`
-  );
+    var colContainerEl = $("<div>").addClass("col s12 m12 l4");
+    colContainerEl.html(
+        `<div class="card-wrapper">
+            <div class="card">
+                <div class="card-image astronaut-wrapper">
+                    <img src="${astronautArray["profile_image"]}" />
+                    <span class="card-title">${astronautArray.name}</span>
+                </div>
+                <div class="card-content-wrapper">
+                    <div class="card-content">
+                        <p>${astronautArray.bio}</p>
+                    </div>
+                </div>
+                
+                <div class="card-action blue lighten-1">
+                    <a href="${astronautArray.wiki}" target="_blank">Wikipedia</a>
+                </div>
+            </div>
+        </div>`
+    );
+    $("#astronauts-row").append(colContainerEl);
+    
 };
 
 // Below Images of the Day 
