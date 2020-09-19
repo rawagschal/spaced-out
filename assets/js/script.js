@@ -174,16 +174,16 @@ var getSpaceFlightNews = function() {
         return spaceNewsResponse.json();
     })
     .then(function(spaceNewsResponse) {
-        console.log(spaceNewsResponse); 
+        console.log(spaceNewsResponse);
+        displayNewsPage(spaceNewsResponse);  
     })
-    displayNewsPage(); 
 } 
     
 // Space News - Fetch News By Hubble
     
     
 // Display the News 
-var displayNewsPage = function () {
+var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   // Create row for the news
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
