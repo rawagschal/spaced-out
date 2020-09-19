@@ -153,6 +153,50 @@ function getAstrobin() {
     })  
 };
 
+// Space News - By Spaceflight
+function getSpaceFlightNews() {
+    fetch(
+        `https://spaceflightnewsapi.net/api/v1/articles`
+    )
+    .then(function(spaceNewsResponse) {
+        return spaceNewsResponse.json();
+      })
+    .then(function(spaceNewsResponse) {
+        console.log(spaceNewsResponse);
+        
+        // Create row for the news
+        $("#content-container").html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+
+        // Loop through the news
+        for (i =0; i < spaceNewsResponse.docs.length; i++) {
+            // Container for Each Piece of News
+            var spaceFlightCardContainer = $("<div>").addClass("col s12 m8 l9");
+            var card = $("<div>").addClass("card")
+            var body = $("<div>").addClass("card-body")
+
+            // Display Information
+            var spaceFlightPubDate = $("<p>").addClass("card-content").text(spaceNewsResponse.docs[i].published_date);
+            var spaceFligthFormattedDate = moment(spaceFlightPubDate).format("MMM. Do, YYYY");
+            var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("height", 250);
+            var spaceFlightTitle = $("<h5>").addClass("card-content").text(spaceNewsResponse.docs[i].title);
+            var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].featured_image).attr("target", "_blank");
+            
+            // Append Display to Container
+            spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
+            $("#content-container .row").append(spaceFlightCardContainer);
+            // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
+        }
+    })
+    
+
+    
+    
+
+
+} 
+
+// Space News - By Hubble
+
 
 // displayIntroPage();
 getNasa();
@@ -161,5 +205,10 @@ getAstrobin();
 //all of our on click events should go here
 
 // Mercury in Retorgrade - Not respecting on click
-$(mercuryBtn).on("click", getMercury());
+// $(mercuryBtn).on("click", getMercury());
+getMercury();
+
+// Space News  - Not respecting on click
+// $(spaceNewsBtn).on("click", getSpaceFlightNews());
+getSpaceFlightNews();
 
