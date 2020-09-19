@@ -1,5 +1,39 @@
 // Global Variables
 var currentDate = moment();
+var introContainerEl = $("#content-container");
+
+
+//add this var to the beginning of each new DOM generated page
+var destroyElement = function () {
+    introContainerEl.innerHTML = null;
+}
+
+var displayIntroPage = function () {
+    // this will nuke all the script when pages lead back here
+    destroyElement();
+    //these create the elements
+    //generate intro banner
+    var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
+    var paraContainerEl = $("<p>").addClass("intro-paragraph").text("The only home we’ve ever known preserve and cherish that pale blue dot. Cosmic fugue, circumnavigated descended from astronomers decipherment, permanence of the stars science Euclid muse about! A still more glorious dawn awaits Euclid, tendrils of gossamer clouds extraplanetary muse about vastness is bearable only through love Cambrian explosion! Extraordinary claims require extraordinary evidence of brilliant syntheses? Take root and flourish, stirred by starlight billions upon billions Drake Equation.");
+    // here are buttons for intro page
+    var btnContainerEl = $("<div>").addClass("btn-container");
+    //button to atronaut bios
+    var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("button");
+    //button to photo gallery
+    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    //button to mercury in retrograde
+    var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
+    //button to news
+    var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("button");
+    //these append all of the above to the main container
+    introContainerEl.append(imgEl);
+    introContainerEl.append(paraContainerEl);
+    btnContainerEl.append(astronautBtn);
+    btnContainerEl.append(galleryBtn);
+    btnContainerEl.append(mercuryBtn);
+    btnContainerEl.append(spaceNewsBtn);
+    introContainerEl.append(btnContainerEl);
+}
 
 // Mercury Retrograde Button
 var mercuryRetroBtn = document.getElementById("button-1")
@@ -28,7 +62,6 @@ function getMercury() {
     }
 };
 
-console.log("hi");
 var test = function () {
     fetch("http://api.open-notify.org/astros.json")
       .then(function (response) {
@@ -36,6 +69,7 @@ var test = function () {
       })
       .then(function (astroResponse) {
         console.log(astroResponse);
+
         astroResponse.people.forEach(element => {
           fetch(
               "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
@@ -124,8 +158,10 @@ function getAstrobin() {
     })  
 };
 
+
+displayIntroPage();
 getNasa();
 getAstrobin();
 
+//all of our on click events should go here
 
-    
