@@ -93,8 +93,7 @@ var getAstronauts = function () {
     });
 };
 
-var displayAstro = function (astronautArray) { 
-  console.log("am i getting called", astronautArray);
+var displayAstro = function (astronautArray) {
   introContainerEl.html(
     `
     <div class="row">
@@ -177,17 +176,17 @@ var getSpaceFlightNews = function() {
     .then(function(spaceNewsResponse) {
         console.log(spaceNewsResponse); 
     })
-    displayNewsPage(spaceNewsResponse); 
+    displayNewsPage(); 
 } 
     
 // Space News - Fetch News By Hubble
     
     
 // Display the News 
-var displayNewsPage = function (spaceNewsResponse) {
+var displayNewsPage = function () {
   destroyElement();
   // Create row for the news
-  $("#content-container").html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
 
   // Loop through the news
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
@@ -205,7 +204,7 @@ var displayNewsPage = function (spaceNewsResponse) {
       
       // Append Display to Container
       spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
-      $("#content-container .row").append(spaceFlightCardContainer);
+      introContainerEl.append(spaceFlightCardContainer);
       // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
   }
 };
