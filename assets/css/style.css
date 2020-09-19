@@ -119,7 +119,7 @@ footer ul li a:hover {
     letter-spacing: 1px;
 }
 
-/* these are button styles  */
+/* these are button styles on the main page */
 .btn-container {
     display: flex;
     justify-content: space-between;
@@ -139,4 +139,21 @@ footer ul li a:hover {
 .button:hover {
     background-color: var(--hover-teal);
     box-shadow: 0 0 5px 1px var(--hover-teal);
+}
+
+/* below is the astronaut style page  */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-wrapper {
+    width: 100%;
+    height: 700px;
+}
+
+.card-content-wrapper {
+    flex: 1 0 0;
+    overflow-y: auto;
 }
