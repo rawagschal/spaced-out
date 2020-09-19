@@ -5,7 +5,7 @@ var introContainerEl = $("#content-container");
 
 //add this var to the beginning of each new DOM generated page
 var destroyElement = function () {
-    introContainerEl.innerHTML = null;
+    introContainerEl.html(null);
 }
 
 var displayIntroPage = function () {
@@ -19,27 +19,27 @@ var displayIntroPage = function () {
     var btnContainerEl = $("<div>").addClass("btn-container");
     //button to atronaut bios
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("button");
+    astronautBtn.on("click", getAstronauts);
     //button to photo gallery
-    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    // var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    // galleryBtn.on("click", getSpaceFlightN);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
+    mercuryBtn.on("click", displayMercury);
     //button to news
     var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("button");
+    spaceNewsBtn.on("click", getSpaceFlightNews);
     //these append all of the above to the main container
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
     btnContainerEl.append(astronautBtn);
-    btnContainerEl.append(galleryBtn);
+    // btnContainerEl.append(galleryBtn);
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
-}
+};
 
-// Mercury Retrograde Button
-var mercuryRetroBtn = document.getElementById("button-1")
-$("#button-1").text("Is Mercury in Retrograde?");
-mercuryRetroBtn.onclick = getMercury;
-
+//below is the mercury in retrograde stuff
 // Is Mercury in Retrograde response
 function getMercury() {
     var date = moment(currentDate).format("(YYYY-MM-DD)")
@@ -52,17 +52,24 @@ function getMercury() {
     .then(function(mercuryResponse) {
         console.log(mercuryResponse.is_retrograde);
     })
-    if ("mercuryResponse.is_retrograde" === "true") {
-        // Display the result
-        $("#button-1").append("<h1>True</h1>");
-    }
-    else {
-        // Display the result
-        $("#button-1").append("<h1>False</h1>");
-    }
+  displayMercury(mercuryResponse)
 };
 
-var test = function () {
+var displayMercury = function (mercuryResponse) {
+  if ("mercuryResponse.is_retrograde" === "true") {
+    // Display the result
+    console.log("True")
+  }
+  else {
+    // Display the result
+    console.log("False")
+  }
+};
+
+
+//this is the name of the astronaut stuff
+var getAstronauts = function () {
+    destroyElement();
     fetch("http://api.open-notify.org/astros.json")
       .then(function (response) {
         return response.json();
@@ -80,39 +87,37 @@ var test = function () {
               })
               .then(function (bioResponse) {
                 console.log(bioResponse);
-                // bioResponse.push(bioResponse.results[0])
-                showAstros(bioResponse.results[0]);
+                displayAstro(bioResponse.results[0]);
               });
         })
-  
-      });
-  };
-  function showAstros(astroObj){
-      console.log('finished loading' + astroObj.name);
-      astroList.innerHTML += `
-      <div class="row">
-                  <div class="col s12 m12">
-                    <div class="card">
-                      <div class="card-image">
-                        <img src="${astroObj.profile_image}" />
-                        <span class="card-title">${astroObj.name}</span>
-                      </div>
-                      <div class="card-content">
-                        <p>
-                          ${astroObj.bio}
-                        </p>
-                      </div>
-                      <div class="card-action">
-                        <a href="${astroObj.wiki}">Wikipedia</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      `
-  }
-  test();
-    
+    });
+};
 
+var displayAstro = function (astronautArray) {
+  introContainerEl.html(
+    `
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card">
+          <div class="card-image">
+            <img src="${astronautArray["profile_image"]}" />
+            <span class="card-title">${astronautArray.name}</span>
+          </div>
+          <div class="card-content">
+            <p>
+              ${astronautArray.bio}
+            </p>
+          </div>
+          <div class="card-action">
+            <a href="${astronautArray.wiki}">Wikipedia</a>
+          </div>
+        </div>
+      </div>
+    </div>`
+  );
+};
+
+// Below Images of the Day 
 // Nasa Image of the Day
 function getNasa() {
     fetch(
@@ -159,9 +164,49 @@ function getAstrobin() {
 };
 
 
+// Below is the Recent Space News
+// Space News - Fetch News By Spaceflight
+var getSpaceFlightNews = function() {
+    fetch(
+        `https://spaceflightnewsapi.net/api/v1/articles`
+    )
+    .then(function(spaceNewsResponse) {
+        return spaceNewsResponse.json();
+    })
+    .then(function(spaceNewsResponse) {
+        console.log(spaceNewsResponse); 
+    })
+    displayNewsPage(); 
+} 
+    
+// Space News - Fetch News By Hubble
+    
+    
+// Display the News 
+var displayNewsPage = function () {
+  destroyElement();
+  // Create row for the news
+  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+
+  // Loop through the news
+  for (i =0; i < spaceNewsResponse.docs.length; i++) {
+      // Container for Each Piece of News
+      var spaceFlightCardContainer = $("<div>").addClass("col s12 m8 l9");
+      var card = $("<div>").addClass("card")
+      var body = $("<div>").addClass("card-body")
+
+      // Display Information
+      var spaceFlightPubDate = $("<p>").addClass("card-content").text(spaceNewsResponse.docs[i].published_date);
+      var spaceFligthFormattedDate = moment(spaceFlightPubDate).format("MMM. Do, YYYY");
+      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("height", 250);
+      var spaceFlightTitle = $("<h5>").addClass("card-content").text(spaceNewsResponse.docs[i].title);
+      var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].featured_image).attr("target", "_blank");
+      
+      // Append Display to Container
+      spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
+      introContainerEl.append(spaceFlightCardContainer);
+      // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
+  }
+};
+
 displayIntroPage();
-getNasa();
-getAstrobin();
-
-//all of our on click events should go here
-
