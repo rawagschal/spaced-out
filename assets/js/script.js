@@ -8,7 +8,7 @@ var destroyElement = function () {
     introContainerEl.innerHTML = null;
 }
 
-var displayIntroPage = function () {
+// var displayIntroPage = function () {
     // this will nuke all the script when pages lead back here
     destroyElement();
     //these create the elements
@@ -33,12 +33,7 @@ var displayIntroPage = function () {
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
-}
-
-// Mercury Retrograde Button
-var mercuryRetroBtn = document.getElementById("button-1")
-$("#button-1").text("Is Mercury in Retrograde?");
-mercuryRetroBtn.onclick = getMercury;
+// }
 
 // Is Mercury in Retrograde response
 function getMercury() {
@@ -54,11 +49,11 @@ function getMercury() {
     })
     if ("mercuryResponse.is_retrograde" === "true") {
         // Display the result
-        $("#button-1").append("<h1>True</h1>");
+        $(mercuryBtn).append("<h1>True</h1>");
     }
     else {
         // Display the result
-        $("#button-1").append("<h1>False</h1>");
+        $(mercuryBtn).append("<h1>False</h1>");
     }
 };
 
@@ -159,9 +154,12 @@ function getAstrobin() {
 };
 
 
-displayIntroPage();
+// displayIntroPage();
 getNasa();
 getAstrobin();
 
 //all of our on click events should go here
+
+// Mercury in Retorgrade - Not respecting on click
+$(mercuryBtn).on("click", getMercury());
 
