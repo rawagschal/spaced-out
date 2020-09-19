@@ -144,9 +144,9 @@ function getAstrobin() {
         var astroImageInfo = response.objects[0].image
         console.log(astroImageInfo);
         
-        // Use image info to fetch additional information - Hardcoded, need to make dynamic
+        // Use image info to fetch additional information
         fetch(
-            `https://www.astrobin.com/api/v1/image/nxqnot/?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
+            `https://www.astrobin.com` + astroImageInfo +`?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
         )
         .then(function(response) {
             return response.json();
@@ -210,3 +210,4 @@ var displayNewsPage = function (spaceNewsResponse) {
 };
 
 displayIntroPage();
+getAstrobin();
