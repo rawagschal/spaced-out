@@ -29,27 +29,27 @@ function getMercury() {
 };
 
 console.log("hi");
-var test = function(){
-    fetch("http://api.open-notify.org/astros.json")
-    .then(function (response) {
-        return response.json()
-    })
-    .then(function (astroResponse) {
-        console.log(astroResponse);
-        // Array.forEach(element => {
+// var test = function(){
+//     fetch("http://api.open-notify.org/astros.json")
+//     .then(function (response) {
+//         return response.json()
+//     })
+//     .then(function (astroResponse) {
+//         console.log(astroResponse);
+//         // Array.forEach(element => {
             
-        //  })
-        });  
-    fetch("https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" + astroResponse.people[0].name.split(" ")[1])
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (bioResponse){
-        console.log(bioResponse);     
-    })
-};
+//         //  })
+//         });  
+//     fetch("https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" + astroResponse.people[0].name.split(" ")[1])
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (bioResponse){
+//         console.log(bioResponse);     
+//     })
+// };
 
-test();
+// test();
     
 
 // Nasa Image of the Day
