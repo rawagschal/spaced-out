@@ -121,14 +121,22 @@ var displayAstro = function (astronautArray) {
 // Nasa Image of the Day
 function getNasa() {
     fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=12`
+        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=1`
     )
     .then(function(response) {
         return response.json();
       })
     .then(function(response) {
-        var imageTitle = response[0].title;
-        console.log(imageTitle);
+
+        // Var of Image URL for image of the day
+        var nasaImage = $("<img>").attr("src", response[0].hdurl).attr("width", 220);
+            
+        // Var of Title & Description for image of the day
+        var nasaTitle = $("<h5>").text(response[0].title).addClass("sidebar-subheader")
+        // var nasaDesc = $("<p>").text(response[0].explanation)
+        
+        // Append Image, Title, and Descritpion to the sidebar
+        $("#nasa").append(nasaImage, nasaTitle);
     })
 };
 
@@ -142,7 +150,6 @@ function getAstrobin() {
       })
     .then(function(response) {
         var astroImageInfo = response.objects[0].image
-        console.log(astroImageInfo);
         
         // Use image info to fetch additional information
         fetch(
@@ -152,13 +159,14 @@ function getAstrobin() {
             return response.json();
           })
         .then(function(response) {
-            // HD Image URL for image of the day
-            var astroImage = response.url_hd
-            console.log(astroImage);
-
-            // Title for image of the day
-            var astroTitle = response.title
-            console.log(astroTitle);
+            // Var of HD Image URL for image of the day
+            var astroImage = $("<img>").attr("src", response.url_hd).attr("width", 220);
+            
+            // Var of Title for image of the day
+            var astroTitle = $("<h4>").text(response.title).addClass("sidebar-subheader")
+            
+            // Append Image & Title to the sidebar
+            $("#astrobin").append(astroImage, astroTitle);
         })
     })  
 };
@@ -210,3 +218,4 @@ var displayNewsPage = function (spaceNewsResponse) {
 
 displayIntroPage();
 getAstrobin();
+getNasa();
