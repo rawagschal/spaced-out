@@ -181,7 +181,6 @@ var getSpaceFlightNews = function() {
     
 // Space News - Fetch News By Hubble
     
-    
 // Display the News 
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
@@ -200,7 +199,7 @@ var displayNewsPage = function (spaceNewsResponse) {
       var spaceFligthFormattedDate = moment(spaceFlightPubDate).format("MMM. Do, YYYY");
       var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("height", 250);
       var spaceFlightTitle = $("<h5>").addClass("card-content").text(spaceNewsResponse.docs[i].title);
-      var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].featured_image).attr("target", "_blank");
+      var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
       
       // Append Display to Container
       spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
