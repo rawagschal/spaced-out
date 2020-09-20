@@ -142,7 +142,7 @@ footer ul li a:hover {
 }
 
 /* below is the astronaut style page  */
-.card {
+.card-astro {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -157,3 +157,5 @@ footer ul li a:hover {
     flex: 1 0 0;
     overflow-y: auto;
 }
+
+

@@ -99,7 +99,7 @@ var displayAstro = function (astronautArray) {
     var colContainerEl = $("<div>").addClass("col s12 m12 l4");
     colContainerEl.html(
         `<div class="card-wrapper">
-            <div class="card">
+            <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
                     <span class="card-title">${astronautArray.name}</span>
@@ -212,6 +212,8 @@ var displayNewsPage = function (spaceNewsResponse) {
       var spaceFlightTitle = $("<p>").addClass("card-title").text(spaceNewsResponse.docs[i].title);
       var readNow = $("<a>").text("Read Now").addClass("card-action teal lighten-2").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
       
+
+
       // Append Display to Container
       card.append(image.append(spaceFlightImage));
       card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
