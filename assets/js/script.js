@@ -124,7 +124,7 @@ var displayAstro = function (astronautArray) {
 // Nasa Image of the Day
 function getNasa() {
     fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=1`
+        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU`
     )
     .then(function(response) {
         return response.json();
@@ -132,10 +132,10 @@ function getNasa() {
     .then(function(response) {
 
         // Var of Image URL for image of the day
-        var nasaImage = $("<img>").attr("src", response[0].hdurl).attr("width", 220);
+        var nasaImage = $("<img>").attr("src", response.url).attr("width", 220);
             
         // Var of Title & Description for image of the day
-        var nasaTitle = $("<h5>").text(response[0].title).addClass("sidebar-subheader")
+        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader")
         // var nasaDesc = $("<p>").text(response[0].explanation)
         
         // Append Image, Title, and Descritpion to the sidebar
