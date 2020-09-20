@@ -202,9 +202,9 @@ var displayNewsPage = function (spaceNewsResponse) {
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
       // Container for Each Piece of News
       var spaceFlightCardContainer = $("<div>").addClass("col");
-      var card = $("<div>").addClass("card horizontal")
-      var image = $("<div>").addClass("card-image hide-on-med-and-down")
-      var body = $("<div>").addClass("card-stacked")
+      var card = $("<div>").addClass("card horizontal");
+      var image = $("<div>").addClass("card-image hide-on-med-and-down");
+      var body = $("<div>").addClass("card-stacked");
 
       // Display Information
       var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
