@@ -202,20 +202,21 @@ var displayNewsPage = function (spaceNewsResponse) {
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
       // Container for Each Piece of News
       var spaceFlightCardContainer = $("<div>").addClass("col s12 m8 l9");
-      var card = $("<div>").addClass("card")
-      var body = $("<div>").addClass("card-body")
+      var card = $("<div>").addClass("card horizontal")
+      var image = $("<div>").addClass("card-image")
+      var body = $("<div>").addClass("card-stacked")
 
       // Display Information
-      var spaceFlightPubDate = $("<p>").addClass("card-content").text(spaceNewsResponse.docs[i].published_date);
-      var spaceFligthFormattedDate = moment(spaceFlightPubDate).format("MMM. Do, YYYY");
-      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("height", 250);
-      var spaceFlightTitle = $("<h5>").addClass("card-content").text(spaceNewsResponse.docs[i].title);
-      var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
+      var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
+      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image);
+      var spaceFlightTitle = $("<p>").addClass("card-title").text(spaceNewsResponse.docs[i].title);
+      var readNow = $("<a>").text("Read Now").addClass("card-action teal lighten-2").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
       
       // Append Display to Container
-      spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
+      card.append(image.append(spaceFlightImage));
+      card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+      spaceFlightCardContainer.append(card);
       introContainerEl.append(spaceFlightCardContainer);
-      // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
   }
 };
 
