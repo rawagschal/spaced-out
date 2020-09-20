@@ -21,8 +21,8 @@ var displayIntroPage = function () {
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("button");
     astronautBtn.on("click", getAstronauts);
     //button to photo gallery
-    var galleryBtn = $("galleryBtn")//("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
-    galleryBtn.on("click", getPhotoGallery);
+    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    galleryBtn.on("click", getImgGallery);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
     mercuryBtn.on("click", displayMercury);
@@ -33,7 +33,7 @@ var displayIntroPage = function () {
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
     btnContainerEl.append(astronautBtn);
-    // btnContainerEl.append(galleryBtn);
+    btnContainerEl.append(galleryBtn);
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
@@ -66,21 +66,36 @@ var displayMercury = function (mercuryResponse) {
   }
 };
 
-//Photo gallery
-var galleryBtn = $("galleryBtn")
-galleryBtn.on("click", getPhotoGallery);
-
-var getPhotoGallery = function () {
+//Photo Gallery
+var getImgGallery = function () {
   fetch("https://images-api.nasa.gov")
-  
   .then(function(response) {
     return response.json();
   })
-  .then(function(data) {
-    console.log(data);
+  .then(function(galleryResponse) {
+    console.log(galleryResponse);
+    displayGallery(galleryResponse);
   });
 }
 
+var displayGallery = function (galleryResponse) {
+  destroyElement();
+  introContainerEl.html("<h4>NASA Photo Gallery</h4>");
+  //Image Search Bar
+  var imageSearchWrapper = $("<div>").addClass("image-search-wrapper col s12 m12 l12")
+  var imageSearchLabel = $("<label class=\"label-icon\" for=\"search\">")
+  var imageSearchInput = $("<input type=\"search\" id=\"search\" placeholder=\"Search for an Image\">")
+  var searchIcon = $("<i>").addClass("far fa-search")
+  //Gallery Container
+  var galleryContainer = $("<div>").addClass("galleryContainer col s12 m12 l12")
+  // Gallery
+  // var gallery = $()
+  // Append Display to Container
+  // galleryContainer.append(gallery);
+  introContainerEl.append(imageSearchWrapper);
+  imageSearchWrapper.append(imageSearchLabel, imageSearchInput, searchIcon);
+  introContainerEl.append(galleryContainer);
+}
 
 //this is the name of the astronaut stuff
 var getAstronauts = function () {
