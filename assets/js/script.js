@@ -129,7 +129,7 @@ var displayAstro = function (astronautArray) {
     var colContainerEl = $("<div>").addClass("col s12 m12 l4");
     colContainerEl.html(
         `<div class="card-wrapper">
-            <div class="card">
+            <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
                     <span class="card-title">${astronautArray.name}</span>
@@ -154,14 +154,22 @@ var displayAstro = function (astronautArray) {
 // Nasa Image of the Day
 function getNasa() {
     fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=12`
+        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU`
     )
     .then(function(response) {
         return response.json();
       })
     .then(function(response) {
-        var imageTitle = response[0].title;
-        console.log(imageTitle);
+
+        // Var of Image URL for image of the day
+        var nasaImage = $("<img>").attr("src", response.url).attr("width", 220);
+            
+        // Var of Title & Description for image of the day
+        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader")
+        // var nasaDesc = $("<p>").text(response[0].explanation)
+        
+        // Append Image, Title, and Descritpion to the sidebar
+        $("#nasa").append(nasaImage, nasaTitle);
     })
 };
 
@@ -175,23 +183,23 @@ function getAstrobin() {
       })
     .then(function(response) {
         var astroImageInfo = response.objects[0].image
-        console.log(astroImageInfo);
         
-        // Use image info to fetch additional information - Hardcoded, need to make dynamic
+        // Use image info to fetch additional information
         fetch(
-            `https://www.astrobin.com/api/v1/image/nxqnot/?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
+            `https://www.astrobin.com` + astroImageInfo +`?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
         )
         .then(function(response) {
             return response.json();
           })
         .then(function(response) {
-            // HD Image URL for image of the day
-            var astroImage = response.url_hd
-            console.log(astroImage);
-
-            // Title for image of the day
-            var astroTitle = response.title
-            console.log(astroTitle);
+            // Var of HD Image URL for image of the day
+            var astroImage = $("<img>").attr("src", response.url_hd).attr("width", 220);
+            
+            // Var of Title for image of the day
+            var astroTitle = $("<h4>").text(response.title).addClass("sidebar-subheader")
+            
+            // Append Image & Title to the sidebar
+            $("#astrobin").append(astroImage, astroTitle);
         })
     })  
 };
@@ -214,7 +222,6 @@ var getSpaceFlightNews = function() {
     
 // Space News - Fetch News By Hubble
     
-    
 // Display the News 
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
@@ -224,22 +231,25 @@ var displayNewsPage = function (spaceNewsResponse) {
   // Loop through the news
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
       // Container for Each Piece of News
-      var spaceFlightCardContainer = $("<div>").addClass("col s12 m8 l9");
-      var card = $("<div>").addClass("card")
-      var body = $("<div>").addClass("card-body")
+      var spaceFlightCardContainer = $("<div>").addClass("col");
+      var card = $("<div>").addClass("card horizontal");
+      var image = $("<div>").addClass("card-image hide-on-med-and-down");
+      var body = $("<div>").addClass("card-stacked");
 
       // Display Information
-      var spaceFlightPubDate = $("<p>").addClass("card-content").text(spaceNewsResponse.docs[i].published_date);
-      var spaceFligthFormattedDate = moment(spaceFlightPubDate).format("MMM. Do, YYYY");
-      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("height", 250);
-      var spaceFlightTitle = $("<h5>").addClass("card-content").text(spaceNewsResponse.docs[i].title);
-      var readNow = $("<a>").text("Read Now").addClass("card-content").attr("href", spaceNewsResponse.docs[i].featured_image).attr("target", "_blank");
+      var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
+      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("width", 100).addClass("center-align");
+      var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
+      var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-small").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
       
       // Append Display to Container
-      spaceFlightCardContainer.append(card.append(body.append(spaceFligthFormattedDate, spaceFlightImage, spaceFlightTitle, readNow)));
+      card.append(image.append(spaceFlightImage));
+      card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+      spaceFlightCardContainer.append(card);
       introContainerEl.append(spaceFlightCardContainer);
-      // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
   }
 };
 
 displayIntroPage();
+getAstrobin();
+getNasa();
