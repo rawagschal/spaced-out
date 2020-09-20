@@ -158,4 +158,9 @@ footer ul li a:hover {
     overflow-y: auto;
 }
 
+/* Below is style for Space News Page */
+.cta-text {
+    text-decoration: none;
+}
+
 
