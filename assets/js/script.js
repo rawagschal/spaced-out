@@ -16,7 +16,11 @@ var destroyBackBtn = function () {
 
 //this creates the back button, you can add this to whereever you make a new page
 var displayBackBtn = function () {
-    var backBtnEl = $("<button>").attr("type", "button").addClass("back-button").html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`).on("click", displayIntroPage);
+    var backBtnEl = $("<button>")
+        .attr("type", "button")
+        .addClass("back-button")
+        .html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`)
+        .on("click", displayIntroPage);
     headerContainerEl.append(backBtnEl);
 }
 
@@ -125,8 +129,8 @@ var displayAstro = function (astronautArray) {
                     </div>
                 </div>
                 
-                <div class="card-action blue lighten-1">
-                    <a href="${astronautArray.wiki}" target="_blank">Wikipedia</a>
+                <div class="card-action cyan darken-4">
+                    <a href="${astronautArray.wiki}" target="_blank"><span class="white-text">Wikipedia</span></a>
                 </div>
             </div>
         </div>`

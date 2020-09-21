@@ -23,4 +23,16 @@
         flex: 1 0 0;
     }
 
+    /* here is styling for the back button  */
+    .et-go-home {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    .back-button {
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+    }
 }

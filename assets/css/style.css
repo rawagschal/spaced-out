@@ -159,6 +159,10 @@ footer ul li a:hover {
     overflow-y: auto;
 }
 
+.card-anchor-background {
+    background-color: var(--deep-space-blue);
+}
+
 /* Below is style for Space News Page */
 .cta-text {
     text-decoration: none;
