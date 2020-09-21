@@ -1,6 +1,7 @@
 // Global Variables
 var currentDate = moment();
 var introContainerEl = $("#content-container");
+var headerContainerEl = $("#header-container");
 
 
 //add this var to the beginning of each new DOM generated page
@@ -8,9 +9,22 @@ var destroyElement = function () {
     introContainerEl.html(null);
 }
 
+//this function is only for the home page
+var destroyBackBtn = function () {
+    headerContainerEl.html(null);
+}
+
+//this creates the back button, you can add this to whereever you make a new page
+var displayBackBtn = function () {
+    var backBtnEl = $("<button>").attr("type", "button").addClass("back-button").html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`).on("click", displayIntroPage);
+    headerContainerEl.append(backBtnEl);
+}
+
+//displays main page
 var displayIntroPage = function () {
     // this will nuke all the script when pages lead back here
     destroyElement();
+    destroyBackBtn();
     //these create the elements
     //generate intro banner
     var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
@@ -18,22 +32,22 @@ var displayIntroPage = function () {
     // here are buttons for intro page
     var btnContainerEl = $("<div>").addClass("btn-container");
     //button to atronaut bios
-    var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("button");
+    var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
     astronautBtn.on("click", getAstronauts);
     //button to photo gallery
-    // var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
     // galleryBtn.on("click", getSpaceFlightN);
     //button to mercury in retrograde
-    var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
+    var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
     mercuryBtn.on("click", displayMercury);
     //button to news
-    var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("button");
+    var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
     spaceNewsBtn.on("click", getSpaceFlightNews);
     //these append all of the above to the main container
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
     btnContainerEl.append(astronautBtn);
-    // btnContainerEl.append(galleryBtn);
+    btnContainerEl.append(galleryBtn);
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
@@ -66,10 +80,10 @@ var displayMercury = function (mercuryResponse) {
   }
 };
 
-
 //this is the name of the astronaut stuff
 var getAstronauts = function () {
     destroyElement();
+    displayBackBtn(); //this is our back button
     var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
     introContainerEl.append(rowContainerEl);
     fetch("http://api.open-notify.org/astros.json")
@@ -95,6 +109,7 @@ var getAstronauts = function () {
     });
 };
 
+//this displays the astronaut stuff
 var displayAstro = function (astronautArray) {
     var colContainerEl = $("<div>").addClass("col s12 m12 l4");
     colContainerEl.html(
@@ -120,7 +135,7 @@ var displayAstro = function (astronautArray) {
     
 };
 
-// Below Images of the Day 
+// Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
 function getNasa() {
     fetch(
@@ -189,12 +204,11 @@ var getSpaceFlightNews = function() {
         displayNewsPage(spaceNewsResponse);  
     })
 } 
-    
-// Space News - Fetch News By Hubble
-    
+
 // Display the News 
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
+  displayBackBtn(); //this is our back button
   // Create row for the news
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
 

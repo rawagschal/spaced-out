@@ -127,16 +127,17 @@ footer ul li a:hover {
     margin: 2% 0 ;
 }
 
-.button {
+.main-button {
     margin: 2px;
     background-color: var(--teal);
     color: #ffffff;
     border: none;
     padding: 10px 25px;
     border-radius: 2px;
+    letter-spacing: 2px;
 }
 
-.button:hover {
+.main-button:hover {
     background-color: var(--hover-teal);
     box-shadow: 0 0 5px 1px var(--hover-teal);
 }
@@ -163,4 +164,26 @@ footer ul li a:hover {
     text-decoration: none;
 }
 
+/* below is styling for the header  */
+.back-button {
+    margin-top: 2%;
+    background-color: var(--ocean-depths);
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 2px;
+}
+
+.back-button:hover {
+    background-color: var(--ocean-depths);
+    box-shadow: 0 0 5px 1px var(--deep-space-blue);
+}
+
+.et-go-home {
+    letter-spacing: 2px;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
 
