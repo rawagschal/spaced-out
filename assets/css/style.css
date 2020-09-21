@@ -50,17 +50,27 @@ body {
     align-items: center;
 }
 
-.side-child {
-    flex-direction: column;
+.img-icon-wrapper {
+    margin-top: 2%;
     width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
+/* .side-child { */
+    /* display: flex;
+    flex-direction: column; */
+    /* width: 50%; */
+/* } */
+
 .side-child img {
-    width: 70%;
+    width: 95%;
 }
 
 .sidebar-header {
-    font-size: 1.45em;
+    font-size: 1.25em;
+    padding-bottom: 5px;
+    line-height: 100%;
 }
 
 .sidebar-subheader {
@@ -162,5 +172,3 @@ footer ul li a:hover {
 .cta-text {
     text-decoration: none;
 }
-
-

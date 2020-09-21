@@ -132,10 +132,10 @@ function getNasa() {
     .then(function(response) {
 
         // Var of Image URL for image of the day
-        var nasaImage = $("<img>").attr("src", response.url).attr("width", 220);
+        var nasaImage = $("<img>").attr("src", response.url);
             
         // Var of Title & Description for image of the day
-        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader")
+        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
         // var nasaDesc = $("<p>").text(response[0].explanation)
         
         // Append Image, Title, and Descritpion to the sidebar
@@ -163,10 +163,10 @@ function getAstrobin() {
           })
         .then(function(response) {
             // Var of HD Image URL for image of the day
-            var astroImage = $("<img>").attr("src", response.url_hd).attr("width", 220);
+            var astroImage = $("<img>").attr("src", response.url_hd);
             
             // Var of Title for image of the day
-            var astroTitle = $("<h4>").text(response.title).addClass("sidebar-subheader")
+            var astroTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
             
             // Append Image & Title to the sidebar
             $("#astrobin").append(astroImage, astroTitle);
