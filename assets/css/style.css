@@ -127,16 +127,17 @@ footer ul li a:hover {
     margin: 2% 0 ;
 }
 
-.button {
+.main-button {
     margin: 2px;
     background-color: var(--teal);
     color: #ffffff;
     border: none;
     padding: 10px 25px;
     border-radius: 2px;
+    letter-spacing: 2px;
 }
 
-.button:hover {
+.main-button:hover {
     background-color: var(--hover-teal);
     box-shadow: 0 0 5px 1px var(--hover-teal);
 }
@@ -158,9 +159,60 @@ footer ul li a:hover {
     overflow-y: auto;
 }
 
-/* Below is style for Space News Page */
+.card-anchor-background {
+    background-color: var(--deep-space-blue);
+}
+
+/* Below is style for Space News Page  */
 .cta-text {
     text-decoration: none;
 }
 
+.flight-img-placement {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-image {
+    flex-basis: 60%;
+}
+
+.card-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-basis: 40%;
+}
+
+.card-title {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.btn-large {
+    width: 100%;
+}
+
+/* below is styling for the header  */
+.back-button {
+    margin-top: 2%;
+    background-color: var(--ocean-depths);
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 2px;
+}
+
+.back-button:hover {
+    background-color: var(--ocean-depths);
+    box-shadow: 0 0 5px 1px var(--deep-space-blue);
+}
+
+.et-go-home {
+    letter-spacing: 2px;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
 
