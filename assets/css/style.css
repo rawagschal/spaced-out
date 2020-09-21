@@ -90,6 +90,7 @@ body {
 footer h4 {
     font-size: 1.25em;
     letter-spacing: 15px;
+    color: var(--midnight-plum);
 }
 
 footer ul {
@@ -103,6 +104,7 @@ footer ul {
 footer ul li a {
     text-decoration: none;
     color: var(--deep-space-blue);
+    padding: 0 5px;
 }
 
 footer ul li a:hover {
