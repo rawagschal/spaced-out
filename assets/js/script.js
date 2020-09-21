@@ -220,15 +220,15 @@ var displayNewsPage = function (spaceNewsResponse) {
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
       // Container for Each Piece of News
       var spaceFlightCardContainer = $("<div>").addClass("col");
-      var card = $("<div>").addClass("card horizontal");
-      var image = $("<div>").addClass("card-image hide-on-med-and-down");
+      var card = $("<div>").addClass("card flight-img-placement");
+      var image = $("<div>").addClass("card-image");
       var body = $("<div>").addClass("card-stacked");
 
       // Display Information
       var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
-      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).attr("width", 100).addClass("center-align");
+      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
       var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
-      var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-small").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
+      var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-large").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
       
       // Append Display to Container
       card.append(image.append(spaceFlightImage));

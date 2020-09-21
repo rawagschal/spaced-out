@@ -163,9 +163,34 @@ footer ul li a:hover {
     background-color: var(--deep-space-blue);
 }
 
-/* Below is style for Space News Page */
+/* Below is style for Space News Page  */
 .cta-text {
     text-decoration: none;
+}
+
+.flight-img-placement {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-image {
+    flex-basis: 60%;
+}
+
+.card-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-basis: 40%;
+}
+
+.card-title {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.btn-large {
+    width: 100%;
 }
 
 /* below is styling for the header  */
