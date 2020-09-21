@@ -51,19 +51,17 @@ body {
 }
 
 .img-icon-wrapper {
-    margin-top: 2%;
-    width: 50%;
+    margin-top: 5%;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-/* .side-child { */
-    /* display: flex;
-    flex-direction: column; */
-    /* width: 50%; */
-/* } */
+.icon-img {
+    width: 50%;
+}
 
-.side-child img {
+.day-img {
     width: 95%;
 }
 

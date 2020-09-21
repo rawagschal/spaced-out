@@ -132,7 +132,7 @@ function getNasa() {
     .then(function(response) {
 
         // Var of Image URL for image of the day
-        var nasaImage = $("<img>").attr("src", response.url);
+        var nasaImage = $("<img>").attr("src", response.url).addClass("day-img");
             
         // Var of Title & Description for image of the day
         var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
@@ -163,7 +163,7 @@ function getAstrobin() {
           })
         .then(function(response) {
             // Var of HD Image URL for image of the day
-            var astroImage = $("<img>").attr("src", response.url_hd);
+            var astroImage = $("<img>").attr("src", response.url_hd).addClass("day-img");
             
             // Var of Title for image of the day
             var astroTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
