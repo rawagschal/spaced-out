@@ -66,35 +66,43 @@ var displayMercury = function (mercuryResponse) {
   }
 };
 
-//Photo Gallery
+//Inital Photo Gallery
 var getImgGallery = function () {
-  fetch("https://images-api.nasa.gov")
+  fetch("https://images-api.nasa.gov/search?q=great%20observatories")
   .then(function(response) {
     return response.json();
   })
-  .then(function(galleryResponse) {
-    console.log(galleryResponse);
-    displayGallery(galleryResponse);
+  .then(function(response) {
+    console.log(response);
+    displayGallery(response);
   });
 }
 
-var displayGallery = function (galleryResponse) {
+var displayGallery = function (response) {
   destroyElement();
   introContainerEl.html("<h4>NASA Photo Gallery</h4>");
   //Image Search Bar
-  var imageSearchWrapper = $("<div>").addClass("image-search-wrapper col s12 m12 l12")
-  var imageSearchLabel = $("<label class=\"label-icon\" for=\"search\">")
+  var imageSearchContainer = $("<div>").addClass("image-search container")
   var imageSearchInput = $("<input type=\"search\" id=\"search\" placeholder=\"Search for an Image\">")
+  var imageSearchButton = $("<button>").attr("type", "button").addClass("button")
   var searchIcon = $("<i>").addClass("far fa-search")
-  //Gallery Container
-  var galleryContainer = $("<div>").addClass("galleryContainer col s12 m12 l12")
-  // Gallery
-  // var gallery = $()
-  // Append Display to Container
-  // galleryContainer.append(gallery);
-  introContainerEl.append(imageSearchWrapper);
-  imageSearchWrapper.append(imageSearchLabel, imageSearchInput, searchIcon);
+  // Append Search Bar Display to Container
+  imageSearchButton.append(searchIcon);
+  imageSearchContainer.append(imageSearchInput, imageSearchButton);
+  introContainerEl.append(imageSearchContainer);
+  //Image Gallery -- get this to display in a 3x3 grid
+  var galleryContainer = $("<div>").addClass("image-gallery container")
   introContainerEl.append(galleryContainer);
+  for (i =0; i < 9; i++) {
+    var nasaImage = $("<img>").attr("src", response.collection.items[i].links[0].href);
+    galleryContainer.append(nasaImage);
+  }
+  
+  imageSearchButton.on("click", displayImageSearch);
+}
+
+var displayImageSearch = function () {
+
 }
 
 //this is the name of the astronaut stuff
