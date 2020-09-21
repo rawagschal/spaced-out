@@ -66,7 +66,7 @@ var displayMercury = function (mercuryResponse) {
   }
 };
 
-//Inital Photo Gallery
+//Image Gallery
 var getImgGallery = function () {
   fetch("https://images-api.nasa.gov/search?q=great%20observatories")
   .then(function(response) {
@@ -94,8 +94,14 @@ var displayGallery = function (response) {
   var galleryContainer = $("<div>").addClass("image-gallery container")
   introContainerEl.append(galleryContainer);
   for (i =0; i < 9; i++) {
-    var nasaImage = $("<img>").attr("src", response.collection.items[i].links[0].href);
-    galleryContainer.append(nasaImage);
+    var imageModal = $("<div>").attr("id", "image-modal").addClass("modal")
+    var imageModalContent = $("<img>").attr("src", response.collection.items[i].links[0].href)
+    var imageModalTrigger = $("<a>").addClass("modal-trigger").attr("href", "#image-modal")
+    var nasaImage = $("<img>").attr("src", response.collection.items[i].links[0].href)
+    imageModalTrigger.append(nasaImage);
+    galleryContainer.append(imageModalTrigger);
+    imageModal.append(imageModalContent);
+    galleryContainer.append(imageModal);
   }
   
   imageSearchButton.on("click", displayImageSearch);
