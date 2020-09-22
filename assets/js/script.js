@@ -39,7 +39,7 @@ var displayIntroPage = function () {
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
     astronautBtn.on("click", getAstronauts);
     //button to photo gallery
-    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
+    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
     galleryBtn.on("click", getImgGallery);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
@@ -97,29 +97,37 @@ var getImgGallery = function () {
 }
 
 var displayGallery = function (response) {
-  destroyElement();
+  destroyElement(); //clear page
+  displayBackBtn(); //home button in header 
   introContainerEl.html("<h4>NASA Photo Gallery</h4>");
+  
+  var galleryContaierEl = $("<div>").addClass("row")
+  introContainerEl.append(galleryContaierEl);
+  
   //Image Search Bar
-  var imageSearchContainer = $("<div>").addClass("image-search container")
+  var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer")
   var imageSearchInput = $("<input type=\"search\" id=\"search\" placeholder=\"Search for an Image\">")
   var imageSearchButton = $("<button>").attr("type", "button").addClass("button")
   var searchIcon = $("<i>").addClass("far fa-search")
   // Append Search Bar Display to Container
   imageSearchButton.append(searchIcon);
   imageSearchContainer.append(imageSearchInput, imageSearchButton);
-  introContainerEl.append(imageSearchContainer);
+  galleryContaierEl.append(imageSearchContainer);
+  
   //Image Gallery -- get this to display in a 3x3 grid
-  var galleryContainer = $("<div>").addClass("image-gallery container")
-  introContainerEl.append(galleryContainer);
+  var galleryGridContainer = $("<div>").addClass("row").attr("id", "galleryGridContainer")
+  galleryContaierEl.append(galleryGridContainer);
+  
   for (i =0; i < 9; i++) {
     var imageModal = $("<div>").attr("id", "image-modal").addClass("modal")
     var imageModalContent = $("<img>").attr("src", response.collection.items[i].links[0].href)
     var imageModalTrigger = $("<a>").addClass("modal-trigger").attr("href", "#image-modal")
     var nasaImage = $("<img>").attr("src", response.collection.items[i].links[0].href)
+    
     imageModalTrigger.append(nasaImage);
-    galleryContainer.append(imageModalTrigger);
+    galleryGridContainer.append(imageModalTrigger);
     imageModal.append(imageModalContent);
-    galleryContainer.append(imageModal);
+    galleryGridContainer.append(imageModal);
   }
   
   imageSearchButton.on("click", displayImageSearch);
