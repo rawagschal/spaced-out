@@ -14,7 +14,7 @@ var displayIntroPage = function () {
     //these create the elements
     //generate intro banner
     var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
-    var paraContainerEl = $("<p>").addClass("intro-paragraph").text("The only home we’ve ever known preserve and cherish that pale blue dot. Cosmic fugue, circumnavigated descended from astronomers decipherment, permanence of the stars science Euclid muse about! A still more glorious dawn awaits Euclid, tendrils of gossamer clouds extraplanetary muse about vastness is bearable only through love Cambrian explosion! Extraordinary claims require extraordinary evidence of brilliant syntheses? Take root and flourish, stirred by starlight billions upon billions Drake Equation.");
+    var paraContainerEl = $("<p>").addClass("intro-paragraph").text("Look up into th cosmos a little more often.");
     // here are buttons for intro page
     var btnContainerEl = $("<div>").addClass("btn-container");
     //button to atronaut bios
@@ -62,7 +62,7 @@ var displayMercury = function (mercuryResponse) {
     //banner and paragraph
     var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
     var bannerCreditEl = $("<h6>").text("Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
-    var retrogradeInfoEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day, depending on the time of year of course. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't psuedoscience. The mythology says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. ").addClass("mercury-paragragh");
+    var retrogradeInfoEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't pseudoscience. Pseudoscience says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. While that might be up for debate, one thing is certain, Retrograde is a real Astronomical event. It's an illusion that happens when the orbit of Mercury moves faster around the sun than Earth, creating the illsion that for a brief period of time it moves backward, creating a loop effect. The occurance takes roughly about a month and happens about 3 times a year, the length of time it takes Mercury to do a full orbit around us and the sun. It actually is an event that can be observed with most of the planets that we can see in the sky. With the chaos of everyday life, it's easy to see how this might have been a scapegoat to blame for daily mishaps, but it's important to realize what this really is. An illusion.").addClass("mercury-paragragh");
     var retrogradeBtn = $("<button>").attr("type", "button").text("Well, is it?");
     var retroResponseEl = $("<div>");
     var retroVideoContainerEl = $("<div>").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
@@ -72,7 +72,7 @@ var displayMercury = function (mercuryResponse) {
     introContainerEl.append(retrogradeInfoEl);
     introContainerEl.append(retroResponseEl);
     introContainerEl.append(retroVideoContainerEl);
-
+    var response
     if ("mercuryResponse.is_retrograde" === "true") {
             // Display the result
             console.log("True")
