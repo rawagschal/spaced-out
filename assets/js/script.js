@@ -25,7 +25,7 @@ var displayIntroPage = function () {
     // galleryBtn.on("click", getSpaceFlightN);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("button");
-    mercuryBtn.on("click", displayMercury);
+    mercuryBtn.on("click", getMercury);
     //button to news
     var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("button");
     spaceNewsBtn.on("click", getSpaceFlightNews);
@@ -39,8 +39,7 @@ var displayIntroPage = function () {
     introContainerEl.append(btnContainerEl);
 };
 
-//below is the mercury in retrograde stuff
-// Is Mercury in Retrograde response
+// Below is Mercury in Retrograde response
 function getMercury() {
     var date = moment(currentDate).format("(YYYY-MM-DD)")
     fetch(
@@ -50,29 +49,46 @@ function getMercury() {
         return mercuryResponse.json();
       })
     .then(function(mercuryResponse) {
-        console.log(mercuryResponse.is_retrograde);
+        console.log("well it", mercuryResponse.is_retrograde);
+        displayMercury(mercuryResponse);
     })
-  displayMercury(mercuryResponse)
+    
 };
+
 
 var displayMercury = function (mercuryResponse) {
-  if ("mercuryResponse.is_retrograde" === "true") {
-    // Display the result
-    console.log("True")
-  }
-  else {
-    // Display the result
-    console.log("False")
-  }
+    destroyElement();
+    displayBackBtn();
+    //banner and paragraph
+    var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner");
+    var retrogradeInfoEl = $("<p>").text("Here will be some information.");
+    var retrogradeBtn = $("<button>").attr("type", "button").text("Well, is it?");
+    var retroResponseEl = $("<div>");
+    //appending all of them to the main container
+    introContainerEl.append(retrogradeBannerEl);
+    introContainerEl.append(retrogradeInfoEl);
+    introContainerEl.append(retroResponseEl);
+
+    if ("mercuryResponse.is_retrograde" === "true") {
+            // Display the result
+            console.log("True")
+            retroResponseEl.text("It sure is.");
+    } else {
+            // Display the result
+            console.log("False")
+            retroResponseEl.text("Not this time");
+    }
+    
+
 };
 
 
-//this is the name of the astronaut stuff
+//this is how many astronauts are in space
 var getAstronauts = function () {
     destroyElement();
     var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
     introContainerEl.append(rowContainerEl);
-    fetch("http://api.open-notify.org/astros.json")
+    fetch("https://api.open-notify.org/astros.json")
       .then(function (response) {
         return response.json();
       })
