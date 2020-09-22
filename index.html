@@ -10,7 +10,7 @@
     <!-- here are our css reference sheets  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <!-- here is the icon sheet  -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />    
     <!-- here is our style sheet  -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/media.css" />
@@ -18,6 +18,16 @@
 <body>
     <div class="main-wrapper">
         <div class="main-container">
+            <div class="row">
+                <!-- this is our header  -->
+                <header class="col s12">
+                    <div class="header-container" id="header-container">
+                        <!-- <button class="back-button" id="back-button">
+                            <i class="tiny material-icons">navigate_before</i>
+                        </button> -->
+                    </div>
+                </header>
+            </div>
             <div class="row">
                 <!-- main content  -->
                 <div class="col s12 m8 l9">
@@ -29,13 +39,26 @@
                 <div class="col s12 m4 l3">
                     <div class="side-container">
                         <!-- here is where the images of the day should be -->
-                        <div class="row image-sidebar">
-                            <!-- nasa image of the day  -->
-                            <div class="col s12 side-child">
-                                <h4 id=nasa class="sidebar-header">NASA's Image of the Day</h4>
-                            </div>
-                            <div class="col s12 side-child">
-                                <h4 id=astrobin class="sidebar-header">AstroBin's Image of the Day</h4>
+                        <div class="image-sidebar">
+                            <div class="row ">
+                                <!-- icon  -->
+                                <div class="col s12 m12 l12 side-child">
+                                    <div class="img-icon-wrapper">
+                                        <img class="icon-img"src="assets/images/spacedout-icon.png" alt="Spaced out icon."/>
+                                    </div>
+                                </div>
+                                <!-- nasa image of the day  -->
+                                <div class="col s12 side-child">
+                                    <div class="img-content-wrapper" id="nasa">
+                                        <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                                    </div>
+                                </div>
+                                <!-- astrobin image of the day -->
+                                <div class="col s12 side-child">
+                                    <div class="image-content-wrapper" id="astrobin">
+                                        <h4 class="sidebar-header">AstroBin's Image of the Day</h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,7 +72,7 @@
                         <h4>Spaced Out</h4>
                         <ul>
                             <li>
-                                <a href="#" target="_blank">About The Creators</a>
+                                <a href="#">About The Creators</a>
                             </li>
                             <li>
                                 <a href="https://github.com/rawagschal/spaced-out" target="_blank">GitHub Repo</a>
