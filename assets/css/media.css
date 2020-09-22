@@ -9,6 +9,10 @@
         flex: 1 0 0;
     }
 
+    .flight-img-placement {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -23,4 +27,31 @@
         flex: 1 0 0;
     }
 
+    /* below is the side bar adjustments */
+    .icon-img {
+        position: absolute;
+        top: 0px;
+        left: -4000px;
+    }
+
+    .day-img {
+        width: 100%;
+    }
+    .flight-img-placement {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* here is styling for the back button  */
+    .et-go-home {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    .back-button {
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+    }
 }
