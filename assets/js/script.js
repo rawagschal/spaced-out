@@ -25,51 +25,6 @@ var displayBackBtn = function () {
 
 //displays main page
 var displayIntroPage = function () {
-<<<<<<< HEAD
-  // this will nuke all the script when pages lead back here
-  destroyElement();
-  //these create the elements
-  //generate intro banner
-  var imgEl = $("<img>")
-    .attr("src", "assets/images/spaced-out-banner.png")
-    .addClass("img-banner");
-  var paraContainerEl = $("<p>")
-    .addClass("intro-paragraph")
-    .text(
-      "The only home we’ve ever known preserve and cherish that pale blue dot. Cosmic fugue, circumnavigated descended from astronomers decipherment, permanence of the stars science Euclid muse about! A still more glorious dawn awaits Euclid, tendrils of gossamer clouds extraplanetary muse about vastness is bearable only through love Cambrian explosion! Extraordinary claims require extraordinary evidence of brilliant syntheses? Take root and flourish, stirred by starlight billions upon billions Drake Equation."
-    );
-  // here are buttons for intro page
-  var btnContainerEl = $("<div>").addClass("btn-container");
-  //button to atronaut bios
-  var astronautBtn = $("<button>")
-    .attr("type", "button")
-    .text("Astronauts In Space")
-    .addClass("button");
-  astronautBtn.on("click", getAstronauts);
-  //button to photo gallery
-  // var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("button");
-  // galleryBtn.on("click", getSpaceFlightN);
-  //button to mercury in retrograde
-  var mercuryBtn = $("<button>")
-    .attr("type", "button")
-    .text("Mercury In Retrograde")
-    .addClass("button");
-  mercuryBtn.on("click", displayMercury);
-  //button to news
-  var spaceNewsBtn = $("<button>")
-    .attr("type", "button")
-    .text("Space News")
-    .addClass("button");
-  spaceNewsBtn.on("click", getSpaceFlightNews);
-  //these append all of the above to the main container
-  introContainerEl.append(imgEl);
-  introContainerEl.append(paraContainerEl);
-  btnContainerEl.append(astronautBtn);
-  // btnContainerEl.append(galleryBtn);
-  btnContainerEl.append(mercuryBtn);
-  btnContainerEl.append(spaceNewsBtn);
-  introContainerEl.append(btnContainerEl);
-=======
     // this will nuke all the script when pages lead back here
     destroyElement();
     destroyBackBtn();
@@ -99,8 +54,7 @@ var displayIntroPage = function () {
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
-};
+f};
 
 //below is the mercury in retrograde stuff
 // Is Mercury in Retrograde response
@@ -127,7 +81,6 @@ var displayMercury = function (mercuryResponse) {
 };
 
 //this is the name of the astronaut stuff
-<<<<<<< HEAD
 function scrapeAstroNames() {
   fetch(
     "https://cors-anywhere.herokuapp.com/https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json"
@@ -151,14 +104,6 @@ var getAstronauts = function (people) {
       "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
         element.name.split(" ")[1]
     )
-=======
-var getAstronauts = function () {
-    destroyElement();
-    displayBackBtn(); //this is our back button
-    var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
-    introContainerEl.append(rowContainerEl);
-    fetch("http://api.open-notify.org/astros.json")
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
       .then(function (response) {
         return response.json();
       })
@@ -171,17 +116,10 @@ var getAstronauts = function () {
 
 //this displays the astronaut stuff
 var displayAstro = function (astronautArray) {
-<<<<<<< HEAD
-  var colContainerEl = $("<div>").addClass("col s12 m12 l4");
-  colContainerEl.html(
-    `<div class="card-wrapper">
-            <div class="card">
-=======
     var colContainerEl = $("<div>").addClass("col s12 m12 l4");
     colContainerEl.html(
         `<div class="card-wrapper">
             <div class="card card-astro">
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
                     <span class="card-title">${astronautArray.name}</span>
@@ -201,16 +139,6 @@ var displayAstro = function (astronautArray) {
   $("#astronauts-row").append(colContainerEl);
 };
 
-<<<<<<< HEAD
-// Below Images of the Day
-// Nasa Image of the Day
-function getNasa() {
-  fetch(
-    `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=12`
-  )
-    .then(function (response) {
-      return response.json();
-=======
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
 function getNasa() {
@@ -231,7 +159,6 @@ function getNasa() {
         
         // Append Image, Title, and Descritpion to the sidebar
         $("#nasa").append(nasaImage, nasaTitle);
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
     })
     .then(function (response) {
       var imageTitle = response[0].title;
@@ -241,24 +168,6 @@ function getNasa() {
 
 // Astrobin Image of the Day
 function getAstrobin() {
-<<<<<<< HEAD
-  fetch(
-    `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      var astroImageInfo = response.objects[0].image;
-      console.log(astroImageInfo);
-
-      // Use image info to fetch additional information - Hardcoded, need to make dynamic
-      fetch(
-        `https://www.astrobin.com/api/v1/image/nxqnot/?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
-      )
-        .then(function (response) {
-          return response.json();
-=======
     fetch(
         `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
     )
@@ -284,7 +193,6 @@ function getAstrobin() {
             
             // Append Image & Title to the sidebar
             $("#astrobin").append(astroImage, astroTitle);
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
         })
         .then(function (response) {
           // HD Image URL for image of the day
@@ -305,16 +213,6 @@ var getSpaceFlightNews = function () {
     .then(function (spaceNewsResponse) {
       return spaceNewsResponse.json();
     })
-<<<<<<< HEAD
-    .then(function (spaceNewsResponse) {
-      console.log(spaceNewsResponse);
-      displayNewsPage(spaceNewsResponse);
-    });
-};
-// Space News - Fetch News By Hubble
-
-// Display the News
-=======
     .then(function(spaceNewsResponse) {
         console.log(spaceNewsResponse);
         displayNewsPage(spaceNewsResponse);  
@@ -322,7 +220,6 @@ var getSpaceFlightNews = function () {
 } 
 
 // Display the News 
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
@@ -332,46 +229,6 @@ var displayNewsPage = function (spaceNewsResponse) {
     .append('<div class="row">');
 
   // Loop through the news
-<<<<<<< HEAD
-  for (i = 0; i < spaceNewsResponse.docs.length; i++) {
-    // Container for Each Piece of News
-    var spaceFlightCardContainer = $("<div>").addClass("col s12 m8 l9");
-    var card = $("<div>").addClass("card");
-    var body = $("<div>").addClass("card-body");
-
-    // Display Information
-    var spaceFlightPubDate = $("<p>")
-      .addClass("card-content")
-      .text(spaceNewsResponse.docs[i].published_date);
-    var spaceFligthFormattedDate = moment(spaceFlightPubDate).format(
-      "MMM. Do, YYYY"
-    );
-    var spaceFlightImage = $("<img>")
-      .attr("src", spaceNewsResponse.docs[i].featured_image)
-      .attr("height", 250);
-    var spaceFlightTitle = $("<h5>")
-      .addClass("card-content")
-      .text(spaceNewsResponse.docs[i].title);
-    var readNow = $("<a>")
-      .text("Read Now")
-      .addClass("card-content")
-      .attr("href", spaceNewsResponse.docs[i].featured_image)
-      .attr("target", "_blank");
-
-    // Append Display to Container
-    spaceFlightCardContainer.append(
-      card.append(
-        body.append(
-          spaceFligthFormattedDate,
-          spaceFlightImage,
-          spaceFlightTitle,
-          readNow
-        )
-      )
-    );
-    introContainerEl.append(spaceFlightCardContainer);
-    // console.log(spaceFlightImage, spaceFlightTitle, spaceFligthFormattedDate);
-=======
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
       // Container for Each Piece of News
       var spaceFlightCardContainer = $("<div>").addClass("col");
@@ -390,71 +247,9 @@ var displayNewsPage = function (spaceNewsResponse) {
       card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
       spaceFlightCardContainer.append(card);
       introContainerEl.append(spaceFlightCardContainer);
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
   }
 };
 
 displayIntroPage();
-<<<<<<< HEAD
-
-// function getHubble() {
-//   fetch(
-//     `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=12`
-//   )
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (response) {`
-
-//       var = ;
-//     });
-// }console.log(data)
-var getHubbleNews = function () {
-  fetch(`https://webbtelescope.org/api/v3/news_release/last`, {
-    method: "GET",
-    mode: "cors",
-    // headers: {
-    //   'Access-Control-Allow-Origin':'*'
-    // }
-  })
-    .then(function (response) {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => console.log(data));
-};
-//getHubbleNews();
-
-function getStars() {
-  fetch(
-    `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&count=12`
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      var imageTitle = response[0].title;
-      console.log(imageTitle);
-    });
-}
-
-$(document).ready(function () {
-  scrapeAstroNames();
-
-  //   var planetarium = $.virtualsky({
-  //           id: 'starmap',
-  //           az: 225,
-  //           projection: 'stereo',
-  //           constellations: true,
-  //           constellationboundaries: true,
-  //           boundaries: [
-  //                   ["And",343,34.5,343,52.5,350,52.5,350,50,353.75,50,353.75,48,2.5,48,2.5,46,13,46,13,48,16.75,48,16.75,50,20.5,50,25,50,25,47,30.625,47,30.625,50.5,37.75,50.5,37.75,36.75,30,36.75,30,35,21.125,35,21.125,33,10.75,33,10.75,23.75,12.75,23.75,12.75,21,2.125,21,2.125,22,1,22,1,28,0,28,0,31.33333,356.25,31.33333,356.25,32.08333,352.5,32.08333,352.5,34.5,343,34.5],
-  //                   ["Ori",69.25,0,69.25,15.5,74.5,15.5,74.5,16,80,16,80,15.5,84,15.5,84,12.5,86.5,12.5,86.5,18,85.5,18,85.5,22.83333,88.25,22.83333,88.25,21.5,93.25,21.5,93.25,17.5,94.625,17.5,94.625,12,94.625,10,93.625,10,93.625,0,93.625,-4,87.5,-4,87.5,-11,76.25,-11,76.25,-4,70,-4,70,0,69.25,0]
-  //           ],
-  //           clock:new Date("July 17, 2013 18:39:00 GMT")
-  //   });
-});
-=======
 getAstrobin();
 getNasa();
->>>>>>> b7081081c75f43dbcd53a719d2affafaf63f88f7
