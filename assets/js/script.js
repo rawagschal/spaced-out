@@ -143,19 +143,11 @@ var displayAstro = function (astronautArray) {
 // Nasa Image of the Day
 function getNasa() {
     fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU`
+        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` + currentDate.format("YYYY-MM-DD")
     )
     .then(function(response) {
-      if (response.status === 404) {
-        console.log ("I'm a 404")
-        fetch(
-          `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=2020-09-21`
-        )
-        return response.json();
-      } else {
         return response.json()
-      }  
-      })
+      }  )
     .then(function(response) {
 
         // Var of Image URL for image of the day
