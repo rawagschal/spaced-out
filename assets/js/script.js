@@ -143,11 +143,11 @@ var displayAstro = function (astronautArray) {
 // Nasa Image of the Day
 function getNasa() {
     fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU`
+        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` + currentDate.format("YYYY-MM-DD")
     )
     .then(function(response) {
-        return response.json();
-      })
+        return response.json()
+      }  )
     .then(function(response) {
 
         // Var of Image URL for image of the day
