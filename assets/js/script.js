@@ -58,16 +58,20 @@ function getMercury() {
 
 var displayMercury = function (mercuryResponse) {
     destroyElement();
-    displayBackBtn();
+    // displayBackBtn();
     //banner and paragraph
-    var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner");
-    var retrogradeInfoEl = $("<p>").text("Here will be some information.");
+    var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
+    var bannerCreditEl = $("<h6>").text("Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
+    var retrogradeInfoEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day, depending on the time of year of course. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't psuedoscience. The mythology says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. ").addClass("mercury-paragragh");
     var retrogradeBtn = $("<button>").attr("type", "button").text("Well, is it?");
     var retroResponseEl = $("<div>");
+    var retroVideoContainerEl = $("<div>").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
     //appending all of them to the main container
     introContainerEl.append(retrogradeBannerEl);
+    introContainerEl.append(bannerCreditEl);
     introContainerEl.append(retrogradeInfoEl);
     introContainerEl.append(retroResponseEl);
+    introContainerEl.append(retroVideoContainerEl);
 
     if ("mercuryResponse.is_retrograde" === "true") {
             // Display the result
@@ -78,7 +82,6 @@ var displayMercury = function (mercuryResponse) {
             console.log("False")
             retroResponseEl.text("Not this time");
     }
-    
 
 };
 
@@ -88,25 +91,25 @@ var getAstronauts = function () {
     destroyElement();
     var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
     introContainerEl.append(rowContainerEl);
-    fetch("https://api.open-notify.org/astros.json")
-      .then(function (response) {
+    fetch("http://api.open-notify.org/astros.json", {method: 'GET'})
+    .then(function (response) {
         return response.json();
-      })
-      .then(function (astroResponse) {
+    })
+    .then(function (astroResponse) {
         console.log(astroResponse);
 
         astroResponse.people.forEach(element => {
           fetch(
               "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
-                element.name.split(" ")[1]
+                element.name.split(" ")[1] 
             )
-              .then(function (response) {
+            .then(function (response) {
                 return response.json();
-              })
-              .then(function (bioResponse) {
+            })
+            .then(function (bioResponse) {
                 console.log(bioResponse);
                 displayAstro(bioResponse.results[0]);
-              });
+            });
         })
     });
 };
