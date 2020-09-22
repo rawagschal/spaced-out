@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Space Out</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaced Out</title>
     <!-- here is our browser icon  -->
-    <link rel="icon" type="image/png" href="assets\images\favicon-moon.png">
+    <link rel="icon" type="image/png" href="assets\images\favicon-moon.png" />
     
     <!-- here are our css reference sheets  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <!-- here is the icon sheet  -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- here are our css reference sheets  -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <!-- here is our style sheet  -->
     <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
+    <link rel="stylesheet" href="assets/css/media.css" />
+    <!--[if lt IE 9]><script src="excanvas.min.js"></script><![endif]-->
+</head>
 
   <body>
     <div class="main-wrapper">
         <div class="main-container">
             <div class="row">
                 <!-- main content  -->
-                <div class="col s12 m8 l9 content-container">
-                    <!-- main content page, astronaut blurbs, and image gallery and everything else -->
-                    <section id="astroList">
-              
-                    </section>
-                    Here is some mock up main content that should be regenerated in the DOM.
-                    <button id="button-1"></button>
+                <div class="col s12 m8 l9">
+                    <div class="content-container" id="content-container">
+                        <!-- main content page, astronaut blurbs, and image gallery and everything else -->
+                
+                      </div>
+                      <div id="starmap" style="width:944px;height:400px;"></div>
                 </div>
 
                 <!-- side bar  -->
-                <div class="col s12 m4 l3 side-container">
-                    <!-- here is where the images of the day should be -->
-                    <div class="row image-sidebar">
-                        <!-- nasa image of the day  -->
-                        <div class="col s12 side-child">
-                            <h4 class="sidebar-header">NASA's Image of the Day</h4>
-                            <img id="day-nasa-img" src="assets/images/exampleimagefornasa.jpg" />
-                            <h5 class="sidebar-subheader">History of Chandra X-Ray Observatory</h5>
-                            <p>This most distant x-ray cluster of galaxies yet has been found by astronomers using Chandra X-ray Observatory (CXO).</p>
-                        </div>
-                        <div class="col s12 side-child">
-                            <h4 class="sidebar-header">AstroBins Image of the Day</h4>
-                            <img id="day-astrobin-img" src="assets/images/exampleimageforastrobin.jpg" />
-                            <h5 class="sidebar-subheader">LDN 1251</h5>
+                <div class="col s12 m4 l3">
+                    <div class="side-container">
+                        <!-- here is where the images of the day should be -->
+                        <div class="row image-sidebar">
+                            <!-- nasa image of the day  -->
+                            <div class="col s12 side-child">
+                                <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                                <img id="day-nasa-img" src="assets/images/exampleimagefornasa.jpg" />
+                                <h5 class="sidebar-subheader">History of Chandra X-Ray Observatory</h5>
+                                <p>This most distant x-ray cluster of galaxies yet has been found by astronomers using Chandra X-ray Observatory (CXO).</p>
+                            </div>
+                            <div class="col s12 side-child">
+                                <h4 class="sidebar-header">AstroBins Image of the Day</h4>
+                                <img id="day-astrobin-img" src="assets/images/exampleimageforastrobin.jpg" />
+                                <h5 class="sidebar-subheader">LDN 1251</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,20 +54,21 @@
             <div class="row">
                 <!-- this is our footer  -->
                 <footer class="col s12">
+                    <div class="footer-container">
                     <!-- some external content and minor links can go here  -->
-                        <h4>S p a c e d O u t</h4>
+                        <h4>Spaced Out</h4>
                         <ul>
                             <li>
-                                <a href="#">I'm a link </a>
+                                <a href="#" target="_blank">About The Creators</a>
                             </li>
                             <li>
-                                <a href="#">I'm a link </a>
+                                <a href="https://github.com/rawagschal/spaced-out" target="_blank">GitHub Repo</a>
                             </li>
                             <li>
-                                <a href="#">I'm possibly another link</a>
+                                <a href="mailto:spaceatspace@space.com" target="_blank">Contact Us</a>
                             </li>
                         </ul>
-                </footer>
+                        <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true&meteorshowers=true&showstarlabels=true" allowTransparency="true"></iframe>                </footer>
             </div>
           </aside>
         </div>
@@ -93,7 +92,7 @@
         </div>
       </div>
     </div>
-
+    <iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width:800px;height:550px;border:none;" frameborder="0" scrolling="no"></iframe>
     <!-- here are our javascript links  -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

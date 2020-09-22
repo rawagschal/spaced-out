@@ -1,3 +1,15 @@
+:root {
+    /* color palette  */
+    --desaturated-yellow: #beb505;
+    --aquamarine: #0fc6a9;
+    --teal: #09756c;
+    --hover-teal: #085751;
+    --ocean-depths: #157255;
+    --grass-is-greener:  #056d24;
+    --deep-space-blue: #064652;
+    --midnight-plum: #272778;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +31,6 @@ body {
     background-color: #ffffff;
     margin: 5%;
     width: 80vw;  /* these two allow container responsiveness on all viewports with ease */
-    /* height: 80vh; */
 }
 
 .content-container,
@@ -60,27 +71,89 @@ body {
     font-size: 0.75em;
 }
 
-footer {
-    height: 10vh;
+/* footer styles  */
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 footer h4 {
     font-size: 1.25em;
+    letter-spacing: 15px;
 }
 
 footer ul {
+    width: 50%;
     margin: 0 15px;
     list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-footer ul li {
-
+    justify-content: space-evenly;
 }
 
 footer ul li a {
-    text-decoration: none; 
-    
+    text-decoration: none;
+    color: var(--deep-space-blue);
+}
+
+footer ul li a:hover {
+    color: var(--desaturated-yellow);
+}
+
+/* this is all the main content  */
+.content-container {
+    margin-top: 2%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-banner {
+    width: 100%;
+}
+
+.intro-paragraph {
+    margin: 2%;
+    text-indent: 2em;
+    letter-spacing: 1px;
+}
+
+/* these are button styles on the main page */
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 2% 0 ;
+}
+
+.button {
+    margin: 2px;
+    background-color: var(--teal);
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 2px;
+}
+
+.button:hover {
+    background-color: var(--hover-teal);
+    box-shadow: 0 0 5px 1px var(--hover-teal);
+}
+
+/* below is the astronaut style page  */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-wrapper {
+    width: 100%;
+    height: 700px;
+}
+
+.card-content-wrapper {
+    flex: 1 0 0;
+    overflow-y: auto;
 }
