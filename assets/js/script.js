@@ -101,17 +101,19 @@ var displayGallery = function (response) {
   displayBackBtn(); //home button in header 
   introContainerEl.html("<h4>NASA Photo Gallery</h4>");
   
-  var galleryContaierEl = $("<div>").addClass("row")
+  var galleryContaierEl = $("<div>").addClass("row").attr("id", "galleryContainerEl")
   introContainerEl.append(galleryContaierEl);
   
   //Image Search Bar
   var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer")
-  var imageSearchInput = $("<input type=\"search\" id=\"search\" placeholder=\"Search for an Image\">")
-  var imageSearchButton = $("<button>").attr("type", "button").addClass("button")
-  var searchIcon = $("<i>").addClass("far fa-search")
+  var searchBarWrapper = $("<div>").addClass("col").attr("id", "searcBarWrapper")
+  var imageSearchInput = $("<input>").attr("id", "search").attr("placeholder", "search for an image")
+  var searchButtonWrapper = $("<div>").addClass("col").attr("id", "searchButtonWrapper")
+  var imageSearchIcon = $("<i>").addClass("material-icons").text("search")
   // Append Search Bar Display to Container
-  imageSearchButton.append(searchIcon);
-  imageSearchContainer.append(imageSearchInput, imageSearchButton);
+  searchButtonWrapper.append(imageSearchIcon);
+  searchBarWrapper.append(imageSearchInput);
+  imageSearchContainer.append(searchBarWrapper, searchButtonWrapper);
   galleryContaierEl.append(imageSearchContainer);
   
   //Image Gallery -- get this to display in a 3x3 grid
