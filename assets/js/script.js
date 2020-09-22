@@ -146,7 +146,15 @@ function getNasa() {
         `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU`
     )
     .then(function(response) {
+      if (response.status === 404) {
+        console.log ("I'm a 404")
+        fetch(
+          `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=2020-09-21`
+        )
         return response.json();
+      } else {
+        return response.json()
+      }  
       })
     .then(function(response) {
 
