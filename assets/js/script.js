@@ -237,7 +237,7 @@ var loopNews = function(spaceNewsResponse) {
     var body = $("<div>").addClass("card-stacked");
 
     // Favorite News
-    var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news");
+    var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news-" + [i]);
 
     // Display Information
     var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
@@ -251,9 +251,9 @@ var loopNews = function(spaceNewsResponse) {
     introContainerEl.append(spaceFlightCardContainer);
 
     // Save Favorite News
-    $(document).on("click", "#favorite-news", function() {
+    $(document).on("click", "#favorite-news-" + [i], function() {
       console.log("I was clicked");
-      var newsTitle = spaceNewsResponse.docs[i].title
+      var newsTitle = spaceNewsResponse.docs[0].title
       // If news is not empty
       if (newsTitle !== "") {
           var newsSave =
@@ -268,7 +268,6 @@ var loopNews = function(spaceNewsResponse) {
           window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
       }
       console.log(newsTitle)
-      //getCity(cityName);
     })   
   }
 }
