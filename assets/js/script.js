@@ -214,11 +214,15 @@ var displayNewsPage = function (spaceNewsResponse) {
   displayBackBtn(); //this is our back button
   // Create row for the news
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  // Loop through news
   loopNews(spaceNewsResponse);
+  // Load More Button
   var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
   introContainerEl.append(loadMoreBtn);
+  // Clicking Load More, call Display More News
   $(document).on("click", "#load-more", function() {
     displayMoreNewsPage(spaceNewsResponse.nextPage);
+    loadMoreBtn.remove();
   })
 };
 
@@ -246,22 +250,23 @@ var loopNews = function(spaceNewsResponse) {
   }
 }
 
+// Display More News
 var displayMoreNewsPage = function(spaceNewsResponse) {
   console.log (spaceNewsResponse)
   fetch(
     `https://spaceflightnewsapi.net/api/v1/articles?page=` + spaceNewsResponse
   )
-  .then(function(moreSpaceNewsResponse) {
-    return moreSpaceNewsResponse.json();
+  .then(function(spaceNewsResponse) {
+    return spaceNewsResponse.json();
   })
-  .then(function(moreSpaceNewsResponse) {
-    loopNews(moreSpaceNewsResponse);  
-  })
-  
-  var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
-  introContainerEl.append(loadMoreBtn);
-  $(document).on("click", "#load-more", function() {
-    displayMoreNewsPage(spaceNewsResponse.nextPage);
+  .then(function(spaceNewsResponse) {
+    loopNews(spaceNewsResponse);
+    var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more-2").text("Load More News").addClass("main-button");
+    introContainerEl.append(loadMoreBtn);
+    $(document).on("click", "#load-more-2", function() {
+      displayMoreNewsPage(spaceNewsResponse.nextPage);
+      loadMoreBtn.remove();
+    })
   })
 };
 
