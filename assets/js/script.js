@@ -101,8 +101,8 @@ var displayGallery = function (response) {
   displayBackBtn(); //home button in header 
   introContainerEl.html("<h4>NASA Photo Gallery</h4>");
   
-  var galleryContaierEl = $("<div>").addClass("row").attr("id", "galleryContainerEl")
-  introContainerEl.append(galleryContaierEl);
+  var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl")
+  introContainerEl.append(galleryContainerEl);
   
   //Image Search Bar
   var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer")
@@ -114,65 +114,51 @@ var displayGallery = function (response) {
   searchButtonWrapper.append(imageSearchIcon);
   searchBarWrapper.append(imageSearchInput);
   imageSearchContainer.append(searchBarWrapper, searchButtonWrapper);
-  galleryContaierEl.append(imageSearchContainer);
+  galleryContainerEl.append(imageSearchContainer);
   
   //Image Gallery -- get this to display in a 3x3 grid
-  var galleryGridContainer = $("<div>").addClass("row").attr("id", "galleryGridContainer")
-  galleryContaierEl.append(galleryGridContainer);
+  var galleryGridContainer = $("<div>").addClass("row").attr("id","galleryGridContainer")
+  galleryContainerEl.append(galleryGridContainer);
   
   for (i =0; i < 9; i++) {
     // var imageModal = $("<div>").attr("id", "image-modal").addClass("modal")
     // var imageModalContent = $("<img>").attr("src", response.collection.items[i].links[0].href)
     // var imageModalTrigger = $("<a>").addClass("modal-trigger").attr("href", "#image-modal")
+    var imageWrapper = $("<div>").addClass("col")
     var nasaImage = $("<img>").attr("src", response.collection.items[i].links[0].href)
     
     // imageModalTrigger.append(nasaImage);
     // galleryGridContainer.append(imageModalTrigger);
     // imageModal.append(imageModalContent);
     // galleryGridContainer.append(imageModal);
-    galleryGridContainer.append(nasaImage);
+    imageWrapper.append(nasaImage);
+    galleryGridContainer.append(imageWrapper);
   }
   
-  searchButtonWrapper.on("click", displayImageSearch);
+  searchButtonWrapper.on("click", getSearchResults);
 
 }
 
-var displayImageSearch = function () {
-  $("#galleryGridContainer").html(null);
-  var galleryGridContainer = $("<div>").addClass("row").attr("id", "galleryGridContainer")
+var getSearchResults = function () {
   var userInput = $("#search").val()
-  
-  fetch(
-    "https://images-api.nasa.gov/search?q="
-     + userInput 
-  )
-  .then(function(searchResponse) {
-    return searchResponse.json();
+  fetch("https://images-api.nasa.gov/search?q=" + userInput)
+  .then(function(response) {
+    return response.json();
   })
-  
-  //this in a for loop
-  .then(function(searchResponse) {
-    console.log(searchResponse);
-    for (i=0; i < 9; i++) {
-      var nasaImage = searchResponse.collection.items[i].data[i].nasa_id
-      fetch (
-        `https://images-api.nasa.gov/asset/` + nasaImage
-      )
-      .then(function(nasaIdResponse) {
-        return nasaIdResponse.json();
-      })
-      .then(function(nasaIdResponse){
-        var nasaImageById = $("<img>").attr("src", nasaIdResponse.collection.items[i].href)
-        console.log(nasaImageById);
-        galleryGridContainer.append(nasaImageById);
-      })
-      
+  .then(function(response) {
+    console.log(response);
+    //clear image gallery
+    $("#galleryGridContainer").html(null); 
+    // !! display results - only generates text that says [object Object] 
+    for (i=0; i<9; i++) {
+      var imageWrapper = $("<div>").addClass("col")
+      var imageResult = $("<img>").attr("src", response.collection.items[i].links[0].href)
+
+      imageWrapper.append(imageResult);
+      galleryGridContainer.append(imageWrapper);    
     }
-    
   });
-
 }
-
 
 //this is the name of the astronaut stuff
 var getAstronauts = function () {
