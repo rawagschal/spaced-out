@@ -34,10 +34,11 @@ body {
 }
 
 .content-container,
-.side-container { /*was a col */
+.side-container {
     display: flex;
     justify-content: center;
     align-content: center;
+    align-items: center;
 }
 
 /* everything below is the sidebar  */
@@ -226,3 +227,43 @@ footer ul li a:hover {
     vertical-align: middle;
 }
 
+/* below are the styles for mercury page  */
+.mercury-header {
+    margin-bottom: 10px;
+}
+
+.credit-to {
+    font-size: 11px;
+    font-weight: lighter;
+}
+
+.mercury-paragragh {
+    text-indent: 2em;
+    margin-bottom: 25px;
+}
+
+.response-div {
+    background-color: var(--desaturated-yellow);
+    text-align: center;
+    margin: 15px;
+    padding: 15px;
+    width: 30%;
+}
+
+.mercury-button {
+    margin: 2px;
+    background-color: var(--desaturated-yellow);
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 2px;
+}
+
+.mercury-button:hover {
+    background-color: var(--desaturated-yellow);
+    box-shadow: 0 0 5px 1px var(--desaturated-yellow);
+}
+
+.mercury-links {
+    margin: 15px;
+}
