@@ -215,7 +215,7 @@ var displayNewsPage = function (spaceNewsResponse) {
   
   // Create row for the new
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
-  var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news");
+  var favoriteNews = $("<button>").addClass("material-icons waves-effect waves-light btn-small").text("star_border").attr("id", "favorite-news");
   introContainerEl.append(favoriteNews)
   
   // Loop through news
