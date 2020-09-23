@@ -225,4 +225,6 @@ footer ul li a:hover {
 .material-icons {
     vertical-align: middle;
 }
-
+.game {
+    width: 500px;
+}
