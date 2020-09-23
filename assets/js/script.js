@@ -244,7 +244,6 @@ var loopNews = function(spaceNewsResponse) {
     var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
     var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
     var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
-    var newsTitle = spaceNewsResponse.docs[i].title
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
     card.append(body.append(favoriteNews, spaceFlightPubDate, spaceFlightTitle, readNow));
@@ -254,6 +253,7 @@ var loopNews = function(spaceNewsResponse) {
     // Save Favorite News
     $(document).on("click", "#favorite-news", function() {
       console.log("I was clicked");
+      var newsTitle = spaceNewsResponse.docs[i].title
       // If news is not empty
       if (newsTitle !== "") {
           var newsSave =
@@ -267,7 +267,7 @@ var loopNews = function(spaceNewsResponse) {
           newsSave.push(newsInfo);
           window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
       }
-      console.log(spaceFlightTitle)
+      console.log(newsTitle)
       //getCity(cityName);
     })   
   }
