@@ -204,7 +204,6 @@ var getSpaceFlightNews = function() {
         return spaceNewsResponse.json();
     })
     .then(function(spaceNewsResponse) {
-        console.log(spaceNewsResponse);
         displayNewsPage(spaceNewsResponse);  
     })
 } 
@@ -215,27 +214,51 @@ var displayNewsPage = function (spaceNewsResponse) {
   displayBackBtn(); //this is our back button
   // Create row for the news
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  loopNews(spaceNewsResponse);
+  var loadMoreBtn = $("<button>").text("Load More News").addClass("waves-effect waves-light btn-large");
+  introContainerEl.append(loadMoreBtn);
+  loadMoreBtn.on("click", displayMoreNewsPage(spaceNewsResponse.nextPage));
+};
 
+// Loop through News
+var loopNews = function(spaceNewsResponse) {
   // Loop through the news
   for (i =0; i < spaceNewsResponse.docs.length; i++) {
-      // Container for Each Piece of News
-      var spaceFlightCardContainer = $("<div>").addClass("col");
-      var card = $("<div>").addClass("card flight-img-placement");
-      var image = $("<div>").addClass("card-image");
-      var body = $("<div>").addClass("card-stacked");
+    // Container for Each Piece of News
+    var spaceFlightCardContainer = $("<div>").addClass("col");
+    var card = $("<div>").addClass("card flight-img-placement");
+    var image = $("<div>").addClass("card-image");
+    var body = $("<div>").addClass("card-stacked");
 
-      // Display Information
-      var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
-      var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
-      var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
-      var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-large").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
-      
-      // Append Display to Container
-      card.append(image.append(spaceFlightImage));
-      card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
-      spaceFlightCardContainer.append(card);
-      introContainerEl.append(spaceFlightCardContainer);
-  }
+    // Display Information
+    var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
+    var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
+    var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
+    var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-large").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
+    
+    // Append Display to Container
+    card.append(image.append(spaceFlightImage));
+    card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+    spaceFlightCardContainer.append(card);
+    introContainerEl.append(spaceFlightCardContainer);
+}
+}
+
+var displayMoreNewsPage = function(spaceNewsResponse) {
+  console.log (spaceNewsResponse)
+  fetch(
+    `https://spaceflightnewsapi.net/api/v1/articles?page=` + spaceNewsResponse
+  )
+  .then(function(moreSpaceNewsResponse) {
+    return moreSpaceNewsResponse.json();
+  })
+  .then(function(moreSpaceNewsResponse) {
+    loopNews(moreSpaceNewsResponse);  
+  })
+  
+  var loadMoreBtn = $("<button>").text("Load More News").addClass("waves-effect waves-light btn-large");
+  introContainerEl.append(loadMoreBtn);
+  loadMoreBtn.on("click", displayMoreNewsPage(moreSpaceNewsResponse.nextPage));
 };
 
 displayIntroPage();
