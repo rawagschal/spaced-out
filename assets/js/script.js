@@ -215,9 +215,11 @@ var displayNewsPage = function (spaceNewsResponse) {
   // Create row for the news
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
   loopNews(spaceNewsResponse);
-  var loadMoreBtn = $("<button>").text("Load More News").addClass("waves-effect waves-light btn-large");
+  var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
   introContainerEl.append(loadMoreBtn);
-  loadMoreBtn.on("click", displayMoreNewsPage(spaceNewsResponse.nextPage));
+  $(document).on("click", "#load-more", function() {
+    displayMoreNewsPage(spaceNewsResponse.nextPage);
+  })
 };
 
 // Loop through News
@@ -234,14 +236,14 @@ var loopNews = function(spaceNewsResponse) {
     var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
     var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
     var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
-    var readNow = $("<a>").text("Read Now").addClass("waves-effect waves-light btn-large").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
+    var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
     
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
     card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
     spaceFlightCardContainer.append(card);
     introContainerEl.append(spaceFlightCardContainer);
-}
+  }
 }
 
 var displayMoreNewsPage = function(spaceNewsResponse) {
@@ -256,9 +258,11 @@ var displayMoreNewsPage = function(spaceNewsResponse) {
     loopNews(moreSpaceNewsResponse);  
   })
   
-  var loadMoreBtn = $("<button>").text("Load More News").addClass("waves-effect waves-light btn-large");
+  var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
   introContainerEl.append(loadMoreBtn);
-  loadMoreBtn.on("click", displayMoreNewsPage(moreSpaceNewsResponse.nextPage));
+  $(document).on("click", "#load-more", function() {
+    displayMoreNewsPage(spaceNewsResponse.nextPage);
+  })
 };
 
 displayIntroPage();
