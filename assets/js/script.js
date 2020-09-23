@@ -242,7 +242,7 @@ var displayNewsPage = function (spaceNewsResponse) {
 // Loop through News
 var loopNews = function(spaceNewsResponse) {
   // Loop through the news
-  for (i =0; i < spaceNewsResponse.docs.length; i++) {
+  for (let i =0; i < spaceNewsResponse.docs.length; i++) {
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
@@ -266,7 +266,7 @@ var loopNews = function(spaceNewsResponse) {
     // Save Favorite News
     $(document).on("click", "#favorite-news-" + [i], function() {
       console.log("I was clicked");
-      var newsTitle = spaceNewsResponse.docs[0].title
+      var newsTitle = spaceNewsResponse.docs[i].title
       console.log(newsTitle)
       // If news is not empty
       if (newsTitle !== "") {
