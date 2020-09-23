@@ -78,7 +78,7 @@ var displayMercury = function (mercuryResponse) {
     // Display the result
     console.log("False");
   }
-};
+}; 
 
 //this is the name of the astronaut stuff
 function scrapeAstroNames() {
