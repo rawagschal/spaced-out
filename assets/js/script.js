@@ -236,17 +236,40 @@ var loopNews = function(spaceNewsResponse) {
     var image = $("<div>").addClass("card-image");
     var body = $("<div>").addClass("card-stacked");
 
+    // Favorite News
+    var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news");
+
     // Display Information
     var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
     var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
     var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
     var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
-    
+    var newsTitle = spaceNewsResponse.docs[i].title
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
-    card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+    card.append(body.append(favoriteNews, spaceFlightPubDate, spaceFlightTitle, readNow));
     spaceFlightCardContainer.append(card);
     introContainerEl.append(spaceFlightCardContainer);
+
+    // Save Favorite News
+    $(document).on("click", "#favorite-news", function() {
+      console.log("I was clicked");
+      // If news is not empty
+      if (newsTitle !== "") {
+          var newsSave =
+          JSON.parse(window.localStorage.getItem("newsSave")) || [];
+          
+          var newsInfo = {
+              title: newsTitle
+          };
+  
+          // Save to Local Storage
+          newsSave.push(newsInfo);
+          window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+      }
+      console.log(spaceFlightTitle)
+      //getCity(cityName);
+    })   
   }
 }
 
