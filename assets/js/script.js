@@ -212,18 +212,31 @@ var getSpaceFlightNews = function() {
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
-  // Create row for the news
+  
+  // Create row for the new
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news");
+  introContainerEl.append(favoriteNews)
+  
   // Loop through news
   loopNews(spaceNewsResponse);
+  
   // Load More Button
   var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
   introContainerEl.append(loadMoreBtn);
+  
   // Clicking Load More, call Display More News
   $(document).on("click", "#load-more", function() {
     displayMoreNewsPage(spaceNewsResponse.nextPage);
     loadMoreBtn.remove();
   })
+
+  // Clicking on Favorites, loads news articles
+  $(document).on("click", "#favorite-news", function() {
+    printFavoriteNews();
+    loadMoreBtn.text("star");
+  })
+
 };
 
 // Loop through News
@@ -254,6 +267,7 @@ var loopNews = function(spaceNewsResponse) {
     $(document).on("click", "#favorite-news-" + [i], function() {
       console.log("I was clicked");
       var newsTitle = spaceNewsResponse.docs[0].title
+      console.log(newsTitle)
       // If news is not empty
       if (newsTitle !== "") {
           var newsSave =
@@ -267,7 +281,6 @@ var loopNews = function(spaceNewsResponse) {
           newsSave.push(newsInfo);
           window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
       }
-      console.log(newsTitle)
     })   
   }
 }
@@ -291,6 +304,31 @@ var displayMoreNewsPage = function(spaceNewsResponse) {
     })
   })
 };
+
+// Show favorites
+function printFavoriteNews() {
+  destroyElement();
+  console.log("I was clicked")
+  // Check Local Storage
+  if(localStorage.length === 0) {
+      console.log(" there is nothing in there")
+  } else {
+      var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
+
+      for (var i = 0; i < newsFavorites.length; i++) {
+        fetch (
+          `https://spaceflightnewsapi.net/api/v1/articles?title=` + newsFavorites[i].title
+        )
+        .then(function(spaceNewsResponse) {
+          return spaceNewsResponse.json();
+        })
+        .then(function(spaceNewsResponse) {
+          console.log(spaceNewsResponse.docs[0].title);
+          loopNews(spaceNewsResponse);
+        })
+      }
+  }
+}
 
 displayIntroPage();
 getAstrobin();
