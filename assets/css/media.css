@@ -13,6 +13,14 @@
         display: flex;
         flex-direction: column;
     }
+
+    /* below is the invader page  */
+
+    .invader-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -53,5 +61,13 @@
         border: none;
         padding: 10px;
         border-radius: 50%;
+    }
+
+    /* below is the invader page  */
+
+    .invader-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
     }
 }

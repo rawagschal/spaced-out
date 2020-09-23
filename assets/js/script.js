@@ -270,6 +270,33 @@ var displayMoreNewsPage = function(spaceNewsResponse) {
   })
 };
 
-displayIntroPage();
+// var displayInvaders = function () {
+//   destroyElement();
+//   displayBackBtn();
+//   var spaceInvaderdContainerEl = $("<div>").addClass("invader-iframe").html(`<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width:800px;height:550px;border:none;" frameborder="0" scrolling="no"></iframe>`);
+//   introContainerEl.append(spaceInvaderdContainerEl);
+// };
+
+//  functionsaveHighscore(score) {
+//    ar initials = initialsEl.value.trim();
+//    /  If initials are empty
+//      f (initials !== "") {
+//        var highscores ==      JSON.parse(window.localStorage.getItem("highscores")) || [];
+//       // Get the score and initial info
+//       var newScore = {
+//          core: score,
+//          / initials: initials
+//       };
+ 
+//       // Save to Local Storage
+//       highscores.push(newScore);
+//       window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    
+//  };
+
+
+//onclick event
+$("#space-invaders").on("click", displayInvaders);
+ displayIntroPage();
 getAstrobin();
-getNasa();
+etNasa();
