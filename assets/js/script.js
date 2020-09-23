@@ -34,9 +34,9 @@ var displayIntroPage = function () {
     var paraContainerEl = $("<p>").addClass("intro-paragraph").text("The only home we’ve ever known preserve and cherish that pale blue dot. Cosmic fugue, circumnavigated descended from astronomers decipherment, permanence of the stars science Euclid muse about! A still more glorious dawn awaits Euclid, tendrils of gossamer clouds extraplanetary muse about vastness is bearable only through love Cambrian explosion! Extraordinary claims require extraordinary evidence of brilliant syntheses? Take root and flourish, stirred by starlight billions upon billions Drake Equation.");
     // here are buttons for intro page
     var btnContainerEl = $("<div>").addClass("btn-container");
-    //button to atronaut bios
+    //button to atronaut bio
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
-    astronautBtn.on("click", getAstronauts);
+    astronautBtn.on("click", scrapeAstroNames);
     //button to photo gallery
     var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
     // galleryBtn.on("click", getSpaceFlightN);
@@ -54,7 +54,7 @@ var displayIntroPage = function () {
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
-f};
+};
 
 //below is the mercury in retrograde stuff
 // Is Mercury in Retrograde response
@@ -141,70 +141,70 @@ var displayAstro = function (astronautArray) {
 
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
-function getNasa() {
-    fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` + currentDate.format("YYYY-MM-DD")
-    )
-    .then(function(response) {
-        return response.json()
-      }  )
-    .then(function(response) {
+// function getNasa() {
+//     fetch(
+//         `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` + currentDate.format("YYYY-MM-DD")
+//     )
+//     .then(function(response) {
+//         return response.json()
+//       }  )
+//     .then(function(response) {
 
-        // Var of Image URL for image of the day
-        var nasaImage = $("<img>").attr("src", response.url).addClass("day-img");
+//         // Var of Image URL for image of the day
+//         var nasaImage = $("<img>").attr("src", response.url).addClass("day-img");
             
-        // Var of Title & Description for image of the day
-        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
-        // var nasaDesc = $("<p>").text(response[0].explanation)
+//         // Var of Title & Description for image of the day
+//         var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
+//         // var nasaDesc = $("<p>").text(response[0].explanation)
         
-        // Append Image, Title, and Descritpion to the sidebar
-        $("#nasa").append(nasaImage, nasaTitle);
-    })
-    .then(function (response) {
-      var imageTitle = response[0].title;
-      console.log(imageTitle);
-    });
-}
+//         // Append Image, Title, and Descritpion to the sidebar
+//         $("#nasa").append(nasaImage, nasaTitle);
+//     })
+//     .then(function (response) {
+//       var imageTitle = response[0].title;
+//       console.log(imageTitle);
+//     });
+// }
 
 // Astrobin Image of the Day
-function getAstrobin() {
-    fetch(
-        `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
-    )
-    .then(function(response) {
-        return response.json();
-      })
-    .then(function(response) {
-        var astroImageInfo = response.objects[0].image
+// function getAstrobin() {
+//     fetch(
+//         `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
+//     )
+//     .then(function(response) {
+//         return response.json();
+//       })
+//     .then(function(response) {
+//         var astroImageInfo = response.objects[0].image
         
-        // Use image info to fetch additional information
-        fetch(
-            `https://www.astrobin.com` + astroImageInfo +`?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
-        )
-        .then(function(response) {
-            return response.json();
-          })
-        .then(function(response) {
-            // Var of HD Image URL for image of the day
-            var astroImage = $("<img>").attr("src", response.url_hd).addClass("day-img");
+//         // Use image info to fetch additional information
+//         fetch(
+//             `https://www.astrobin.com` + astroImageInfo +`?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
+//         )
+//         .then(function(response) {
+//             return response.json();
+//           })
+//         .then(function(response) {
+//             // Var of HD Image URL for image of the day
+//             var astroImage = $("<img>").attr("src", response.url_hd).addClass("day-img");
             
-            // Var of Title for image of the day
-            var astroTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
+//             // Var of Title for image of the day
+//             var astroTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
             
-            // Append Image & Title to the sidebar
-            $("#astrobin").append(astroImage, astroTitle);
-        })
-        .then(function (response) {
-          // HD Image URL for image of the day
-          var astroImage = response.url_hd;
-          console.log(astroImage);
+//             // Append Image & Title to the sidebar
+//             $("#astrobin").append(astroImage, astroTitle);
+//         })
+//         .then(function (response) {
+//           // HD Image URL for image of the day
+//           var astroImage = response.url_hd;
+//           console.log(astroImage);
 
-          // Title for image of the day
-          var astroTitle = response.title;
-          console.log(astroTitle);
-        });
-    });
-}
+//           // Title for image of the day
+//           var astroTitle = response.title;
+//           console.log(astroTitle);
+//         });
+//     });
+// }
 
 // Below is the Recent Space News
 // Space News - Fetch News By Spaceflight
@@ -251,5 +251,5 @@ var displayNewsPage = function (spaceNewsResponse) {
 };
 
 displayIntroPage();
-getAstrobin();
-getNasa();
+// getAstrobin();
+// getNasa();
