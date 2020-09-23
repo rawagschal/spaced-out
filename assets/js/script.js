@@ -87,8 +87,7 @@ var mercuryAnswer = function (mercuryResponse) {
 
 var displayMercury = function () {
     destroyElement();
-    // displayBackBtn();
-
+    displayBackBtn();
     //banner and paragraph
     var retrogradeHeaderEl = $("<h4>").text("Is Mercury in Retrograde?").addClass("mercury-header");
     var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
