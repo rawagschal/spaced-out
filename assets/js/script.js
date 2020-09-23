@@ -79,7 +79,7 @@ var displayMercury = function () {
     var btnPromptEl = $("<p>").text("Click below to find out.");
     var retrogradeBtn = $("<button>").attr("type", "button").text("Click here to find out").addClass("mercury-button").on("click", mercuryAnswer);
     var retroResponseEl = $("<div>").addClass("response-div").attr("id", "mercuryAnswer");
-    var retroVideoContainerEl = $("<div>").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+    var retroVideoContainerEl = $("<div>").addClass("mercury-iframe").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
     // here are external links 
     var externalLinksContainer = $("<div>")
         .addClass("mercury-links")

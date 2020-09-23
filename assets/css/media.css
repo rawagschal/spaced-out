@@ -9,6 +9,13 @@
         flex: 1 0 0;
     }
 
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -4000px;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -21,6 +28,13 @@
 
     .card-content-wrapper {
         flex: 1 0 0;
+    }
+
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -4000px;
     }
 
 }
