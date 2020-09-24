@@ -141,7 +141,7 @@ var getImgGallery = function () {
 var displayGallery = function (response) {
   //DOM elements
   //main container
-  var galleryContainerEl = $("<div>").addClass("row s12 m8 l9").attr("id", "galleryContainerEl");
+  var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl");
   //search bar
   var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer");
   var searchBarWrapper = $("<div>").addClass("col").attr("id", "searcBarWrapper");
@@ -162,7 +162,7 @@ var displayGallery = function (response) {
     var imageSrc = response.collection.items[i].links[0].href;
     console.log(imageSrc);
     //more gallery DOM elements
-    var imageWrapper = $("<div>").addClass("col");
+    var imageWrapper = $("<div>").addClass("col l4 m12 s12");
     var nasaImage = $("<img>").attr("src", imageSrc);
     //append to gallery grid
     imageWrapper.append(nasaImage);
