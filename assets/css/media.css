@@ -22,6 +22,38 @@
     }
 }
 
+@media screen and (max-width: 950px) {
+    /* below is the main page's styles */
+    .btn-container {
+        justify-content: space-around;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* below is sidebar styles */
+    #space-invaders {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    /* this is the main content page  */
+
+    .main-button {
+        padding: 20px 45px;
+        margin: 5px;
+    }
+
+    .constellation-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+}
+
 @media screen and (max-width: 600px) {
 
     /* below is the astronaut style page media adjustments */

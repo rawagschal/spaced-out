@@ -47,7 +47,7 @@ var displayIntroPage = function () {
     //button to news
     var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
     spaceNewsBtn.on("click", getSpaceFlightNews);
-    var constellationViewer = $("<div>").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
+    var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
     //these append all of the above to the main container
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
@@ -167,7 +167,7 @@ var displayAstro = function (astronautArray) {
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
-                    <span class="card-title">${astronautArray.name}</span>
+                    <span class="card-title astronaut-name">${astronautArray.name}</span>
                 </div>
                 <div class="card-content-wrapper">
                     <div class="card-content">
