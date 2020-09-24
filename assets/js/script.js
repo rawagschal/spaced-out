@@ -69,7 +69,6 @@ function getMercury() {
         return mercuryResponse.json();
       })
     .then(function(mercuryResponse) {
-        console.log("well it", mercuryResponse.is_retrograde);
         displayMercury(mercuryResponse);
     })
     
@@ -78,11 +77,9 @@ function getMercury() {
 var mercuryAnswer = function (mercuryResponse) {
     if (mercuryResponse.is_retrograde === true) {
         // Display the result
-        console.log("True")
         $("#mercuryAnswer").text("Mercury is currently in retrograde.");
     } else {
         // Display the result
-        console.log("False")
         $("#mercuryAnswer").text("Mercury is not currently in retrograde.");
     }
 }
@@ -153,7 +150,6 @@ var getAstronauts = function (people) {
         return response.json();
       })
       .then(function (bioResponse) {
-        console.log(bioResponse);
         displayAstro(bioResponse.results[0]);
       });
   });
