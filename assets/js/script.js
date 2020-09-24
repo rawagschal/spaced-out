@@ -316,17 +316,19 @@ var displayInvaders = function () {
   destroyElement();
   displayBackBtn();
   var spaceInvadersContainerEl = $("<div>")
-    .addClass("invader-iframe")
+    .addClass("game")
     .html(
       `<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`
     );
   introContainerEl.append(spaceInvadersContainerEl);
   const highScoreForm = $(`<form id="scoreForm">
-  <label for="initials">Enter Initials</label>
+    <i class="material-icons prefix">account_circle</i>
+    <label for="initials">Enter Initials</label>
   <input type="text" name="initials" id="initials"></input>
+  <i class="material-icons prefix">mode_edit</i>
   <label for="score">Save high score!:</label>
   <input type="number" name="score:" id="score"></input>
-  <input type="submit" value="Submit"></input>
+  <input type="submit" value="Submit" class="main-button"></input>
   </form>`)
   introContainerEl.append(highScoreForm)
   var scoreForm = document.getElementById("scoreForm")
@@ -338,8 +340,10 @@ var displayInvaders = function () {
   })
   var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
   var highScoreList = $(`<ul>`)
+  .addClass("collection")
   for(var i=0; i<highScores.length; i++){
-    var listItem = $(`<li>score:${highScores[i].score} initials:${highScores[i].initials}</li>`)
+    var listItem = $(`<li>score: ${highScores[i].score} initials: ${highScores[i].initials}</li>`)
+    .addClass("collection-item")
     highScoreList.append(listItem)
   }
   introContainerEl.append(highScoreList);
@@ -359,6 +363,7 @@ function saveHighscore(score, initials) {
     // Save to Local Storage
     highscores.push(newScore);
     localStorage.setItem("highscores", JSON.stringify(highscores));
+    displayInvaders();
   }
 }
 
