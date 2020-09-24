@@ -34,10 +34,11 @@ body {
 }
 
 .content-container,
-.side-container { /*was a col */
+.side-container {
     display: flex;
     justify-content: center;
     align-content: center;
+    align-items: center;
 }
 
 /* everything below is the sidebar  */
@@ -113,8 +114,6 @@ footer ul li a:hover {
 
 /* this is all the main content  */
 .content-container {
-    margin-top: 2%;
-    margin-left: 2%;
     display: flex;
     flex-direction: column;
 }
@@ -143,7 +142,7 @@ footer ul li a:hover {
     color: #ffffff;
     border: none;
     padding: 10px 25px;
-    border-radius: 2px;
+    border-radius: 5px;
     letter-spacing: 2px;
 }
 
@@ -171,6 +170,12 @@ footer ul li a:hover {
 
 .card-anchor-background {
     background-color: var(--deep-space-blue);
+}
+
+.astronaut-name {
+    color: #000;
+    border-radius: 5px;
+    background-color: #387effbd;
 }
 
 /* Below is style for Space News Page  */
@@ -203,6 +208,10 @@ footer ul li a:hover {
     width: 100%;
 }
 
+.hide {
+    display: none;
+}
+
 /* below is styling for the header  */
 .back-button {
     margin-top: 2%;
@@ -210,7 +219,7 @@ footer ul li a:hover {
     color: #ffffff;
     border: none;
     padding: 10px 25px;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .back-button:hover {
@@ -225,6 +234,58 @@ footer ul li a:hover {
 .material-icons {
     vertical-align: middle;
 }
+
 .game {
     width: 100%;
+}
+
+/* below are the styles for mercury page  */
+.mercury-header {
+    margin-bottom: 10px;
+}
+
+.credit-to {
+    font-size: 11px;
+    font-weight: lighter;
+}
+
+.mercury-paragragh {
+    text-indent: 2em;
+    margin-bottom: 25px;
+}
+
+.response-div {
+    background-color: var(--desaturated-yellow);
+    text-align: center;
+    margin: 15px;
+    padding: 15px;
+    width: 30%;
+}
+
+.mercury-button {
+    margin: 2px;
+    background-color: var(--desaturated-yellow);
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+}
+
+.mercury-button:hover {
+    background-color: var(--desaturated-yellow);
+    box-shadow: 0 0 5px 1px var(--desaturated-yellow);
+}
+
+.mercury-links {
+    margin: 15px;
+}
+
+/* below are the creators page styles  */
+.creator-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quote-style {
+    width: 60%;
 }

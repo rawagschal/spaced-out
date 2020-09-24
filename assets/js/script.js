@@ -1,4 +1,4 @@
-// Global Variables
+//Global Variables
 var currentDate = moment();
 var introContainerEl = $("#content-container");
 var headerContainerEl = $("#header-container");
@@ -18,115 +18,141 @@ var displayBackBtn = function () {
   var backBtnEl = $("<button>")
     .attr("type", "button")
     .addClass("back-button")
-    .html(
-      `<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`
-    )
+    .html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`)
     .on("click", displayIntroPage);
+  headerContainerEl.html(null);
   headerContainerEl.append(backBtnEl);
 };
 
 //displays main page
 var displayIntroPage = function () {
-  // this will nuke all the script when pages lead back here
-  destroyElement();
-  destroyBackBtn();
-  //these create the elements
-  //generate intro banner
-  var imgEl = $("<img>")
-    .attr("src", "assets/images/spaced-out-banner.png")
-    .addClass("img-banner");
-  var paraContainerEl = $("<p>")
-    .addClass("intro-paragraph")
-    .text(
-      "The only home we’ve ever known preserve and cherish that pale blue dot. Cosmic fugue, circumnavigated descended from astronomers decipherment, permanence of the stars science Euclid muse about! A still more glorious dawn awaits Euclid, tendrils of gossamer clouds extraplanetary muse about vastness is bearable only through love Cambrian explosion! Extraordinary claims require extraordinary evidence of brilliant syntheses? Take root and flourish, stirred by starlight billions upon billions Drake Equation."
-    );
-  // here are buttons for intro page
-  var btnContainerEl = $("<div>").addClass("btn-container");
-  //button to atronaut bios
-  var astronautBtn = $("<button>")
-    .attr("type", "button")
-    .text("Astronauts In Space")
-    .addClass("main-button");
-  astronautBtn.on("click", getAstronauts);
-  //button to photo gallery
-  var galleryBtn = $("<button>")
-    .attr("type", "button")
-    .text("NASA Image Gallery")
-    .addClass("main-button");
-  // galleryBtn.on("click", getSpaceFlightN);
-  //button to mercury in retrograde
-  var mercuryBtn = $("<button>")
-    .attr("type", "button")
-    .text("Mercury In Retrograde")
-    .addClass("main-button");
-  mercuryBtn.on("click", displayMercury);
-  //button to news
-  var spaceNewsBtn = $("<button>")
-    .attr("type", "button")
-    .text("Space News")
-    .addClass("main-button");
-  spaceNewsBtn.on("click", getSpaceFlightNews);
-  //these append all of the above to the main container
-  introContainerEl.append(imgEl);
-  introContainerEl.append(paraContainerEl);
-  btnContainerEl.append(astronautBtn);
-  btnContainerEl.append(galleryBtn);
-  btnContainerEl.append(mercuryBtn);
-  btnContainerEl.append(spaceNewsBtn);
-  introContainerEl.append(btnContainerEl);
+    // this will nuke all the script when pages lead back here
+    destroyElement();
+    destroyBackBtn();
+    //these create the elements
+    //generate intro banner
+    var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
+    var paraContainerEl = $("<p>").addClass("intro-paragraph").text("Look up into the cosmos a little more often.");
+    // here are buttons for intro page
+    var btnContainerEl = $("<div>").addClass("btn-container");
+    //button to atronaut bio
+    var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
+    astronautBtn.on("click", scrapeAstroNames);
+    //button to photo gallery
+    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
+    // galleryBtn.on("click", getSpaceFlightN);
+    //button to mercury in retrograde
+    var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
+    mercuryBtn.on("click", displayMercury);
+    //button to news
+    var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
+    spaceNewsBtn.on("click", getSpaceFlightNews);
+    var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
+    //these append all of the above to the main container
+    introContainerEl.append(imgEl);
+    introContainerEl.append(paraContainerEl);
+    btnContainerEl.append(astronautBtn);
+    btnContainerEl.append(galleryBtn);
+    btnContainerEl.append(mercuryBtn);
+    btnContainerEl.append(spaceNewsBtn);
+    introContainerEl.append(btnContainerEl);
+    introContainerEl.append(constellationViewer);
 };
 
-//below is the mercury in retrograde stuff
-// Is Mercury in Retrograde response
+// Below is Mercury in Retrograde response
 function getMercury() {
-  var date = moment(currentDate).format("(YYYY-MM-DD)");
-  fetch(`https:mercuryretrogradeapi.com/?date=&${date}`)
-    .then(function (mercuryResponse) {
-      return mercuryResponse.json();
+  var date = moment(currentDate).format("(YYYY-MM-DD)")
+    fetch(
+        (`https:mercuryretrogradeapi.com/?date=&${date}`)
+    )
+    .then(function(mercuryResponse) {
+        return mercuryResponse.json();
+      })
+    .then(function(mercuryResponse) {
+        displayMercury(mercuryResponse);
     })
-    .then(function (mercuryResponse) {
-      console.log(mercuryResponse.is_retrograde);
-    });
-  displayMercury(mercuryResponse);
+    
+};
+
+var mercuryAnswer = function (mercuryResponse) {
+    if (mercuryResponse.is_retrograde === true) {
+        // Display the result
+        $("#mercuryAnswer").text("Mercury is currently in retrograde.");
+    } else {
+        // Display the result
+        $("#mercuryAnswer").text("Mercury is not currently in retrograde.");
+    }
 }
 
-var displayMercury = function (mercuryResponse) {
-  if ("mercuryResponse.is_retrograde" === "true") {
-    // Display the result
-    console.log("True");
-  } else {
-    // Display the result
-    console.log("False");
-  }
+var displayMercury = function () {
+    destroyElement();
+    displayBackBtn();
+    //banner and paragraph
+    var retrogradeHeaderEl = $("<h4>").text("Is Mercury in Retrograde?").addClass("mercury-header");
+    var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
+    var bannerCreditEl = $("<figure>").text("fig 1. Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
+    var retrogradeParaEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't pseudoscience. Pseudoscience says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. While that might be up for debate, one thing is certain, Retrograde is a real Astronomical event. It's an illusion that happens when the orbit of Mercury moves faster around the sun than Earth, creating the illusion that Mercury moves backward, creating a loop effect. The occurance takes roughly about a month and happens about 3 times a year, the length of time it takes Mercury to do a full orbit around us and the sun. It is an event that can be observed with most of the planets that we can see in the sky. With the chaos of everyday life, it's easy to see how this might have been a scapegoat for daily mishaps, but it's important to realize what this really is. An illusion and oddity of time.").addClass("mercury-paragragh");
+    var btnPromptEl = $("<p>").text("Click below to find out.");
+    var retrogradeBtn = $("<button>").attr("type", "button").text("Click here to find out").addClass("mercury-button").on("click", mercuryAnswer);
+    var retroResponseEl = $("<div>").addClass("response-div").attr("id", "mercuryAnswer");
+    var retroVideoContainerEl = $("<div>").addClass("mercury-iframe").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+    // here are external links 
+    var externalLinksContainer = $("<div>")
+        .addClass("mercury-links")
+        .html(` 
+            <p>Click the links below to learn more about Mercury in Retrograde.
+            <br/>
+            <ol>
+            <li><a href="https://www.youtube.com/watch?v=VXQh1xFce7s" target="_blank">Star Talk: Neil de Grass Tyson explains Mercury in Retrograde.</a></li>
+            <li><a href="https://earthsky.org/space/what-is-retrograde-motion" target="_blank">EarthSky explains Mercury in Retrograde.</a></li>
+            <li><a href="https://www.vox.com/videos/2018/11/16/18098729/what-is-mercury-retrograde-meaning" target="_blank">Vox's article on Mercury In Retrograde.</a></li>
+            </ol></p>`);
+
+    //appending all of them to the main container
+    introContainerEl.append(retrogradeHeaderEl);
+    introContainerEl.append(retrogradeBannerEl);
+    introContainerEl.append(bannerCreditEl);
+    introContainerEl.append(retrogradeParaEl);
+    introContainerEl.append(btnPromptEl);
+    retroResponseEl.append(retrogradeBtn);
+    introContainerEl.append(retroResponseEl);
+    introContainerEl.append(retroVideoContainerEl);
+    introContainerEl.append(externalLinksContainer);
+    introContainerEl.append(externalLinksContainer);
 };
 
 //this is the name of the astronaut stuff
-var getAstronauts = function () {
-  destroyElement();
-  displayBackBtn(); //this is our back button
-  var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
-  introContainerEl.append(rowContainerEl);
-  fetch("http://api.open-notify.org/astros.json")
+function scrapeAstroNames() {
+  fetch(
+    "https://cors-anywhere.herokuapp.com/https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json"
+  )
     .then(function (response) {
       return response.json();
     })
-    .then(function (astroResponse) {
-      console.log(astroResponse);
-
-      astroResponse.people.forEach((element) => {
-        fetch(
-          "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
-            element.name.split(" ")[1]
-        )
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (bioResponse) {
-            console.log(bioResponse);
-            displayAstro(bioResponse.results[0]);
-          });
-      });
+    .then(function (response) {
+      var people = response.people;
+      getAstronauts(people)
     });
+}
+
+var getAstronauts = function (people) {
+  destroyElement();
+  displayBackBtn();
+  var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
+  introContainerEl.append(rowContainerEl);
+
+  people.forEach((element) => {
+    fetch(
+      "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
+        element.name.split(" ")[1]
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (bioResponse) {
+        displayAstro(bioResponse.results[0]);
+      });
+  });
 };
 
 //this displays the astronaut stuff
@@ -137,7 +163,7 @@ var displayAstro = function (astronautArray) {
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
-                    <span class="card-title">${astronautArray.name}</span>
+                    <span class="card-title astronaut-name">${astronautArray.name}</span>
                 </div>
                 <div class="card-content-wrapper">
                     <div class="card-content">
@@ -156,6 +182,7 @@ var displayAstro = function (astronautArray) {
 
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
+
 function getNasa() {
   fetch(
     `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` +
@@ -232,12 +259,21 @@ var getSpaceFlightNews = function () {
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
-  // Create row for the news
-  introContainerEl
-    .html("<h4>Space Flight News</h4>")
-    .append('<div class="row">');
+  
+  // Create News Header
+
+  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");  
+  var favoriteNews = $("<button>")
+    .text("star")
+    .attr("id", "favorite-news")
+    .html(
+      `<i class="material-icons main-button offset-s6">star</i><span> Select to see your saved news </span>`)
+  introContainerEl.append(favoriteNews);
+  
+  
   // Loop through news
   loopNews(spaceNewsResponse);
+  
   // Load More Button
   var loadMoreBtn = $("<button>")
     .attr("type", "button")
@@ -245,29 +281,42 @@ var displayNewsPage = function (spaceNewsResponse) {
     .text("Load More News")
     .addClass("main-button");
   introContainerEl.append(loadMoreBtn);
+  
   // Clicking Load More, call Display More News
   $(document).on("click", "#load-more", function () {
     displayMoreNewsPage(spaceNewsResponse.nextPage);
     loadMoreBtn.remove();
-  });
+  })
+
+  // Clicking on Favorites, loads news articles
+  $(document).on("click", "#favorite-news", function() {
+    printFavoriteNews();
+  })
 };
 
 // Loop through News
 var loopNews = function (spaceNewsResponse) {
   // Loop through the news
-  for (i = 0; i < spaceNewsResponse.docs.length; i++) {
+  for (let i =0; i < spaceNewsResponse.docs.length; i++) {
+
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
     var image = $("<div>").addClass("card-image");
     var body = $("<div>").addClass("card-stacked");
 
+    // Favorite News
+    var favoriteNews = $("<button>")
+      .addClass("material-icons")
+      .text("star_border")
+      .attr("id", "favorite-news-" + [i]);
+
     // Display Information
+
     var spaceFlightPubDate = $("<p>")
       .addClass("card-content")
-      .text(
-        moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY")
-      );
+      .text(moment(spaceNewsResponse.docs[i].published_date)
+      .format("MMM. Do, YYYY"));
     var spaceFlightImage = $("<img>")
       .attr("src", spaceNewsResponse.docs[i].featured_image)
       .addClass("center-align");
@@ -282,9 +331,31 @@ var loopNews = function (spaceNewsResponse) {
 
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
-    card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+    card.append(body.append(favoriteNews, spaceFlightPubDate, spaceFlightTitle, readNow));
     spaceFlightCardContainer.append(card);
     introContainerEl.append(spaceFlightCardContainer);
+
+    // Save Favorite News
+    $(document).on("click", "#favorite-news-" + [i], function() {
+      console.log("I was clicked");
+      var newsTitle = spaceNewsResponse.docs[i].title
+      console.log(newsTitle)
+      // If news is not empty
+      if (newsTitle !== "") {
+        var newsSave =
+        JSON.parse(window.localStorage.getItem("newsSave")) || [];
+        
+        var newsInfo = {
+            title: newsTitle
+        };
+        if (newsSave.indexOf(newsInfo) == -1){
+          //add the value to the array
+          newsSave.push(newsInfo);
+          // Save to Local Storage
+          window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+        } 
+      }
+    })   
   }
 };
 
@@ -311,6 +382,31 @@ var displayMoreNewsPage = function (spaceNewsResponse) {
       });
     });
 };
+
+// Show favorites
+function printFavoriteNews() {
+  destroyElement();
+  console.log("I was clicked")
+  // Check Local Storage
+  if(localStorage.length === 0) {
+      console.log(" there is nothing in there")
+  } else {
+      var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
+
+      for (var i = 0; i < newsFavorites.length; i++) {
+        fetch (
+          `https://spaceflightnewsapi.net/api/v1/articles?title=` + newsFavorites[i].title
+        )
+        .then(function(spaceNewsResponse) {
+          return spaceNewsResponse.json();
+        })
+        .then(function(spaceNewsResponse) {
+          console.log(spaceNewsResponse.docs[0].title);
+          loopNews(spaceNewsResponse);
+        })
+      }
+  }
+}
 
 var displayInvaders = function () {
   destroyElement();
@@ -367,8 +463,75 @@ function saveHighscore(score, initials) {
   }
 }
 
+//below is the meet the creators page
+function displayCreators () {
+  destroyElement();
+  displayBackBtn();
+
+  var creatorHeader = $("<h4>").addClass("creators-header").text("Meet the creators!");
+  var creatorRow = $("<div>").addClass("row creator-flex");
+  introContainerEl.append(creatorHeader);
+  introContainerEl.append(creatorRow);
+
+  var creatorsObj = [
+    {
+      name: "Amanda",
+      img: "assets/images/amanda-portrait.png",
+      quote: "We truly are so small in this grand universe. I'm interested to learn what is out there!",
+      github: "https://github.com/AmandaGuerriero",
+    },
+    {
+      name: "Cat",
+      img: "assets/images/cat-portrait.png",
+      quote: "Look up into the cosmos a little more often.",
+      github: "https://github.com/cat-lin-morgan",
+    },
+    {
+      name: "Kim",
+      img: "assets/images/kim-portrait.png",
+      quote: 'The beauty of space has always captivated me, so simple looking with the naked eye and yet more far reaching and complex than we will ever know. It really is the "final frontier".',
+      github: "https://github.com/Kimmulligan",
+    },
+    {
+      name: "Rachel",
+      img: "assets/images/rachel-portrait.png",
+      quote: "Space is crazy, man.",
+      github: "https://github.com/rawagschal",
+    }
+  ];
+
+  var displayCreatorPage = function(i, creators) {
+    var name = creators.name;
+    var image = creators.img;
+    var quote = creators.quote;
+    var URL = creators.github;
+
+    //creating each element
+    var creatorCol  = $("<div>").addClass("col s12 m12 l6");
+    // var creatorWrapper = $("<div>").addClass("creator-wrapper");
+    var creatorName = $("<h5>").text(name);
+    var creatorImg = $("<img>").attr("src", image);
+    var creatorQuote = $("<p>").text(quote).addClass("quote-style");
+    var creatorURL = $("<a>").attr("href", URL).attr("target", "_blank").text("Github Profile");
+
+    //appending elements
+    creatorRow.append(creatorCol);
+    // creatorWrapper.append(creatorCol);
+    creatorCol.append(creatorName);
+    creatorCol.append(creatorImg);
+    creatorCol.append(creatorQuote);
+    creatorCol.append(creatorURL);
+  };
+
+  //loop thru the object
+  $.each(creatorsObj, displayCreatorPage);
+};
+
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
+
+
+//loads immediately 
 displayIntroPage();
 getAstrobin();
 getNasa();

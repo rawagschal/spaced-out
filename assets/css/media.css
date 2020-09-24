@@ -9,18 +9,49 @@
         flex: 1 0 0;
     }
 
-    .flight-img-placement {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* below is the invader page  */
-
-    .invader-iframe {
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
         position: absolute;
         top: 0px;
         left: -5000px;
     }
+    
+    .flight-img-placement {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    /* below is the main page's styles */
+    .btn-container {
+        justify-content: space-around;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* below is sidebar styles */
+    #space-invaders {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    /* this is the main content page  */
+
+    .main-button {
+        padding: 20px 45px;
+        margin: 5px;
+    }
+
+    .constellation-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -50,6 +81,17 @@
         flex-direction: column;
     }
 
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    .mercury-button {
+        padding: 10px 15px;
+    }
+
     /* here is styling for the back button  */
     .et-go-home {
         position: absolute;
@@ -62,12 +104,4 @@
         padding: 10px;
         border-radius: 50%;
     }
-
-    /* below is the invader page  */
-
-    /* .invader-iframe {
-        position: absolute;
-        top: 0px;
-        left: -5000px;
-    } */
 }
