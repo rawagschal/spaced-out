@@ -137,7 +137,6 @@ var getImgGallery = function () {
 }
 
 var displayGallery = function (response) {
- 
   //DOM elements
     //main container
   var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl")
@@ -149,8 +148,7 @@ var displayGallery = function (response) {
   var imageSearchIcon = $("<i>").addClass("material-icons").text("search")
     //gallery
   var galleryGridContainer = $("<div>").addClass("row").attr("id","galleryGridContainer")
-  // var imageWrapper = $("<div>").addClass("col")
-  // var nasaImage = $("<img>").attr("src", imageSrc)
+  
   //append main display
   searchButtonWrapper.append(imageSearchIcon);
   searchBarWrapper.append(imageSearchInput);
@@ -161,13 +159,15 @@ var displayGallery = function (response) {
    for (i =0; i < 9; i++) {
       //response variable
     var imageSrc = response.collection.items[i].links[0].href
+      //more gallery DOM elements
     var nasaImage = $("<img>").attr("src", imageSrc)
     var imageWrapper = $("<div>").addClass("col")
 
+    //append to gallery grid
     imageWrapper.append(nasaImage);
     galleryGridContainer.append(imageWrapper);
   }
-  
+
   // nasaImage.on("click", materialbox());
   // searchButtonWrapper.on("click", getSearchResults);
 
