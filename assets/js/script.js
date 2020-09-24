@@ -466,7 +466,7 @@ function displayCreators () {
   displayBackBtn();
 
   var creatorHeader = $("<h4>").addClass("creators-header").text("Meet the creators!");
-  var creatorRow = $("<div>").addClass("row");
+  var creatorRow = $("<div>").addClass("row creator-flex");
   introContainerEl.append(creatorHeader);
   introContainerEl.append(creatorRow);
 
