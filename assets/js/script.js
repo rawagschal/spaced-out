@@ -262,10 +262,16 @@ var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
   
-  // Create row for the new
-  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
-  var favoriteNews = $("<button>").addClass("material-icons waves-effect waves-light btn-small").text("star_border").attr("id", "favorite-news");
-  introContainerEl.append(favoriteNews)
+  // Create News Header
+
+  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");  
+  var favoriteNews = $("<button>")
+    .text("star")
+    .attr("id", "favorite-news")
+    .html(
+      `<i class="material-icons main-button offset-s6">star</i><span> Select to see your saved news </span>`)
+  headerContainerEl.append(favoriteNews);
+  
   
   // Loop through news
   loopNews(spaceNewsResponse);
@@ -287,7 +293,6 @@ var displayNewsPage = function (spaceNewsResponse) {
   // Clicking on Favorites, loads news articles
   $(document).on("click", "#favorite-news", function() {
     printFavoriteNews();
-    loadMoreBtn.text("star");
   })
 };
 
@@ -303,14 +308,28 @@ var loopNews = function (spaceNewsResponse) {
     var body = $("<div>").addClass("card-stacked");
 
     // Favorite News
-    var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news-" + [i]);
+    var favoriteNews = $("<button>")
+      .addClass("material-icons")
+      .text("star_border")
+      .attr("id", "favorite-news-" + [i]);
 
     // Display Information
 
-    var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
-    var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
-    var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
-    var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
+    var spaceFlightPubDate = $("<p>")
+      .addClass("card-content")
+      .text(moment(spaceNewsResponse.docs[i].published_date)
+      .format("MMM. Do, YYYY"));
+    var spaceFlightImage = $("<img>")
+      .attr("src", spaceNewsResponse.docs[i].featured_image)
+      .addClass("center-align");
+    var spaceFlightTitle = $("<p>")
+      .addClass("card-title center-align")
+      .text(spaceNewsResponse.docs[i].title);
+    var readNow = $("<a>")
+      .text("Read Now")
+      .addClass("main-button")
+      .attr("href", spaceNewsResponse.docs[i].url)
+      .attr("target", "_blank");
 
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
@@ -331,10 +350,12 @@ var loopNews = function (spaceNewsResponse) {
           var newsInfo = {
               title: newsTitle
           };
-  
-          // Save to Local Storage
-          newsSave.push(newsInfo);
-          window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+          if (newsSave.indexOf(newsInfo) == -1){
+            //add the value to the array
+            newsSave.push(newsInfo);
+            // Save to Local Storage
+            window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+          }
       }
     })   
   }
@@ -442,5 +463,5 @@ function saveHighscore(score, initials) {
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
 displayIntroPage();
-// getAstrobin();
-// getNasa();
+getAstrobin();
+getNasa();
