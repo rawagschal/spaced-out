@@ -41,6 +41,11 @@ body {
     align-items: center;
 }
 
+/* .header-container {
+    display: flex;
+    justify-content: space-around;
+} */
+
 /* everything below is the sidebar  */
 .image-sidebar {
     display: flex;
@@ -204,6 +209,10 @@ footer ul li a:hover {
     width: 100%;
 }
 
+.hide {
+    display: none;
+}
+
 /* below is styling for the header  */
 .back-button {
     margin-top: 2%;
@@ -230,6 +239,7 @@ footer ul li a:hover {
 .game {
     width: 500px; 
 }
+
 /* below are the styles for mercury page  */
 .mercury-header {
     margin-bottom: 10px;
