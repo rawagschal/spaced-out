@@ -460,6 +460,22 @@ function saveHighscore(score, initials) {
   }
 }
 
+//below is the meet the creators page
+function displayCreator () {
+  destroyElement();
+  displayBackBtn();
+  //creating each element
+  var creatorRow = $("<div>").addClass("row");
+  var creatorCol  = $("<div>").addClass("col s12 m12 l3");
+  var creatorWrapper = $("<div>");
+  var creatorAmanda = $("<img>").attr("src", "");
+  var creatorCat = $("<img>").attr("src", "");
+  var creatorKim = $("<img>").attr("src", "");
+  var creatorRachel = $("<img>").attr("src", "");
+  introContainerEl.append(creatorRow);
+  creatorRow.append(creatorCol);
+}
+
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
 displayIntroPage();
