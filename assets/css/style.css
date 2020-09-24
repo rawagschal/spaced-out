@@ -280,6 +280,8 @@ footer ul li a:hover {
     margin: 15px;
 }
 
+/* below are gallery styles */
+
 #galleryContainerEl {
     width: 75%;
     display: flex;
@@ -290,8 +292,13 @@ footer ul li a:hover {
 .gallery-flex {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .gallery-flex img {
     width: 100%;
+}
+
+.nasa-image {
+margin: 15px;
 }
