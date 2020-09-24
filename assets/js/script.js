@@ -422,7 +422,6 @@ var displayInvaders = function () {
   introContainerEl.append(highScoreList);
 };
 
-
 function saveHighscore(score, initials) {
   // If initials are empty
   if (initials !== "") {
