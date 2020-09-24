@@ -139,19 +139,16 @@ var getImgGallery = function () {
 }
 
 var displayGallery = function (response) {
-  //grab objects
-  var imageSrc = response.collection.items[i].links[0].href;
-  console.log(imageSrc);
   //DOM elements
   //main container
   var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl");
-    //search bar
+  //search bar
   var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer");
   var searchBarWrapper = $("<div>").addClass("col").attr("id", "searcBarWrapper");
   var imageSearchInput = $("<input>").attr("id", "search").attr("type","text").attr("placeholder", "search for an image");
   var searchButtonWrapper = $("<div>").addClass("col").attr("id", "searchButtonWrapper");
   var imageSearchIcon = $("<i>").addClass("material-icons").text("search");
-    //gallery
+  //gallery
   var galleryGridContainer = $("<div>").addClass("row").attr("id","galleryGridContainer");
   
   //append main display
@@ -161,12 +158,12 @@ var displayGallery = function (response) {
   galleryContainerEl.append(imageSearchContainer, galleryGridContainer);
   introContainerEl.append(galleryContainerEl);
 
-  for (i =0; i < 9; i++) {
-
+  for (var i = 0; i < 9; i++) {
+    var imageSrc = response.collection.items[i].links[0].href;
+    console.log(imageSrc);
     //more gallery DOM elements
     var imageWrapper = $("<div>").addClass("col");
     var nasaImage = $("<img>").attr("src", imageSrc);
-
     //append to gallery grid
     imageWrapper.append(nasaImage);
     galleryGridContainer.append(imageWrapper);
@@ -193,8 +190,8 @@ var getSearchResults = function () {
 }
 
 var displaySearchResults = function(response) {
-  $("#galleryGridContainer").html(" ");
-  for (i =0; i < 9; i++) {
+  $("#galleryGridContainer").html(null);
+  for (var i =0; i < 9; i++) {
       //response variable
     var newImageSrc = response.collection.items[i].links[0].href
       //more gallery DOM elements
@@ -203,7 +200,7 @@ var displaySearchResults = function(response) {
 
     //append to gallery grid
     imageWrapper.append(nasaImage);
-    galleryGridContainer.append(imageWrapper);
+    $("#galleryGridContainer").append(imageWrapper);
   }
 }
 
