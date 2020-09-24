@@ -41,11 +41,6 @@ body {
     align-items: center;
 }
 
-/* .header-container {
-    display: flex;
-    justify-content: space-around;
-} */
-
 /* everything below is the sidebar  */
 .image-sidebar {
     display: flex;
@@ -119,8 +114,6 @@ footer ul li a:hover {
 
 /* this is all the main content  */
 .content-container {
-    margin-top: 2%;
-    margin-left: 2%;
     display: flex;
     flex-direction: column;
 }
@@ -149,7 +142,7 @@ footer ul li a:hover {
     color: #ffffff;
     border: none;
     padding: 10px 25px;
-    border-radius: 2px;
+    border-radius: 5px;
     letter-spacing: 2px;
 }
 
@@ -177,6 +170,12 @@ footer ul li a:hover {
 
 .card-anchor-background {
     background-color: var(--deep-space-blue);
+}
+
+.astronaut-name {
+    color: #000;
+    border-radius: 5px;
+    background-color: #387effbd;
 }
 
 /* Below is style for Space News Page  */
@@ -220,7 +219,7 @@ footer ul li a:hover {
     color: #ffffff;
     border: none;
     padding: 10px 25px;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .back-button:hover {
@@ -269,7 +268,7 @@ footer ul li a:hover {
     color: #ffffff;
     border: none;
     padding: 10px 25px;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .mercury-button:hover {

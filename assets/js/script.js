@@ -18,10 +18,9 @@ var displayBackBtn = function () {
   var backBtnEl = $("<button>")
     .attr("type", "button")
     .addClass("back-button")
-    .html(
-      `<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`
-    )
+    .html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`)
     .on("click", displayIntroPage);
+  headerContainerEl.html(null);
   headerContainerEl.append(backBtnEl);
 };
 
@@ -48,6 +47,7 @@ var displayIntroPage = function () {
     //button to news
     var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
     spaceNewsBtn.on("click", getSpaceFlightNews);
+    var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
     //these append all of the above to the main container
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
@@ -56,6 +56,7 @@ var displayIntroPage = function () {
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
+    introContainerEl.append(constellationViewer);
 };
 
 // Below is Mercury in Retrograde response
@@ -68,7 +69,6 @@ function getMercury() {
         return mercuryResponse.json();
       })
     .then(function(mercuryResponse) {
-        console.log("well it", mercuryResponse.is_retrograde);
         displayMercury(mercuryResponse);
     })
     
@@ -77,11 +77,9 @@ function getMercury() {
 var mercuryAnswer = function (mercuryResponse) {
     if (mercuryResponse.is_retrograde === true) {
         // Display the result
-        console.log("True")
         $("#mercuryAnswer").text("Mercury is currently in retrograde.");
     } else {
         // Display the result
-        console.log("False")
         $("#mercuryAnswer").text("Mercury is not currently in retrograde.");
     }
 }
@@ -139,6 +137,7 @@ function scrapeAstroNames() {
 
 var getAstronauts = function (people) {
   destroyElement();
+  displayBackBtn();
   var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
   introContainerEl.append(rowContainerEl);
 
@@ -151,7 +150,6 @@ var getAstronauts = function (people) {
         return response.json();
       })
       .then(function (bioResponse) {
-        console.log(bioResponse);
         displayAstro(bioResponse.results[0]);
       });
   });
@@ -165,7 +163,7 @@ var displayAstro = function (astronautArray) {
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
-                    <span class="card-title">${astronautArray.name}</span>
+                    <span class="card-title astronaut-name">${astronautArray.name}</span>
                 </div>
                 <div class="card-content-wrapper">
                     <div class="card-content">
@@ -524,10 +522,11 @@ function displayCreators () {
   $.each(creatorsObj, displayCreatorPage);
 };
 
-
-
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
+
+
+//loads immediately 
 displayIntroPage();
 getAstrobin();
 getNasa();
