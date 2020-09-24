@@ -18,10 +18,9 @@ var displayBackBtn = function () {
   var backBtnEl = $("<button>")
     .attr("type", "button")
     .addClass("back-button")
-    .html(
-      `<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`
-    )
+    .html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`)
     .on("click", displayIntroPage);
+  headerContainerEl.html(null);
   headerContainerEl.append(backBtnEl);
 };
 
@@ -48,6 +47,7 @@ var displayIntroPage = function () {
     //button to news
     var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
     spaceNewsBtn.on("click", getSpaceFlightNews);
+    var constellationViewer = $("<div>").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
     //these append all of the above to the main container
     introContainerEl.append(imgEl);
     introContainerEl.append(paraContainerEl);
@@ -56,6 +56,7 @@ var displayIntroPage = function () {
     btnContainerEl.append(mercuryBtn);
     btnContainerEl.append(spaceNewsBtn);
     introContainerEl.append(btnContainerEl);
+    introContainerEl.append(constellationViewer);
 };
 
 // Below is Mercury in Retrograde response
@@ -139,6 +140,7 @@ function scrapeAstroNames() {
 
 var getAstronauts = function (people) {
   destroyElement();
+  displayBackBtn();
   var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
   introContainerEl.append(rowContainerEl);
 
@@ -460,8 +462,15 @@ function saveHighscore(score, initials) {
   }
 }
 
+function displayCreators () {
+  var creatorsContainer = $("<div>")
+}
+
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
+
+
+//loads immediately 
 displayIntroPage();
 getAstrobin();
 getNasa();
