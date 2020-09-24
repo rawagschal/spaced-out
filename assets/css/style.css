@@ -279,3 +279,13 @@ footer ul li a:hover {
 .mercury-links {
     margin: 15px;
 }
+
+/* below are the creators page styles  */
+.creator-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quote-style {
+    width: 60%;
+}
