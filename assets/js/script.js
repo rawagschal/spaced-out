@@ -1,4 +1,4 @@
-// Global Variables
+//Global Variables
 var currentDate = moment();
 var introContainerEl = $("#content-container");
 var headerContainerEl = $("#header-container");
@@ -36,9 +36,9 @@ var displayIntroPage = function () {
     var paraContainerEl = $("<p>").addClass("intro-paragraph").text("Look up into the cosmos a little more often.");
     // here are buttons for intro page
     var btnContainerEl = $("<div>").addClass("btn-container");
-    //button to atronaut bios
+    //button to atronaut bio
     var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
-    astronautBtn.on("click", getAstronauts);
+    astronautBtn.on("click", scrapeAstroNames);
     //button to photo gallery
     var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
     // galleryBtn.on("click", getSpaceFlightN);
@@ -60,7 +60,7 @@ var displayIntroPage = function () {
 
 // Below is Mercury in Retrograde response
 function getMercury() {
-    var date = moment(currentDate).format("(YYYY-MM-DD)")
+  var date = moment(currentDate).format("(YYYY-MM-DD)")
     fetch(
         (`https:mercuryretrogradeapi.com/?date=&${date}`)
     )
@@ -123,33 +123,38 @@ var displayMercury = function () {
     introContainerEl.append(externalLinksContainer);
 };
 
-//this is how many astronauts are in space
-var getAstronauts = function () {
-    destroyElement();
-    displayBackBtn(); //this is our back button
-    var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
-    introContainerEl.append(rowContainerEl);
-    fetch("http://api.open-notify.org/astros.json", {method: 'GET'})
+//this is the name of the astronaut stuff
+function scrapeAstroNames() {
+  fetch(
+    "https://cors-anywhere.herokuapp.com/https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json"
+  )
     .then(function (response) {
-        return response.json();
+      return response.json();
     })
-    .then(function (astroResponse) {
-        console.log(astroResponse);
-
-        astroResponse.people.forEach(element => {
-          fetch(
-              "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
-                element.name.split(" ")[1] 
-            )
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (bioResponse) {
-                console.log(bioResponse);
-                displayAstro(bioResponse.results[0]);
-            });
-        })
+    .then(function (response) {
+      var people = response.people;
+      getAstronauts(people)
     });
+}
+
+var getAstronauts = function (people) {
+  destroyElement();
+  var rowContainerEl = $("<div>").addClass("row").attr("id", "astronauts-row");
+  introContainerEl.append(rowContainerEl);
+
+  people.forEach((element) => {
+    fetch(
+      "https://spacelaunchnow.me/api/3.3.0/astronaut/?search=" +
+        element.name.split(" ")[1]
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (bioResponse) {
+        console.log(bioResponse);
+        displayAstro(bioResponse.results[0]);
+      });
+  });
 };
 
 //this displays the astronaut stuff
@@ -179,6 +184,7 @@ var displayAstro = function (astronautArray) {
 
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
+
 function getNasa() {
   fetch(
     `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` +
@@ -437,5 +443,5 @@ function saveHighscore(score, initials) {
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
 displayIntroPage();
-getAstrobin();
-getNasa();
+// getAstrobin();
+// getNasa();

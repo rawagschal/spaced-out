@@ -14,9 +14,10 @@
     <!-- here is our style sheet  -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/media.css" />
+    <!--[if lt IE 9]><script src="excanvas.min.js"></script><![endif]-->
 </head>
 
-<body>
+  <body>
     <div class="main-wrapper">
         <div class="main-container">
             <div class="row">
@@ -32,7 +33,9 @@
                 <div class="col s12 m8 l9">
                     <div class="content-container" id="content-container">
                         <!-- main content page, astronaut blurbs, and image gallery and everything else -->
-                    </div>
+                
+                      </div>
+                      <div id="starmap" style="width:944px;height:400px;"></div>
                 </div>
                 <!-- side bar  -->
                 <div class="col s12 m4 l3">
@@ -86,17 +89,36 @@
                                 <a href="mailto:spaceatspace@space.com" target="_blank">Contact Us</a>
                             </li>
                         </ul>
-                    </div>
-                </footer>
+                        <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true&meteorshowers=true&showstarlabels=true" allowTransparency="true"></iframe>                </footer>
             </div>
+          </aside>
         </div>
+        <div class="row">
+          <!-- this is our footer  -->
+          <footer class="col s12">
+            <!-- some external content and minor links can go here  -->
+            <h4>S p a c e d O u t</h4>
+            <ul>
+              <li>
+                <a href="#">I'm a link </a>
+              </li>
+              <li>
+                <a href="#">I'm a link </a>
+              </li>
+              <li>
+                <a href="#">I'm possibly another link</a>
+              </li>
+            </ul>
+          </footer>
+        </div>
+      </div>
     </div>
-
+    <!-- <iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width:800px;height:550px;border:none;" frameborder="0" scrolling="no"></iframe> -->
+    <!-- <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/362980763&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/nasa" title="NASA" target="_blank" style="color: #cccccc; text-decoration: none;">NASA</a> · <a href="https://soundcloud.com/nasa/sets/spookyspacesounds" title="Spooky Sounds from Across the Solar System" target="_blank" style="color: #cccccc; text-decoration: none;">Spooky Sounds from Across the Solar System</a></div> -->
     <!-- here are our javascript links  -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/js/script.js"></script>
-    
-</body>
+    <script src="assets/js/script.js"></script> -->
+  </body>
 </html>
