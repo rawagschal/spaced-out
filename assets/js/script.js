@@ -486,7 +486,7 @@ function displayCreators () {
     {
       name: "Kim",
       img: "assets/images/kim-portrait.png",
-      quote: "Kim's quote here.",
+      quote: 'The beauty of space has always captivated me, so simple looking with the naked eye and yet more far reaching and complex than we will ever know. It really is the "final frontier".',
       github: "https://github.com/Kimmulligan",
     },
     {
