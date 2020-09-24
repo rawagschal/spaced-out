@@ -135,6 +135,7 @@ var displayGallery = function (response) {
     galleryGridContainer.append(imageWrapper);
   }
   
+  // nasaImage.on("click", materialbox());
   searchButtonWrapper.on("click", getSearchResults);
 
 }
@@ -148,13 +149,16 @@ var getSearchResults = function () {
   .then(function(response) {
     console.log(response);
     //clear image gallery
-    $("#galleryGridContainer").html(null); 
+    $("#galleryGridContainer").html(" "); 
     // !! display results - only generates text that says [object Object] 
     for (i=0; i<9; i++) {
-      var imageWrapper = $("<div>").addClass("col")
-      var imageResult = $("<img>").attr("src", response.collection.items[i].links[0].href)
-
-      imageWrapper.append(imageResult);
+      //it's not even making the wrappers
+      var imageWrapper = $("<div>").addClass("col");
+      // var imageSrc = response.collection.items[i].links[0].href
+      // console.log(imageSrc);
+      // var imageResult = $("<img>").attr("src", imageSrc)
+      
+      // imageWrapper.append(imageResult);
       galleryGridContainer.append(imageWrapper);    
     }
   });
