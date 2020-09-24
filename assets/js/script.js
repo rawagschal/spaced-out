@@ -141,7 +141,7 @@ var getImgGallery = function () {
 var displayGallery = function (response) {
   //DOM elements
   //main container
-  var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl");
+  var galleryContainerEl = $("<div>").addClass("row s12 m8 l9").attr("id", "galleryContainerEl");
   //search bar
   var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer");
   var searchBarWrapper = $("<div>").addClass("col").attr("id", "searcBarWrapper");
@@ -149,7 +149,7 @@ var displayGallery = function (response) {
   var searchButtonWrapper = $("<div>").addClass("col").attr("id", "searchButtonWrapper");
   var imageSearchIcon = $("<i>").addClass("material-icons").text("search");
   //gallery
-  var galleryGridContainer = $("<div>").addClass("row").attr("id","galleryGridContainer");
+  var galleryGridContainer = $("<div>").addClass("row s2 m4 l12").attr("id","galleryGridContainer");
   
   //append main display
   searchButtonWrapper.append(imageSearchIcon);

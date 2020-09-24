@@ -279,3 +279,10 @@ footer ul li a:hover {
 .mercury-links {
     margin: 15px;
 }
+
+#galleryContainerEl {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
