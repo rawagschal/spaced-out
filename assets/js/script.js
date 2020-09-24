@@ -255,12 +255,15 @@ var getSpaceFlightNews = function () {
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
-  // Create row for the news
-  introContainerEl
-    .html("<h4>Space Flight News</h4>")
-    .append('<div class="row">');
+  
+  // Create row for the new
+  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  var favoriteNews = $("<button>").addClass("material-icons waves-effect waves-light btn-small").text("star_border").attr("id", "favorite-news");
+  introContainerEl.append(favoriteNews)
+  
   // Loop through news
   loopNews(spaceNewsResponse);
+  
   // Load More Button
   var loadMoreBtn = $("<button>")
     .attr("type", "button")
@@ -268,46 +271,66 @@ var displayNewsPage = function (spaceNewsResponse) {
     .text("Load More News")
     .addClass("main-button");
   introContainerEl.append(loadMoreBtn);
+  
   // Clicking Load More, call Display More News
   $(document).on("click", "#load-more", function () {
     displayMoreNewsPage(spaceNewsResponse.nextPage);
     loadMoreBtn.remove();
-  });
+  })
+
+  // Clicking on Favorites, loads news articles
+  $(document).on("click", "#favorite-news", function() {
+    printFavoriteNews();
+    loadMoreBtn.text("star");
+  })
 };
 
 // Loop through News
 var loopNews = function (spaceNewsResponse) {
   // Loop through the news
-  for (i = 0; i < spaceNewsResponse.docs.length; i++) {
+  for (let i =0; i < spaceNewsResponse.docs.length; i++) {
+
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
     var image = $("<div>").addClass("card-image");
     var body = $("<div>").addClass("card-stacked");
 
+    // Favorite News
+    var favoriteNews = $("<button>").addClass("material-icons").text("star_border").attr("id", "favorite-news-" + [i]);
+
     // Display Information
-    var spaceFlightPubDate = $("<p>")
-      .addClass("card-content")
-      .text(
-        moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY")
-      );
-    var spaceFlightImage = $("<img>")
-      .attr("src", spaceNewsResponse.docs[i].featured_image)
-      .addClass("center-align");
-    var spaceFlightTitle = $("<p>")
-      .addClass("card-title center-align")
-      .text(spaceNewsResponse.docs[i].title);
-    var readNow = $("<a>")
-      .text("Read Now")
-      .addClass("main-button")
-      .attr("href", spaceNewsResponse.docs[i].url)
-      .attr("target", "_blank");
+
+    var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
+    var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
+    var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
+    var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
 
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
-    card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
+    card.append(body.append(favoriteNews, spaceFlightPubDate, spaceFlightTitle, readNow));
     spaceFlightCardContainer.append(card);
     introContainerEl.append(spaceFlightCardContainer);
+
+    // Save Favorite News
+    $(document).on("click", "#favorite-news-" + [i], function() {
+      console.log("I was clicked");
+      var newsTitle = spaceNewsResponse.docs[i].title
+      console.log(newsTitle)
+      // If news is not empty
+      if (newsTitle !== "") {
+          var newsSave =
+          JSON.parse(window.localStorage.getItem("newsSave")) || [];
+          
+          var newsInfo = {
+              title: newsTitle
+          };
+  
+          // Save to Local Storage
+          newsSave.push(newsInfo);
+          window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+      }
+    })   
   }
 };
 
@@ -334,6 +357,31 @@ var displayMoreNewsPage = function (spaceNewsResponse) {
       });
     });
 };
+
+// Show favorites
+function printFavoriteNews() {
+  destroyElement();
+  console.log("I was clicked")
+  // Check Local Storage
+  if(localStorage.length === 0) {
+      console.log(" there is nothing in there")
+  } else {
+      var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
+
+      for (var i = 0; i < newsFavorites.length; i++) {
+        fetch (
+          `https://spaceflightnewsapi.net/api/v1/articles?title=` + newsFavorites[i].title
+        )
+        .then(function(spaceNewsResponse) {
+          return spaceNewsResponse.json();
+        })
+        .then(function(spaceNewsResponse) {
+          console.log(spaceNewsResponse.docs[0].title);
+          loopNews(spaceNewsResponse);
+        })
+      }
+  }
+}
 
 var displayInvaders = function () {
   destroyElement();
@@ -367,6 +415,7 @@ var displayInvaders = function () {
   }
   introContainerEl.append(highScoreList);
 };
+
 
 function saveHighscore(score, initials) {
   // If initials are empty
