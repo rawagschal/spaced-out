@@ -270,7 +270,7 @@ var displayNewsPage = function (spaceNewsResponse) {
     .attr("id", "favorite-news")
     .html(
       `<i class="material-icons main-button offset-s6">star</i><span> Select to see your saved news </span>`)
-  headerContainerEl.append(favoriteNews);
+  introContainerEl.append(favoriteNews);
   
   
   // Loop through news
@@ -344,18 +344,18 @@ var loopNews = function (spaceNewsResponse) {
       console.log(newsTitle)
       // If news is not empty
       if (newsTitle !== "") {
-          var newsSave =
-          JSON.parse(window.localStorage.getItem("newsSave")) || [];
-          
-          var newsInfo = {
-              title: newsTitle
-          };
-          if (newsSave.indexOf(newsInfo) == -1){
-            //add the value to the array
-            newsSave.push(newsInfo);
-            // Save to Local Storage
-            window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
-          }
+        var newsSave =
+        JSON.parse(window.localStorage.getItem("newsSave")) || [];
+        
+        var newsInfo = {
+            title: newsTitle
+        };
+        if (newsSave.indexOf(newsInfo) == -1){
+          //add the value to the array
+          newsSave.push(newsInfo);
+          // Save to Local Storage
+          window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
+        } 
       }
     })   
   }

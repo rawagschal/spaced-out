@@ -41,10 +41,10 @@ body {
     align-items: center;
 }
 
-.header-container {
+/* .header-container {
     display: flex;
-    justify-content: space-between;
-}
+    justify-content: space-around;
+} */
 
 /* everything below is the sidebar  */
 .image-sidebar {
