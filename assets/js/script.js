@@ -154,11 +154,11 @@ var getSearchResults = function () {
     for (i=0; i<9; i++) {
       //it's not even making the wrappers
       var imageWrapper = $("<div>").addClass("col");
-      // var imageSrc = response.collection.items[i].links[0].href
-      // console.log(imageSrc);
-      // var imageResult = $("<img>").attr("src", imageSrc)
+      var imageSrc = response.collection.items[i].links[0].href
+      console.log(imageSrc);
+      var imageResult = $("<img>").attr("src", imageSrc)
       
-      // imageWrapper.append(imageResult);
+      imageWrapper.append(imageResult);
       galleryGridContainer.append(imageWrapper);    
     }
   });
