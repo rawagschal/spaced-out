@@ -81,6 +81,17 @@
         flex-direction: column;
     }
 
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+    .mercury-button {
+        padding: 10px 15px;
+    }
+
     /* here is styling for the back button  */
     .et-go-home {
         position: absolute;

@@ -114,7 +114,6 @@ footer ul li a:hover {
 
 /* this is all the main content  */
 .content-container {
-    margin-top: 2%;
     display: flex;
     flex-direction: column;
 }
