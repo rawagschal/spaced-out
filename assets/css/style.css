@@ -227,6 +227,9 @@ footer ul li a:hover {
     vertical-align: middle;
 }
 
+.game {
+    width: 500px;
+
 /* below are the styles for mercury page  */
 .mercury-header {
     margin-bottom: 10px;

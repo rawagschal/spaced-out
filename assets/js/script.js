@@ -3,26 +3,27 @@ var currentDate = moment();
 var introContainerEl = $("#content-container");
 var headerContainerEl = $("#header-container");
 
-
 //add this var to the beginning of each new DOM generated page
 var destroyElement = function () {
-    introContainerEl.html(null);
-}
+  introContainerEl.html(null);
+};
 
 //this function is only for the home page
 var destroyBackBtn = function () {
-    headerContainerEl.html(null);
-}
+  headerContainerEl.html(null);
+};
 
 //this creates the back button, you can add this to whereever you make a new page
 var displayBackBtn = function () {
-    var backBtnEl = $("<button>")
-        .attr("type", "button")
-        .addClass("back-button")
-        .html(`<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`)
-        .on("click", displayIntroPage);
-    headerContainerEl.append(backBtnEl);
-}
+  var backBtnEl = $("<button>")
+    .attr("type", "button")
+    .addClass("back-button")
+    .html(
+      `<i class="tiny material-icons">navigate_before</i><span class="et-go-home"> Main Page</span>`
+    )
+    .on("click", displayIntroPage);
+  headerContainerEl.append(backBtnEl);
+};
 
 //displays main page
 var displayIntroPage = function () {
@@ -153,9 +154,9 @@ var getAstronauts = function () {
 
 //this displays the astronaut stuff
 var displayAstro = function (astronautArray) {
-    var colContainerEl = $("<div>").addClass("col s12 m12 l4");
-    colContainerEl.html(
-        `<div class="card-wrapper">
+  var colContainerEl = $("<div>").addClass("col s12 m12 l4");
+  colContainerEl.html(
+    `<div class="card-wrapper">
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
@@ -172,102 +173,112 @@ var displayAstro = function (astronautArray) {
                 </div>
             </div>
         </div>`
-    );
-    $("#astronauts-row").append(colContainerEl);
-    
+  );
+  $("#astronauts-row").append(colContainerEl);
 };
 
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
 function getNasa() {
-    fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` + currentDate.format("YYYY-MM-DD")
-    )
-    .then(function(response) {
-        return response.json()
-      }  )
-    .then(function(response) {
-
-        // Var of Image URL for image of the day
-        var nasaImage = $("<img>").attr("src", response.url).addClass("day-img");
-            
-        // Var of Title & Description for image of the day
-        var nasaTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
-        // var nasaDesc = $("<p>").text(response[0].explanation)
-        
-        // Append Image, Title, and Descritpion to the sidebar
-        $("#nasa").append(nasaImage, nasaTitle);
+  fetch(
+    `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` +
+      currentDate.format("YYYY-MM-DD")
+  )
+    .then(function (response) {
+      return response.json();
     })
-};
+    .then(function (response) {
+      // Var of Image URL for image of the day
+      var nasaImage = $("<img>").attr("src", response.url).addClass("day-img");
+
+      // Var of Title & Description for image of the day
+      var nasaTitle = $("<h5>")
+        .text(response.title)
+        .addClass("sidebar-subheader");
+      // var nasaDesc = $("<p>").text(response[0].explanation)
+
+      // Append Image, Title, and Descritpion to the sidebar
+      $("#nasa").append(nasaImage, nasaTitle);
+    });
+}
 
 // Astrobin Image of the Day
 function getAstrobin() {
-    fetch(
-        `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
-    )
-    .then(function(response) {
-        return response.json();
-      })
-    .then(function(response) {
-        var astroImageInfo = response.objects[0].image
-        
-        // Use image info to fetch additional information
-        fetch(
-            `https://www.astrobin.com` + astroImageInfo +`?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
-        )
-        .then(function(response) {
-            return response.json();
-          })
-        .then(function(response) {
-            // Var of HD Image URL for image of the day
-            var astroImage = $("<img>").attr("src", response.url_hd).addClass("day-img");
-            
-            // Var of Title for image of the day
-            var astroTitle = $("<h5>").text(response.title).addClass("sidebar-subheader");
-            
-            // Append Image & Title to the sidebar
-            $("#astrobin").append(astroImage, astroTitle);
-        })
-    })  
-};
+  fetch(
+    `https://www.astrobin.com/api/v1/imageoftheday/?limit=1&api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      var astroImageInfo = response.objects[0].image;
 
+      // Use image info to fetch additional information
+      fetch(
+        `https://www.astrobin.com` +
+          astroImageInfo +
+          `?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          // Var of HD Image URL for image of the day
+          var astroImage = $("<img>")
+            .attr("src", response.url_hd)
+            .addClass("day-img");
+
+          // Var of Title for image of the day
+          var astroTitle = $("<h5>")
+            .text(response.title)
+            .addClass("sidebar-subheader");
+
+          // Append Image & Title to the sidebar
+          $("#astrobin").append(astroImage, astroTitle);
+        });
+    });
+}
 
 // Below is the Recent Space News
 // Space News - Fetch News By Spaceflight
-var getSpaceFlightNews = function() {
-    fetch(
-        `https://spaceflightnewsapi.net/api/v1/articles`
-    )
-    .then(function(spaceNewsResponse) {
-        return spaceNewsResponse.json();
+var getSpaceFlightNews = function () {
+  fetch(`https://spaceflightnewsapi.net/api/v1/articles`)
+    .then(function (spaceNewsResponse) {
+      return spaceNewsResponse.json();
     })
-    .then(function(spaceNewsResponse) {
-        displayNewsPage(spaceNewsResponse);  
-    })
-} 
+    .then(function (spaceNewsResponse) {
+      displayNewsPage(spaceNewsResponse);
+    });
+};
 
-// Display the News 
+// Display the News
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
   // Create row for the news
-  introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");
+  introContainerEl
+    .html("<h4>Space Flight News</h4>")
+    .append('<div class="row">');
   // Loop through news
   loopNews(spaceNewsResponse);
   // Load More Button
-  var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more").text("Load More News").addClass("main-button");
+  var loadMoreBtn = $("<button>")
+    .attr("type", "button")
+    .attr("id", "load-more")
+    .text("Load More News")
+    .addClass("main-button");
   introContainerEl.append(loadMoreBtn);
   // Clicking Load More, call Display More News
-  $(document).on("click", "#load-more", function() {
+  $(document).on("click", "#load-more", function () {
     displayMoreNewsPage(spaceNewsResponse.nextPage);
     loadMoreBtn.remove();
-  })
+  });
 };
 
 // Loop through News
-var loopNews = function(spaceNewsResponse) {
+var loopNews = function (spaceNewsResponse) {
   // Loop through the news
-  for (i =0; i < spaceNewsResponse.docs.length; i++) {
+  for (i = 0; i < spaceNewsResponse.docs.length; i++) {
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
@@ -275,39 +286,107 @@ var loopNews = function(spaceNewsResponse) {
     var body = $("<div>").addClass("card-stacked");
 
     // Display Information
-    var spaceFlightPubDate = $("<p>").addClass("card-content").text(moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY"));
-    var spaceFlightImage = $("<img>").attr("src", spaceNewsResponse.docs[i].featured_image).addClass("center-align");
-    var spaceFlightTitle = $("<p>").addClass("card-title center-align").text(spaceNewsResponse.docs[i].title);
-    var readNow = $("<a>").text("Read Now").addClass("main-button").attr("href", spaceNewsResponse.docs[i].url).attr("target", "_blank");
-    
+    var spaceFlightPubDate = $("<p>")
+      .addClass("card-content")
+      .text(
+        moment(spaceNewsResponse.docs[i].published_date).format("MMM. Do, YYYY")
+      );
+    var spaceFlightImage = $("<img>")
+      .attr("src", spaceNewsResponse.docs[i].featured_image)
+      .addClass("center-align");
+    var spaceFlightTitle = $("<p>")
+      .addClass("card-title center-align")
+      .text(spaceNewsResponse.docs[i].title);
+    var readNow = $("<a>")
+      .text("Read Now")
+      .addClass("main-button")
+      .attr("href", spaceNewsResponse.docs[i].url)
+      .attr("target", "_blank");
+
     // Append Display to Container
     card.append(image.append(spaceFlightImage));
     card.append(body.append(spaceFlightPubDate, spaceFlightTitle, readNow));
     spaceFlightCardContainer.append(card);
     introContainerEl.append(spaceFlightCardContainer);
   }
-}
+};
 
 // Display More News
-var displayMoreNewsPage = function(spaceNewsResponse) {
-  console.log (spaceNewsResponse)
+var displayMoreNewsPage = function (spaceNewsResponse) {
+  console.log(spaceNewsResponse);
   fetch(
     `https://spaceflightnewsapi.net/api/v1/articles?page=` + spaceNewsResponse
   )
-  .then(function(spaceNewsResponse) {
-    return spaceNewsResponse.json();
-  })
-  .then(function(spaceNewsResponse) {
-    loopNews(spaceNewsResponse);
-    var loadMoreBtn = $("<button>").attr("type", "button").attr("id", "load-more-2").text("Load More News").addClass("main-button");
-    introContainerEl.append(loadMoreBtn);
-    $(document).on("click", "#load-more-2", function() {
-      displayMoreNewsPage(spaceNewsResponse.nextPage);
-      loadMoreBtn.remove();
+    .then(function (spaceNewsResponse) {
+      return spaceNewsResponse.json();
     })
-  })
+    .then(function (spaceNewsResponse) {
+      loopNews(spaceNewsResponse);
+      var loadMoreBtn = $("<button>")
+        .attr("type", "button")
+        .attr("id", "load-more-2")
+        .text("Load More News")
+        .addClass("main-button");
+      introContainerEl.append(loadMoreBtn);
+      $(document).on("click", "#load-more-2", function () {
+        displayMoreNewsPage(spaceNewsResponse.nextPage);
+        loadMoreBtn.remove();
+      });
+    });
 };
 
+var displayInvaders = function () {
+  destroyElement();
+  displayBackBtn();
+  var spaceInvadersContainerEl = $("<div>")
+    .addClass("invader-iframe")
+    .html(
+      `<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`
+    );
+  introContainerEl.append(spaceInvadersContainerEl);
+  const highScoreForm = $(`<form id="scoreForm">
+  <label for="initials">Enter Initials</label>
+  <input type="text" name="initials" id="initials"></input>
+  <label for="score">Save high score!:</label>
+  <input type="number" name="score:" id="score"></input>
+  <input type="submit" value="Submit"></input>
+  </form>`)
+  introContainerEl.append(highScoreForm)
+  var scoreForm = document.getElementById("scoreForm")
+  scoreForm.addEventListener("submit", function(event){
+    event.preventDefault()
+    var score = document.getElementById("score").value;
+    var initials = document.getElementById("initials").value;
+    saveHighscore(score, initials);
+  })
+  var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+  var highScoreList = $(`<ul>`)
+  for(var i=0; i<highScores.length; i++){
+    var listItem = $(`<li>score:${highScores[i].score} initials:${highScores[i].initials}</li>`)
+    highScoreList.append(listItem)
+  }
+  introContainerEl.append(highScoreList);
+};
+
+function saveHighscore(score, initials) {
+  // If initials are empty
+  if (initials !== "") {
+    var highscores =
+      JSON.parse(localStorage.getItem("highscores")) || [];
+    // Get the score and initial info
+    var newScore = {
+      score: score,
+      initials: initials,
+    };
+
+    // Save to Local Storage
+    highscores.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+  }
+}
+
+//onclick event
+$("#space-invaders").on("click", displayInvaders);
 displayIntroPage();
 getAstrobin();
 getNasa();
