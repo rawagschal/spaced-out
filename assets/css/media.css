@@ -9,6 +9,15 @@
         flex: 1 0 0;
     }
 
+
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
+
+
     .flight-img-placement {
         display: flex;
         flex-direction: column;
@@ -35,6 +44,12 @@
         flex: 1 0 0;
     }
 
+    /* below are the styles for the mercury page  */
+    .mercury-iframe {
+        position: absolute;
+        top: 0px;
+        left: -5000px;
+    }
     /* below is the side bar adjustments */
     .icon-img {
         position: absolute;
@@ -45,6 +60,7 @@
     .day-img {
         width: 100%;
     }
+    
     .flight-img-placement {
         display: flex;
         flex-direction: column;
