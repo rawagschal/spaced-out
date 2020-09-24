@@ -149,8 +149,7 @@ var displayGallery = function (response) {
   var searchButtonWrapper = $("<div>").addClass("col").attr("id", "searchButtonWrapper");
   var imageSearchIcon = $("<i>").addClass("material-icons").text("search");
   //gallery
-  var galleryGridContainer = $("<div>").addClass("row s2 m4 l12").attr("id","galleryGridContainer");
-  
+  var galleryGridContainer = $("<div>").addClass("row gallery-flex").attr("id","galleryGridContainer");
   //append main display
   searchButtonWrapper.append(imageSearchIcon);
   searchBarWrapper.append(imageSearchInput);

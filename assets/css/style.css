@@ -286,3 +286,12 @@ footer ul li a:hover {
     flex-direction: column;
     margin: auto;
 }
+
+.gallery-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery-flex img {
+    width: 100%;
+}
