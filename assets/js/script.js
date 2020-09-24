@@ -442,5 +442,5 @@ function saveHighscore(score, initials) {
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
 displayIntroPage();
-// getAstrobin();
-// getNasa();
+getAstrobin();
+getNasa();
