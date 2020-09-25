@@ -1,99 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spaced Out</title>
-    <!-- here is our browser icon  -->
-    <link rel="icon" type="image/png" href="assets\images\favicon-moon.png" />
-    
-    <!-- here are our css reference sheets  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <!-- here is the icon sheet  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />    
-    <!-- here is our style sheet  -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/media.css" />
-</head>
-<body>
-    <div class="main-wrapper">
-        <div class="main-container">
-            <div class="row">
-                <!-- this is our header  -->
-                <header class="col s12">
-                    <div class="header-container" id="header-container">
-                        <!-- back button exists here  -->
-                    </div>
-                </header>
-            </div>
-            <div class="row">
-                <!-- main content  -->
-                <div class="col s12 m8 l9">
-                    <div class="content-container" id="content-container">
-                        <!-- main content page, astronaut blurbs, and image gallery and everything else -->
-                    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spaced Out</title>
+        <!-- here is our browser icon  -->
+        <link rel="icon" type="image/png" href="assets\images\favicon-moon.png" />
+        
+        <!-- here are our css reference sheets  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+        <!-- here is the icon sheet  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />    
+        <!-- here is our style sheet  -->
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/media.css" />
+    </head>
+    <body>
+        <div class="main-wrapper">
+            <div class="main-container">
+                <div class="row">
+                    <!-- this is our header  -->
+                    <header class="col s12">
+                        <div class="header-container" id="header-container">
+                            <!-- back button exists here  -->
+                        </div>
+                    </header>
                 </div>
-                <!-- side bar  -->
-                <div class="col s12 m4 l3">
-                    <div class="side-container">
-                        <!-- here is where the images of the day should be -->
-                        <div class="image-sidebar">
-                            <div class="row ">
-                                <!-- icon  -->
-                                <div class="col s12 m12 l12 side-child">
-                                    <div class="img-icon-wrapper">
-                                        <img class="icon-img"src="assets/images/spacedout-icon.png" alt="Spaced out icon."/>
+                <div class="row">
+                    <!-- main content  -->
+                    <div class="col s12 m8 l9">
+                        <div class="content-container" id="content-container">
+                            <!-- main content page, astronaut blurbs, and image gallery and everything else -->
+                        </div>
+                    </div>
+                    <!-- side bar  -->
+                    <div class="col s12 m4 l3">
+                        <div class="side-container">
+                            <!-- here is where the images of the day should be -->
+                            <div class="image-sidebar">
+                                <div class="row ">
+                                    <!-- icon  -->
+                                    <div class="col s12 m12 l12 side-child">
+                                        <div class="img-icon-wrapper">
+                                            <img class="icon-img"src="assets/images/spacedout-icon.png" alt="Spaced out icon."/>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- nasa image of the day  -->
-                                <div class="col s12 side-child">
-                                    <div class="img-content-wrapper" id="nasa">
-                                        <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                                    <!-- nasa image of the day  -->
+                                    <div class="col s12 side-child">
+                                        <div class="img-content-wrapper" id="nasa">
+                                            <h4 class="sidebar-header">NASA's Image of the Day</h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- astrobin image of the day -->
-                                <div class="col s12 side-child">
-                                    <div class="image-content-wrapper" id="astrobin">
-                                        <h4 class="sidebar-header">AstroBin's Image of the Day</h4>
+                                    <!-- astrobin image of the day -->
+                                    <div class="col s12 side-child">
+                                        <div class="image-content-wrapper" id="astrobin">
+                                            <h4 class="sidebar-header">AstroBin's Image of the Day</h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- invaders icon  -->
-                                <div class="col s12 m12 l12 side-child">
-                                    <div class="img-icon-wrapper">
-                                        <img id="space-invaders" class="icon-img" src="./assets/images/space-invaders-icon.png" alt="Space Invaders icon link."/>
+                                    <!-- invaders icon  -->
+                                    <div class="col s12 m12 l12 side-child">
+                                        <div class="img-icon-wrapper">
+                                            <img id="space-invaders" class="icon-img" src="./assets/images/space-invaders-icon.png" alt="Space Invaders icon link."/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <!-- this is our footer  -->
-                <footer class="col s12">
-                    <div class="footer-container">
-                    <!-- some external content and minor links can go here  -->
-                        <h4>Spaced Out</h4>
-                        <ul>
-                            <li>
-                                <a href="javascript:displayCreators();">About The Creators</a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/rawagschal/spaced-out" target="_blank">GitHub Repo</a>
-                            </li>
-                            <li>
-                                <a href="mailto:spaceatspace@space.com" target="_blank">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </footer>
+                <div class="row">
+                    <!-- this is our footer  -->
+                    <footer class="col s12">
+                        <div class="footer-container">
+                        <!-- some external content and minor links can go here  -->
+                            <h4>Spaced Out</h4>
+                            <ul>
+                                <li>
+                                    <a href="javascript:displayCreators();">About The Creators</a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/rawagschal/spaced-out" target="_blank">GitHub Repo</a>
+                                </li>
+                                <li>
+                                    <a href="mailto:spaceatspace@space.com" target="_blank">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </footer>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- here are our javascript links  -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/js/script.js"></script>
-</body>
+        <!-- here are our javascript links  -->
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
 </html>
