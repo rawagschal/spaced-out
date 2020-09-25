@@ -476,9 +476,9 @@ var displayInvaders = function () {
   displayBackBtn();
   var spaceInvadersContainerEl = $("<div>")
     .addClass("game")
-    .html(
-      `<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`
-    );
+    .html(`<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`);
+  var invadersHeader = $("<img>").attr("src", "assets/images/invaders-header.png");
+  introContainerEl.append(invadersHeader);
   introContainerEl.append(spaceInvadersContainerEl);
   const highScoreForm = $(`<form id="scoreForm">
     <i class="material-icons prefix">account_circle</i>
