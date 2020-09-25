@@ -32,7 +32,6 @@ var displayIntroPage = function () {
   //these create the elements
   //generate intro banner
   var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
-  var paraContainerEl = $("<p>").addClass("intro-paragraph").text("Look up into the cosmos a little more often.");
   // here are buttons for intro page
   var btnContainerEl = $("<div>").addClass("btn-container");
   //button to atronaut bio
@@ -50,7 +49,6 @@ var displayIntroPage = function () {
   var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
   //these append all of the above to the main container
   introContainerEl.append(imgEl);
-  introContainerEl.append(paraContainerEl);
   btnContainerEl.append(astronautBtn);
   btnContainerEl.append(galleryBtn);
   btnContainerEl.append(mercuryBtn);
@@ -92,8 +90,8 @@ var displayMercury = function () {
   var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
   var bannerCreditEl = $("<figure>").text("fig 1. Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
   var retrogradeParaEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't pseudoscience. Pseudoscience says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. While that might be up for debate, one thing is certain, Retrograde is a real Astronomical event. It's an illusion that happens when the orbit of Mercury moves faster around the sun than Earth, creating the illusion that Mercury moves backward, creating a loop effect. The occurance takes roughly about a month and happens about 3 times a year, the length of time it takes Mercury to do a full orbit around us and the sun. It is an event that can be observed with most of the planets that we can see in the sky. With the chaos of everyday life, it's easy to see how this might have been a scapegoat for daily mishaps, but it's important to realize what this really is. An illusion and oddity of time.").addClass("mercury-paragragh");
-  var btnPromptEl = $("<p>").text("Click below to find out.");
-  var retrogradeBtn = $("<button>").attr("type", "button").text("Click here to find out").addClass("mercury-button").on("click", mercuryAnswer);
+  var btnPromptEl = $("<p>").text("Click below to find out if Mercury is in Retrograde.");
+  var retrogradeBtn = $("<button>").attr("type", "button").text("Click on me!").addClass("mercury-button").on("click", mercuryAnswer);
   var retroResponseEl = $("<div>").addClass("response-div").attr("id", "mercuryAnswer");
   var retroVideoContainerEl = $("<div>").addClass("mercury-iframe").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
   // here are external links 
@@ -235,10 +233,11 @@ var displayAstro = function (astronautArray) {
   var colContainerEl = $("<div>").addClass("col s12 m12 l4");
   colContainerEl.html(
     `<div class="card-wrapper">
+      <span class="card-title astronaut-name">${astronautArray.name}</span>
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
-                    <span class="card-title astronaut-name">${astronautArray.name}</span>
+                   
                 </div>
                 <div class="card-content-wrapper">
                     <div class="card-content">
@@ -374,7 +373,7 @@ var loopNews = function (spaceNewsResponse) {
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
-    var image = $("<div>").addClass("card-image");
+    var image = $("<div>").addClass("card-image card-image-adjust");
     var body = $("<div>").addClass("card-stacked");
 
     // Favorite News
