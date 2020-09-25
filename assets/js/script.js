@@ -40,7 +40,7 @@ var displayIntroPage = function () {
     astronautBtn.on("click", scrapeAstroNames);
     //button to photo gallery
     var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
-    // galleryBtn.on("click", getSpaceFlightN);
+    galleryBtn.on("click", getImgGallery);
     //button to mercury in retrograde
     var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
     mercuryBtn.on("click", displayMercury);
@@ -120,6 +120,87 @@ var displayMercury = function () {
     introContainerEl.append(externalLinksContainer);
     introContainerEl.append(externalLinksContainer);
 };
+
+//Image Gallery
+var getImgGallery = function () {
+  destroyElement(); //clear page
+  displayBackBtn(); //home button in header 
+  introContainerEl.html("<h4>NASA Photo Gallery</h4>");
+
+  fetch("https://images-api.nasa.gov/search?q=great%20observatories")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(response) {
+    console.log(response);
+    displayGallery(response);
+  });
+
+}
+
+var displayGallery = function (response) {
+  //DOM elements
+  //main container
+  var galleryContainerEl = $("<div>").addClass("row").attr("id", "galleryContainerEl");
+  //search bar
+  var imageSearchContainer = $("<div>").addClass("row").attr("id", "imageSearchContainer");
+  var searchBarWrapper = $("<div>").addClass("col").attr("id", "searcBarWrapper");
+  var imageSearchInput = $("<input>").attr("id", "search").attr("type","text").attr("placeholder", "search for an image");
+  var searchButtonWrapper = $("<div>").addClass("col").attr("id", "searchButtonWrapper");
+  var imageSearchIcon = $("<i>").addClass("material-icons").text("search");
+  //gallery
+  var galleryGridContainer = $("<div>").addClass("row gallery-flex").attr("id","galleryGridContainer");
+  //append main display
+  searchButtonWrapper.append(imageSearchIcon);
+  searchBarWrapper.append(imageSearchInput);
+  imageSearchContainer.append(searchBarWrapper, searchButtonWrapper);
+  galleryContainerEl.append(imageSearchContainer, galleryGridContainer);
+  introContainerEl.append(galleryContainerEl);
+
+  for (var i = 0; i < response.collection.items.length; i++) {
+    var imageSrc = response.collection.items[i].links[0].href;
+    console.log(imageSrc);
+    //more gallery DOM elements
+    var imageWrapper = $("<div>").addClass("col l4 m12 s12");
+    var nasaImage = $("<img>").attr("src", imageSrc).addClass("nasa-image");
+    //append to gallery grid
+    imageWrapper.append(nasaImage);
+    galleryGridContainer.append(imageWrapper);
+  }
+
+  searchButtonWrapper.on("click", getSearchResults);
+
+}
+
+var getSearchResults = function () {
+   
+  var userInput = $("#search").val()
+  
+  fetch("https://images-api.nasa.gov/search?q=" + userInput)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(response) {
+    console.log(response);
+    displaySearchResults(response);
+  });
+  
+}
+
+var displaySearchResults = function(response) {
+  $("#galleryGridContainer").html(null);
+  for (var i =0; i < response.collection.items.length; i++) {
+      //response variable
+    var newImageSrc = response.collection.items[i].links[0].href;
+      //more gallery DOM elements
+    var nasaImage = $("<img>").attr("src", newImageSrc);
+    var imageWrapper = $("<div>").addClass("col l4 m12 s12");
+
+    //append to gallery grid
+    imageWrapper.append(nasaImage);
+    $("#galleryGridContainer").append(imageWrapper);
+  }
+}
 
 //this is the name of the astronaut stuff
 function scrapeAstroNames() {
@@ -391,19 +472,19 @@ function printFavoriteNews() {
   if(localStorage.length === 0) {
       console.log(" there is nothing in there")
   } else {
-      var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
+    var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
 
-      for (var i = 0; i < newsFavorites.length; i++) {
-        fetch (
-          `https://spaceflightnewsapi.net/api/v1/articles?title=` + newsFavorites[i].title
-        )
-        .then(function(spaceNewsResponse) {
-          return spaceNewsResponse.json();
-        })
-        .then(function(spaceNewsResponse) {
-          console.log(spaceNewsResponse.docs[0].title);
-          loopNews(spaceNewsResponse);
-        })
+    for (var i = 0; i < newsFavorites.length; i++) {
+      fetch (
+        `https://spaceflightnewsapi.net/api/v1/articles?title=` + newsFavorites[i].title
+      )
+      .then(function(spaceNewsResponse) {
+        return spaceNewsResponse.json();
+      })
+      .then(function(spaceNewsResponse) {
+        console.log(spaceNewsResponse.docs[0].title);
+        loopNews(spaceNewsResponse);
+      })
       }
   }
 }
