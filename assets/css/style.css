@@ -174,8 +174,7 @@ footer ul li a:hover {
 
 .astronaut-name {
     color: #000;
-    border-radius: 5px;
-    background-color: #387effbd;
+    font-size: 1.75em;
 }
 
 /* Below is style for Space News Page  */
@@ -188,7 +187,7 @@ footer ul li a:hover {
     flex-direction: row;
 }
 
-.card-image {
+.card-image-adjust {
     flex-basis: 60%;
 }
 
@@ -235,6 +234,8 @@ footer ul li a:hover {
     vertical-align: middle;
 }
 
+
+/* below are styles for invader game  */
 .game {
     width: 100%;
 }

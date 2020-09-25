@@ -26,37 +26,35 @@ var displayBackBtn = function () {
 
 //displays main page
 var displayIntroPage = function () {
-    // this will nuke all the script when pages lead back here
-    destroyElement();
-    destroyBackBtn();
-    //these create the elements
-    //generate intro banner
-    var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
-    var paraContainerEl = $("<p>").addClass("intro-paragraph").text("Look up into the cosmos a little more often.");
-    // here are buttons for intro page
-    var btnContainerEl = $("<div>").addClass("btn-container");
-    //button to atronaut bio
-    var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
-    astronautBtn.on("click", scrapeAstroNames);
-    //button to photo gallery
-    var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
-    galleryBtn.on("click", getImgGallery);
-    //button to mercury in retrograde
-    var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
-    mercuryBtn.on("click", displayMercury);
-    //button to news
-    var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
-    spaceNewsBtn.on("click", getSpaceFlightNews);
-    var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
-    //these append all of the above to the main container
-    introContainerEl.append(imgEl);
-    introContainerEl.append(paraContainerEl);
-    btnContainerEl.append(astronautBtn);
-    btnContainerEl.append(galleryBtn);
-    btnContainerEl.append(mercuryBtn);
-    btnContainerEl.append(spaceNewsBtn);
-    introContainerEl.append(btnContainerEl);
-    introContainerEl.append(constellationViewer);
+  // this will nuke all the script when pages lead back here
+  destroyElement();
+  destroyBackBtn();
+  //these create the elements
+  //generate intro banner
+  var imgEl = $("<img>").attr("src", "assets/images/spaced-out-banner.png").addClass("img-banner");
+  // here are buttons for intro page
+  var btnContainerEl = $("<div>").addClass("btn-container");
+  //button to atronaut bio
+  var astronautBtn = $("<button>").attr("type", "button").text("Astronauts In Space").addClass("main-button");
+  astronautBtn.on("click", scrapeAstroNames);
+  //button to photo gallery
+  var galleryBtn = $("<button>").attr("type", "button").text("NASA Image Gallery").addClass("main-button");
+  galleryBtn.on("click", getImgGallery);
+  //button to mercury in retrograde
+  var mercuryBtn = $("<button>").attr("type", "button").text("Mercury In Retrograde").addClass("main-button");
+  mercuryBtn.on("click", displayMercury);
+  //button to news
+  var spaceNewsBtn = $("<button>").attr("type", "button").text("Space News").addClass("main-button");
+  spaceNewsBtn.on("click", getSpaceFlightNews);
+  var constellationViewer = $("<div>").addClass("constellation-iframe").html(`<iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://virtualsky.lco.global/embed/index.html?longitude=-119.86286000000001&latitude=34.4326&projection=polar&constellations=true&constellationlabels=true" allowTransparency="true"></iframe>`);
+  //these append all of the above to the main container
+  introContainerEl.append(imgEl);
+  btnContainerEl.append(astronautBtn);
+  btnContainerEl.append(galleryBtn);
+  btnContainerEl.append(mercuryBtn);
+  btnContainerEl.append(spaceNewsBtn);
+  introContainerEl.append(btnContainerEl);
+  introContainerEl.append(constellationViewer);
 };
 
 // Below is Mercury in Retrograde response
@@ -75,50 +73,50 @@ function getMercury() {
 };
 
 var mercuryAnswer = function (mercuryResponse) {
-    if (mercuryResponse.is_retrograde === true) {
-        // Display the result
-        $("#mercuryAnswer").text("Mercury is currently in retrograde.");
-    } else {
-        // Display the result
-        $("#mercuryAnswer").text("Mercury is not currently in retrograde.");
-    }
-}
+  if (mercuryResponse.is_retrograde === true) {
+      // Display the result
+      $("#mercuryAnswer").text("Mercury is currently in retrograde.");
+  } else {
+      // Display the result
+      $("#mercuryAnswer").text("Mercury is not currently in retrograde.");
+  }
+};
 
 var displayMercury = function () {
-    destroyElement();
-    displayBackBtn();
-    //banner and paragraph
-    var retrogradeHeaderEl = $("<h4>").text("Is Mercury in Retrograde?").addClass("mercury-header");
-    var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
-    var bannerCreditEl = $("<figure>").text("fig 1. Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
-    var retrogradeParaEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't pseudoscience. Pseudoscience says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. While that might be up for debate, one thing is certain, Retrograde is a real Astronomical event. It's an illusion that happens when the orbit of Mercury moves faster around the sun than Earth, creating the illusion that Mercury moves backward, creating a loop effect. The occurance takes roughly about a month and happens about 3 times a year, the length of time it takes Mercury to do a full orbit around us and the sun. It is an event that can be observed with most of the planets that we can see in the sky. With the chaos of everyday life, it's easy to see how this might have been a scapegoat for daily mishaps, but it's important to realize what this really is. An illusion and oddity of time.").addClass("mercury-paragragh");
-    var btnPromptEl = $("<p>").text("Click below to find out.");
-    var retrogradeBtn = $("<button>").attr("type", "button").text("Click here to find out").addClass("mercury-button").on("click", mercuryAnswer);
-    var retroResponseEl = $("<div>").addClass("response-div").attr("id", "mercuryAnswer");
-    var retroVideoContainerEl = $("<div>").addClass("mercury-iframe").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
-    // here are external links 
-    var externalLinksContainer = $("<div>")
-        .addClass("mercury-links")
-        .html(` 
-            <p>Click the links below to learn more about Mercury in Retrograde.
-            <br/>
-            <ol>
-            <li><a href="https://www.youtube.com/watch?v=VXQh1xFce7s" target="_blank">Star Talk: Neil de Grass Tyson explains Mercury in Retrograde.</a></li>
-            <li><a href="https://earthsky.org/space/what-is-retrograde-motion" target="_blank">EarthSky explains Mercury in Retrograde.</a></li>
-            <li><a href="https://www.vox.com/videos/2018/11/16/18098729/what-is-mercury-retrograde-meaning" target="_blank">Vox's article on Mercury In Retrograde.</a></li>
-            </ol></p>`);
+  destroyElement();
+  displayBackBtn();
+  //banner and paragraph
+  var retrogradeHeaderEl = $("<h4>").text("Is Mercury in Retrograde?").addClass("mercury-header");
+  var retrogradeBannerEl = $("<img>").attr("src", "assets/images/retrograde-banner.png").addClass("img-banner");
+  var bannerCreditEl = $("<figure>").text("fig 1. Retrograde motion of Mars in 2005. Astrophotographer Tunc Tezel created this composite by superimposing images taken on 35 different dates, separated from each other by about a week.").addClass("credit-to");
+  var retrogradeParaEl = $("<p>").text("I can guarantee you've heard of Mercury in Retrograde, but do you really know what that means? If you're into Astrology it might be the explanation for a bad day. But what is it really? Even in the research that went into writing this tiny paragraph, it was hard to find information that wasn't pseudoscience. Pseudoscience says when Mercury goes into Retrograde, communication of all sorts go haywire. Be that your cell phone, your laptop, or your train of thought. While that might be up for debate, one thing is certain, Retrograde is a real Astronomical event. It's an illusion that happens when the orbit of Mercury moves faster around the sun than Earth, creating the illusion that Mercury moves backward, creating a loop effect. The occurance takes roughly about a month and happens about 3 times a year, the length of time it takes Mercury to do a full orbit around us and the sun. It is an event that can be observed with most of the planets that we can see in the sky. With the chaos of everyday life, it's easy to see how this might have been a scapegoat for daily mishaps, but it's important to realize what this really is. An illusion and oddity of time.").addClass("mercury-paragragh");
+  var btnPromptEl = $("<p>").text("Click below to find out if Mercury is in Retrograde.");
+  var retrogradeBtn = $("<button>").attr("type", "button").text("Click on me!").addClass("mercury-button").on("click", mercuryAnswer);
+  var retroResponseEl = $("<div>").addClass("response-div").attr("id", "mercuryAnswer");
+  var retroVideoContainerEl = $("<div>").addClass("mercury-iframe").html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/FtV0PV9MF88" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+  // here are external links 
+  var externalLinksContainer = $("<div>")
+      .addClass("mercury-links")
+      .html(` 
+          <p>Click the links below to learn more about Mercury in Retrograde.
+          <br/>
+          <ol>
+          <li><a href="https://www.youtube.com/watch?v=VXQh1xFce7s" target="_blank">Star Talk: Neil de Grass Tyson explains Mercury in Retrograde.</a></li>
+          <li><a href="https://earthsky.org/space/what-is-retrograde-motion" target="_blank">EarthSky explains Mercury in Retrograde.</a></li>
+          <li><a href="https://www.vox.com/videos/2018/11/16/18098729/what-is-mercury-retrograde-meaning" target="_blank">Vox's article on Mercury In Retrograde.</a></li>
+          </ol></p>`);
 
-    //appending all of them to the main container
-    introContainerEl.append(retrogradeHeaderEl);
-    introContainerEl.append(retrogradeBannerEl);
-    introContainerEl.append(bannerCreditEl);
-    introContainerEl.append(retrogradeParaEl);
-    introContainerEl.append(btnPromptEl);
-    retroResponseEl.append(retrogradeBtn);
-    introContainerEl.append(retroResponseEl);
-    introContainerEl.append(retroVideoContainerEl);
-    introContainerEl.append(externalLinksContainer);
-    introContainerEl.append(externalLinksContainer);
+  //appending all of them to the main container
+  introContainerEl.append(retrogradeHeaderEl);
+  introContainerEl.append(retrogradeBannerEl);
+  introContainerEl.append(bannerCreditEl);
+  introContainerEl.append(retrogradeParaEl);
+  introContainerEl.append(btnPromptEl);
+  retroResponseEl.append(retrogradeBtn);
+  introContainerEl.append(retroResponseEl);
+  introContainerEl.append(retroVideoContainerEl);
+  introContainerEl.append(externalLinksContainer);
+  introContainerEl.append(externalLinksContainer);
 };
 
 //Image Gallery
@@ -132,11 +130,9 @@ var getImgGallery = function () {
     return response.json();
   })
   .then(function(response) {
-    console.log(response);
     displayGallery(response);
   });
-
-}
+};
 
 var displayGallery = function (response) {
   //DOM elements
@@ -159,7 +155,6 @@ var displayGallery = function (response) {
 
   for (var i = 0; i < response.collection.items.length; i++) {
     var imageSrc = response.collection.items[i].links[0].href;
-    console.log(imageSrc);
     //more gallery DOM elements
     var imageWrapper = $("<div>").addClass("col l4 m12 s12");
     var nasaImage = $("<img>").attr("src", imageSrc).addClass("nasa-image");
@@ -167,25 +162,19 @@ var displayGallery = function (response) {
     imageWrapper.append(nasaImage);
     galleryGridContainer.append(imageWrapper);
   }
-
   searchButtonWrapper.on("click", getSearchResults);
-
-}
+};
 
 var getSearchResults = function () {
-   
   var userInput = $("#search").val()
-  
   fetch("https://images-api.nasa.gov/search?q=" + userInput)
   .then(function(response) {
     return response.json();
   })
   .then(function(response) {
-    console.log(response);
     displaySearchResults(response);
   });
-  
-}
+};
 
 var displaySearchResults = function(response) {
   $("#galleryGridContainer").html(null);
@@ -200,7 +189,7 @@ var displaySearchResults = function(response) {
     imageWrapper.append(nasaImage);
     $("#galleryGridContainer").append(imageWrapper);
   }
-}
+};
 
 //this is the name of the astronaut stuff
 function scrapeAstroNames() {
@@ -214,7 +203,7 @@ function scrapeAstroNames() {
       var people = response.people;
       getAstronauts(people)
     });
-}
+};
 
 var getAstronauts = function (people) {
   destroyElement();
@@ -241,10 +230,11 @@ var displayAstro = function (astronautArray) {
   var colContainerEl = $("<div>").addClass("col s12 m12 l4");
   colContainerEl.html(
     `<div class="card-wrapper">
+      <span class="card-title astronaut-name">${astronautArray.name}</span>
             <div class="card card-astro">
                 <div class="card-image astronaut-wrapper">
                     <img src="${astronautArray["profile_image"]}" />
-                    <span class="card-title astronaut-name">${astronautArray.name}</span>
+                   
                 </div>
                 <div class="card-content-wrapper">
                     <div class="card-content">
@@ -340,9 +330,7 @@ var getSpaceFlightNews = function () {
 var displayNewsPage = function (spaceNewsResponse) {
   destroyElement();
   displayBackBtn(); //this is our back button
-  
   // Create News Header
-
   introContainerEl.html("<h4>Space Flight News</h4>").append("<div class=\"row\">");  
   var favoriteNews = $("<button>")
     .text("star")
@@ -350,7 +338,6 @@ var displayNewsPage = function (spaceNewsResponse) {
     .html(
       `<i class="material-icons main-button offset-s6">star</i><span> Select to see your saved news </span>`)
   introContainerEl.append(favoriteNews);
-  
   
   // Loop through news
   loopNews(spaceNewsResponse);
@@ -383,7 +370,7 @@ var loopNews = function (spaceNewsResponse) {
     // Container for Each Piece of News
     var spaceFlightCardContainer = $("<div>").addClass("col");
     var card = $("<div>").addClass("card flight-img-placement");
-    var image = $("<div>").addClass("card-image");
+    var image = $("<div>").addClass("card-image card-image-adjust");
     var body = $("<div>").addClass("card-stacked");
 
     // Favorite News
@@ -418,16 +405,14 @@ var loopNews = function (spaceNewsResponse) {
 
     // Save Favorite News
     $(document).on("click", "#favorite-news-" + [i], function() {
-      console.log("I was clicked");
-      var newsTitle = spaceNewsResponse.docs[i].title
-      console.log(newsTitle)
+      var newsTitle = spaceNewsResponse.docs[i].title;
       // If news is not empty
       if (newsTitle !== "") {
         var newsSave =
-        JSON.parse(window.localStorage.getItem("newsSave")) || [];
+          JSON.parse(window.localStorage.getItem("newsSave")) || [];
         
         var newsInfo = {
-            title: newsTitle
+          title: newsTitle
         };
         if (newsSave.indexOf(newsInfo) == -1){
           //add the value to the array
@@ -436,13 +421,12 @@ var loopNews = function (spaceNewsResponse) {
           window.localStorage.setItem("newsSave", JSON.stringify(newsSave));
         } 
       }
-    })   
+    });
   }
 };
 
 // Display More News
 var displayMoreNewsPage = function (spaceNewsResponse) {
-  console.log(spaceNewsResponse);
   fetch(
     `https://spaceflightnewsapi.net/api/v1/articles?page=` + spaceNewsResponse
   )
@@ -467,10 +451,8 @@ var displayMoreNewsPage = function (spaceNewsResponse) {
 // Show favorites
 function printFavoriteNews() {
   destroyElement();
-  console.log("I was clicked")
   // Check Local Storage
   if(localStorage.length === 0) {
-      console.log(" there is nothing in there")
   } else {
     var newsFavorites = JSON.parse(window.localStorage.getItem("newsSave")) || [];
 
@@ -482,21 +464,21 @@ function printFavoriteNews() {
         return spaceNewsResponse.json();
       })
       .then(function(spaceNewsResponse) {
-        console.log(spaceNewsResponse.docs[0].title);
+        // console.log(spaceNewsResponse.docs[0].title);
         loopNews(spaceNewsResponse);
       })
       }
   }
-}
+};
 
 var displayInvaders = function () {
   destroyElement();
   displayBackBtn();
   var spaceInvadersContainerEl = $("<div>")
     .addClass("game")
-    .html(
-      `<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`
-    );
+    .html(`<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`);
+  var invadersHeader = $("<img>").attr("src", "assets/images/invaders-header.png");
+  introContainerEl.append(invadersHeader);
   introContainerEl.append(spaceInvadersContainerEl);
   const highScoreForm = $(`<form id="scoreForm">
     <i class="material-icons prefix">account_circle</i>
@@ -608,11 +590,14 @@ function displayCreators () {
   $.each(creatorsObj, displayCreatorPage);
 };
 
+//loads immediately 
+var spacedOut = function () {
+  displayIntroPage();
+  getAstrobin();
+  getNasa();
+};
+
 //onclick event
 $("#space-invaders").on("click", displayInvaders);
 
-
-//loads immediately 
-displayIntroPage();
-getAstrobin();
-getNasa();
+spacedOut();
