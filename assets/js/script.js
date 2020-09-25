@@ -130,7 +130,6 @@ var getImgGallery = function () {
     return response.json();
   })
   .then(function(response) {
-    console.log(response);
     displayGallery(response);
   });
 };
@@ -156,7 +155,6 @@ var displayGallery = function (response) {
 
   for (var i = 0; i < response.collection.items.length; i++) {
     var imageSrc = response.collection.items[i].links[0].href;
-    console.log(imageSrc);
     //more gallery DOM elements
     var imageWrapper = $("<div>").addClass("col l4 m12 s12");
     var nasaImage = $("<img>").attr("src", imageSrc).addClass("nasa-image");
@@ -174,7 +172,6 @@ var getSearchResults = function () {
     return response.json();
   })
   .then(function(response) {
-    console.log(response);
     displaySearchResults(response);
   });
 };
@@ -430,7 +427,6 @@ var loopNews = function (spaceNewsResponse) {
 
 // Display More News
 var displayMoreNewsPage = function (spaceNewsResponse) {
-  console.log(spaceNewsResponse);
   fetch(
     `https://spaceflightnewsapi.net/api/v1/articles?page=` + spaceNewsResponse
   )
@@ -468,7 +464,7 @@ function printFavoriteNews() {
         return spaceNewsResponse.json();
       })
       .then(function(spaceNewsResponse) {
-        console.log(spaceNewsResponse.docs[0].title);
+        // console.log(spaceNewsResponse.docs[0].title);
         loopNews(spaceNewsResponse);
       })
       }
