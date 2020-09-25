@@ -493,17 +493,19 @@ var displayInvaders = function () {
   destroyElement();
   displayBackBtn();
   var spaceInvadersContainerEl = $("<div>")
-    .addClass("invader-iframe")
+    .addClass("game")
     .html(
       `<iframe src="https://funhtml5games.com?embed=spaceinvaders" style="width: 80%;height:450px;border:none;" frameborder="0" scrolling="no"></iframe>`
     );
   introContainerEl.append(spaceInvadersContainerEl);
   const highScoreForm = $(`<form id="scoreForm">
-  <label for="initials">Enter Initials</label>
+    <i class="material-icons prefix">account_circle</i>
+    <label for="initials">Enter Initials</label>
   <input type="text" name="initials" id="initials"></input>
+  <i class="material-icons prefix">mode_edit</i>
   <label for="score">Save high score!:</label>
   <input type="number" name="score:" id="score"></input>
-  <input type="submit" value="Submit"></input>
+  <input type="submit" value="Submit" class="main-button"></input>
   </form>`)
   introContainerEl.append(highScoreForm)
   var scoreForm = document.getElementById("scoreForm")
@@ -515,8 +517,10 @@ var displayInvaders = function () {
   })
   var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
   var highScoreList = $(`<ul>`)
+  .addClass("collection")
   for(var i=0; i<highScores.length; i++){
-    var listItem = $(`<li>score:${highScores[i].score} initials:${highScores[i].initials}</li>`)
+    var listItem = $(`<li>score: ${highScores[i].score} initials: ${highScores[i].initials}</li>`)
+    .addClass("collection-item")
     highScoreList.append(listItem)
   }
   introContainerEl.append(highScoreList);
@@ -536,12 +540,73 @@ function saveHighscore(score, initials) {
     // Save to Local Storage
     highscores.push(newScore);
     localStorage.setItem("highscores", JSON.stringify(highscores));
+    displayInvaders();
   }
 }
 
+//below is the meet the creators page
 function displayCreators () {
-  var creatorsContainer = $("<div>")
-}
+  destroyElement();
+  displayBackBtn();
+
+  var creatorHeader = $("<h4>").addClass("creators-header").text("Meet the creators!");
+  var creatorRow = $("<div>").addClass("row creator-flex");
+  introContainerEl.append(creatorHeader);
+  introContainerEl.append(creatorRow);
+
+  var creatorsObj = [
+    {
+      name: "Amanda",
+      img: "assets/images/amanda-portrait.png",
+      quote: "We truly are so small in this grand universe. I'm interested to learn what is out there!",
+      github: "https://github.com/AmandaGuerriero",
+    },
+    {
+      name: "Cat",
+      img: "assets/images/cat-portrait.png",
+      quote: "Look up into the cosmos a little more often.",
+      github: "https://github.com/cat-lin-morgan",
+    },
+    {
+      name: "Kim",
+      img: "assets/images/kim-portrait.png",
+      quote: 'The beauty of space has always captivated me, so simple looking with the naked eye and yet more far reaching and complex than we will ever know. It really is the "final frontier".',
+      github: "https://github.com/Kimmulligan",
+    },
+    {
+      name: "Rachel",
+      img: "assets/images/rachel-portrait.png",
+      quote: "Space is crazy, man.",
+      github: "https://github.com/rawagschal",
+    }
+  ];
+
+  var displayCreatorPage = function(i, creators) {
+    var name = creators.name;
+    var image = creators.img;
+    var quote = creators.quote;
+    var URL = creators.github;
+
+    //creating each element
+    var creatorCol  = $("<div>").addClass("col s12 m12 l6");
+    // var creatorWrapper = $("<div>").addClass("creator-wrapper");
+    var creatorName = $("<h5>").text(name);
+    var creatorImg = $("<img>").attr("src", image);
+    var creatorQuote = $("<p>").text(quote).addClass("quote-style");
+    var creatorURL = $("<a>").attr("href", URL).attr("target", "_blank").text("Github Profile");
+
+    //appending elements
+    creatorRow.append(creatorCol);
+    // creatorWrapper.append(creatorCol);
+    creatorCol.append(creatorName);
+    creatorCol.append(creatorImg);
+    creatorCol.append(creatorQuote);
+    creatorCol.append(creatorURL);
+  };
+
+  //loop thru the object
+  $.each(creatorsObj, displayCreatorPage);
+};
 
 //onclick event
 $("#space-invaders").on("click", displayInvaders);

@@ -236,7 +236,7 @@ footer ul li a:hover {
 }
 
 .game {
-    width: 500px; 
+    width: 100%;
 }
 
 /* below are the styles for mercury page  */
@@ -280,8 +280,8 @@ footer ul li a:hover {
     margin: 15px;
 }
 
-/* below are gallery styles */
 
+/* below are gallery styles */
 #galleryContainerEl {
     width: 75%;
     display: flex;
@@ -301,4 +301,14 @@ footer ul li a:hover {
 
 .nasa-image {
 margin: 15px;
+}
+
+/* below are the creators page styles  */
+.creator-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quote-style {
+    width: 60%;
 }
