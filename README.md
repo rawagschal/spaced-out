@@ -12,8 +12,7 @@ Spaced Out is a destination for all us nerds that want to see the happenings in 
 * Moment.js
 
 ## Website
-https://rawagschal.github.io/spaced-out/
-
+[Click here for our active Spaced Out Website!](https://rawagschal.github.io/spaced-out/ "SPACED OUT!")
 ## Screenshots
 
 
@@ -24,6 +23,12 @@ https://rawagschal.github.io/spaced-out/
 * Open Notify
 * Space Launch Now
 * Mercury Retrograde
+
+Below is a gif of __Spaced Out__ in action and below that is the screenshot.
+
+<img src="assets/images/sitetour.gif" alt="Gif of Spaced Out"/>
+
+<img src="./assets/images/weatherdashboard.png" alt="screen shot of Spaced Out"/>
 
 ## Contribution
 Made with ❤️ by the Spaced Out Team:
