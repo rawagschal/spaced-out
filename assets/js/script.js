@@ -69,7 +69,6 @@ function getMercury() {
     .then(function(mercuryResponse) {
         displayMercury(mercuryResponse);
     })
-    
 };
 
 var mercuryAnswer = function (mercuryResponse) {
@@ -253,7 +252,6 @@ var displayAstro = function (astronautArray) {
 
 // Below Images of the Day that will displayed on sidebar
 // Nasa Image of the Day
-
 function getNasa() {
   fetch(
     `https://api.nasa.gov/planetary/apod?api_key=gnFNvMf5jFd0dEp5xPORKtYxKUXbb64ISb5kLNdU&date=` +
@@ -270,7 +268,6 @@ function getNasa() {
       var nasaTitle = $("<h5>")
         .text(response.title)
         .addClass("sidebar-subheader");
-      // var nasaDesc = $("<p>").text(response[0].explanation)
 
       // Append Image, Title, and Descritpion to the sidebar
       $("#nasa").append(nasaImage, nasaTitle);
@@ -288,34 +285,33 @@ function getAstrobin() {
     .then(function (response) {
       var astroImageInfo = response.objects[0].image;
 
-      // Use image info to fetch additional information
-      fetch(
-        `https://www.astrobin.com` +
-          astroImageInfo +
-          `?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
-      )
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          // Var of HD Image URL for image of the day
-          var astroImage = $("<img>")
-            .attr("src", response.url_hd)
-            .addClass("day-img");
+    // Use image info to fetch additional information
+    fetch(
+      `https://www.astrobin.com` +
+        astroImageInfo +
+        `?api_key=44c950a81df45f010f9ada74487616c154e92b96&api_secret=9a1781a8d6378a530f3c81cf145464531279d658&format=json.`
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        // Var of HD Image URL for image of the day
+        var astroImage = $("<img>")
+          .attr("src", response.url_hd)
+          .addClass("day-img");
 
-          // Var of Title for image of the day
-          var astroTitle = $("<h5>")
-            .text(response.title)
-            .addClass("sidebar-subheader");
+        // Var of Title for image of the day
+        var astroTitle = $("<h5>")
+          .text(response.title)
+          .addClass("sidebar-subheader");
 
-          // Append Image & Title to the sidebar
-          $("#astrobin").append(astroImage, astroTitle);
-        });
-    });
+        // Append Image & Title to the sidebar
+        $("#astrobin").append(astroImage, astroTitle);
+      });
+  });
 }
 
 // Below is the Recent Space News
-// Space News - Fetch News By Spaceflight
 var getSpaceFlightNews = function () {
   fetch(`https://spaceflightnewsapi.net/api/v1/articles`)
     .then(function (spaceNewsResponse) {
@@ -362,7 +358,7 @@ var displayNewsPage = function (spaceNewsResponse) {
   })
 };
 
-// Loop through News
+// Loop through News with unfilled favorite button
 var loopNews = function (spaceNewsResponse) {
   // Loop through the news
   for (let i =0; i < spaceNewsResponse.docs.length; i++) {
@@ -380,7 +376,6 @@ var loopNews = function (spaceNewsResponse) {
       .attr("id", "favorite-news-" + [i]);
 
     // Display Information
-
     var spaceFlightPubDate = $("<p>")
       .addClass("card-content")
       .text(moment(spaceNewsResponse.docs[i].published_date)
@@ -448,9 +443,10 @@ var displayMoreNewsPage = function (spaceNewsResponse) {
     });
 };
 
-// Show favorites
+// Display Saved News
 function printFavoriteNews() {
   destroyElement();
+  introContainerEl.html("<h4>Your Saved News</h4>").append("<div class=\"row\">");  
   // Check Local Storage
   if(localStorage.length === 0) {
   } else {
@@ -465,11 +461,52 @@ function printFavoriteNews() {
       })
       .then(function(spaceNewsResponse) {
         // console.log(spaceNewsResponse.docs[0].title);
-        loopNews(spaceNewsResponse);
+        loopNewsPrinted(spaceNewsResponse);
       })
       }
   }
 };
+
+// Loop through News to Print Saved Articles
+var loopNewsPrinted = function (spaceNewsResponse) {
+  // Loop through the news
+  for (let i =0; i < spaceNewsResponse.docs.length; i++) {
+
+    // Container for Each Piece of News
+    var spaceFlightCardContainer = $("<div>").addClass("col");
+    var card = $("<div>").addClass("card flight-img-placement");
+    var image = $("<div>").addClass("card-image card-image-adjust");
+    var body = $("<div>").addClass("card-stacked");
+
+    // Favorite News
+    var favoriteNewsFilled = $("<button>")
+      .addClass("material-icons")
+      .text("star");
+
+    // Display Information
+    var spaceFlightPubDate = $("<p>")
+      .addClass("card-content")
+      .text(moment(spaceNewsResponse.docs[i].published_date)
+      .format("MMM. Do, YYYY"));
+    var spaceFlightImage = $("<img>")
+      .attr("src", spaceNewsResponse.docs[i].featured_image)
+      .addClass("center-align");
+    var spaceFlightTitle = $("<p>")
+      .addClass("card-title center-align")
+      .text(spaceNewsResponse.docs[i].title);
+    var readNow = $("<a>")
+      .text("Read Now")
+      .addClass("main-button")
+      .attr("href", spaceNewsResponse.docs[i].url)
+      .attr("target", "_blank");
+
+    // Append Display to Container
+    card.append(image.append(spaceFlightImage));
+    card.append(body.append(favoriteNewsFilled, spaceFlightPubDate, spaceFlightTitle, readNow));
+    spaceFlightCardContainer.append(card);
+    introContainerEl.append(spaceFlightCardContainer);
+  }
+}
 
 var displayInvaders = function () {
   destroyElement();
@@ -483,12 +520,13 @@ var displayInvaders = function () {
   const highScoreForm = $(`<form id="scoreForm">
     <i class="material-icons prefix">account_circle</i>
     <label for="initials">Enter Initials</label>
-  <input type="text" name="initials" id="initials"></input>
-  <i class="material-icons prefix">mode_edit</i>
-  <label for="score">Save high score!:</label>
-  <input type="number" name="score:" id="score"></input>
-  <input type="submit" value="Submit" class="main-button"></input>
-  </form>`)
+    <input type="text" name="initials" id="initials"></input>
+    <i class="material-icons prefix">mode_edit</i>
+    <label for="score">Save high score!:</label>
+    <input type="number" name="score:" id="score"></input>
+    <input type="submit" value="Submit" class="main-button"></input>
+    </form>`
+  )
   introContainerEl.append(highScoreForm)
   var scoreForm = document.getElementById("scoreForm")
   scoreForm.addEventListener("submit", function(event){
