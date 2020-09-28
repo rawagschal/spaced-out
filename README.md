@@ -10,16 +10,15 @@ Spaced Out is a destination for all us nerds that want to see the happenings in 
 * jQuery
 * Materialize
 * Moment.js
-*Adobe Photoshop
+* Adobe Photoshop
 
 ## Website
 [Click here for our active Spaced Out Website!](https://rawagschal.github.io/spaced-out/ "SPACED OUT!")
 
 ## APIs Used
-* Nasa
+* Nasa (2)
 * Astrobin
 * Spaceflight News
-* Open Notify
 * Space Launch Now
 * Mercury Retrograde
 
